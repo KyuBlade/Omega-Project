@@ -3,15 +3,10 @@ package com.team.omega.core.screen;
 import net.team.omega.network.core.LoginServerFactory;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -20,13 +15,9 @@ import com.team.omega.core.LocalizationHandler;
 import com.team.omega.utils.ThreadFactory;
 
 
-public class IdentificationScreen implements Screen
+public class IdentificationScreen extends BaseScreen
 {
     
-    private GameCore core;
-    
-    private Stage stage;
-    private Skin skin;
     private Table table;
     private NinePatch patches;
     
@@ -40,14 +31,8 @@ public class IdentificationScreen implements Screen
     
     public IdentificationScreen(GameCore core)
     {
-	Gdx.app.debug("ScreenManager", "IdentificationScreen created");
-	this.core = core;
+	super(core);
 	
-	stage = new Stage();
-	Gdx.input.setInputProcessor(stage);
-	
-	TextureAtlas _atlas = core.getAssetManager().get("data/skins/default/default-skin.atlas");
-	skin = new Skin(Gdx.files.internal("data/skins/default/default.json"), _atlas);
 	table = new Table(skin);
 	table.setFillParent(true);
 	stage.addActor(table);
@@ -92,8 +77,7 @@ public class IdentificationScreen implements Screen
     @Override
     public void render(float delta)
     {
-	Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+	super.render(delta);
 	
 	stage.act(Gdx.graphics.getDeltaTime());
 	stage.draw();
@@ -102,33 +86,10 @@ public class IdentificationScreen implements Screen
     }
 
     @Override
-    public void resize(int width, int height)
-    {
-    }
-
-    @Override
-    public void show()
-    {
-    }
-
-    @Override
-    public void hide()
-    {
-    }
-
-    @Override
-    public void pause()
-    {
-    }
-
-    @Override
-    public void resume()
-    {
-    }
-
-    @Override
     public void dispose()
     {
+	super.dispose();
+	
 	stage.dispose();
 	skin.dispose();
     }
