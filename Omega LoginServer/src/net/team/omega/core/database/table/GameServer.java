@@ -1,8 +1,8 @@
 package net.team.omega.core.database.table;
 
 import net.team.omega.Constants;
-import net.team.omega.core.network.communication.loginserver.LoginServerFactory;
-import net.team.omega.core.network.communication.serialization.RawData;
+import net.team.omega.core.network.loginserver.LoginServerFactory;
+import net.team.omega.core.network.serialization.RawData;
 
 public class GameServer extends RawData
 {

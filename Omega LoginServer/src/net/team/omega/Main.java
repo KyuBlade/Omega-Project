@@ -1,9 +1,9 @@
 package net.team.omega;
 
 import net.team.omega.core.database.HibernateFactory;
-import net.team.omega.core.network.communication.LoadingFactory;
-import net.team.omega.core.network.communication.gameserver.InternalLoginServerFactory;
-import net.team.omega.core.network.communication.loginserver.LoginServerFactory;
+import net.team.omega.core.network.LoadingFactory;
+import net.team.omega.core.network.gameserver.InternalLoginServerFactory;
+import net.team.omega.core.network.loginserver.LoginServerFactory;
 import net.team.omega.utils.LogHandler;
 
 
