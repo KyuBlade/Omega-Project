@@ -1,8 +1,8 @@
 package net.team.omega.core;
 
 import net.team.omega.core.database.HibernateFactory;
-import net.team.omega.core.network.communication.gameserver.GameServerFactory;
-import net.team.omega.core.network.communication.loginserver.InternalGameServerFactory;
+import net.team.omega.core.network.gameserver.GameServerFactory;
+import net.team.omega.core.network.loginserver.InternalGameServerFactory;
 import net.team.omega.logging.LogHandler;
 
 public class ServerCore
