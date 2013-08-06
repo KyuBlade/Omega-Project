@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -94,9 +93,9 @@ public class ScreenManager implements Disposable
 	    activeScreens.remove(screen);
     }
     
-    public Screen getScreen(Class<? extends Screen> screen)
+    public <T extends Screen> T getScreen(Class<T> screen)
     {
-	return screens.get(screen);
+	return ((T) screens.get(screen));
     }
 
 }

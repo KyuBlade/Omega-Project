@@ -6,6 +6,10 @@ com.badlogic.gdx.graphics.Color: {
 	red: { a: 1, b: 0, g: 0, r: 1 },
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white },
+	toggle: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white, downFontColor: red }
+},
 com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white },
 	toggle: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white, downFontColor: red }
@@ -15,5 +19,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: { background: textfields/background, focusedBackground: textfields/background_focus, cursor: textfields/blue_cursor, selection: textfields/selection, font: default-font, fontColor: white }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+	default: { background: panels/panel_brown, stageBackground: backgrounds/black_alpha80, titleFont: default-font, titleFontColor: white }
 }
 }

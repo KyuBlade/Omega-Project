@@ -3,14 +3,15 @@ package com.team.omega.core.screen;
 import net.team.omega.network.core.LoginServerFactory;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.utils.ThreadFactory;
 
@@ -60,7 +61,7 @@ public class IdentificationScreen extends BaseScreen
 		});
 	    }
 	    
-	});
+	});	
 	
 	table.debug();
 	table.add(userLabel);
@@ -85,6 +86,16 @@ public class IdentificationScreen extends BaseScreen
     public void dispose()
     {
 	super.dispose();
+    }
+    
+    public void showServerUnreachable()
+    {
+	Dialog dialogServerUnreachable = new Dialog("Unable to connect to server", skin);
+	dialogServerUnreachable.button(new TextButton("Ok", skin));
+	dialogServerUnreachable.setTitleAlignment(Align.center);
+	dialogServerUnreachable.setMovable(false);
+	dialogServerUnreachable.center();
+	dialogServerUnreachable.show(stage);
     }
 
 }

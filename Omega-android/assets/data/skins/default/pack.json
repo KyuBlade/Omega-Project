@@ -4,7 +4,7 @@
         paddingY: 0,
         duplicatePadding: true,
         edgePadding: true,
-        rotation: false,
+        rotation: true,
         minWidth: 16,
         minHeight: 16,
         maxWidth: 1024,
