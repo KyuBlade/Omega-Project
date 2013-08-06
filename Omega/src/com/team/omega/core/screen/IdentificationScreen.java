@@ -1,6 +1,6 @@
 package com.team.omega.core.screen;
 
-import net.team.omega.communication.core.LoginServerFactory;
+import net.team.omega.network.core.LoginServerFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
