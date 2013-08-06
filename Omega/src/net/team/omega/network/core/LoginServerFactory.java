@@ -85,7 +85,7 @@ public class LoginServerFactory
 	} catch (IOException ex)
 	{
 	    state = ConnectionState.IDLE;
-	    GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showServerUnreachable();
+	    GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup("Unable to connect to server");
 	    LogHandler.severe("Cannot connect to the loginserver ! ");
 	    LogHandler.severe("Cause : " + ex.getMessage());
 

@@ -88,9 +88,9 @@ public class IdentificationScreen extends BaseScreen
 	super.dispose();
     }
     
-    public void showServerUnreachable()
+    public void showPopup(String message)
     {
-	Dialog dialogServerUnreachable = new Dialog("Unable to connect to server", skin);
+	Dialog dialogServerUnreachable = new Dialog(message, skin);
 	dialogServerUnreachable.button(new TextButton("Ok", skin));
 	dialogServerUnreachable.setTitleAlignment(Align.center);
 	dialogServerUnreachable.setMovable(false);
