@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="isometric" width="30" height="30" tilewidth="64" tileheight="32">
+ <tileset firstgid="1" name="terrain_0" tilewidth="64" tileheight="64">
+  <image source="../textures/tilesets/terrain.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzbkRACAQAzHXzDPA9UV/uAoPwQaKVZJOUNmybTds8PLy8vLy8vLy8vLyfvhO62HNHiEYX+g=
+  </data>
+ </layer>
+ <layer name="Calque 2" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4A2oJAINYdo7opRMJQAMWmGFHCcyuaRCi4j4eFq7+EBshcZ0MLegwNkL6kAnzuP0M0Vo2AkAHqUp9SuA2BgtK0xCkYBfgAAkfQTzA==
+  </data>
+ </layer>
+</map>
