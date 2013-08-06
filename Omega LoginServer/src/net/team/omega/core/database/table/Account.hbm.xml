@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4 ao?t 2013 19:09:43 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="net.team.omega.core.database.table.Account" table="accounts">
+        <id name="id" type="int">
+            <column name="ID" not-null="true" />
+            <generator class="native" />
+        </id>
+        <property name="user" type="java.lang.String" not-null="true" >
+            <column name="User" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="Password" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="Email" />
+        </property>
+        <property name="rights" type="short">
+            <column name="Rights" />
+        </property>
+        <property name="banned" type="boolean">
+            <column name="Banned" />
+        </property>
+    </class>
+</hibernate-mapping>

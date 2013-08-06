@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 ao?t 2013 12:26:14 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="net.team.omega.core.database.table.GameServer" table="gameservers">
+        <id name="id" type="byte">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="Name" />
+        </property>
+        <property name="ip" type="java.lang.String">
+            <column name="Host" />
+        </property>
+    </class>
+</hibernate-mapping>
