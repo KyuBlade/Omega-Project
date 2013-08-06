@@ -1,44 +1,102 @@
 package com.team.omega.core.screen;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.team.omega.core.GameCore;
+import com.badlogic.gdx.utils.Disposable;
 
 
-public class ScreenManager
+public class ScreenManager implements Disposable
 {
     
-    private GameCore core;
-    
     private Map<Class<? extends Screen>, Screen> screens = new HashMap<Class<? extends Screen>, Screen>();
+    private List<Class<? extends Screen>> activeScreens = new ArrayList<>();
     
-    public ScreenManager(GameCore core)
+    public ScreenManager()
     {
-	this.core = core;
+	
+    }
+    
+    public void render(float delta)
+    {
+	for(Class<? extends Screen> _clazz : activeScreens)
+	{
+	    Screen _screen = getScreen(_clazz);
+	    if(_screen == null)
+		throw new NullPointerException("[Render] Active screen is not in the global list of screens");
+	    else
+		_screen.render(delta);
+	}
+    }
+    
+    public void resize(int width, int height)
+    {
+	for(Screen _screen : screens.values())
+	    _screen.pause();
+    }
+    
+    public void pause()
+    {
+	for(Class<? extends Screen> _clazz : activeScreens)
+	{
+	    Screen _screen = getScreen(_clazz);
+	    if(_screen == null)
+		throw new NullPointerException("[Pause] Active screen is not in the global list of screens");
+	    else
+		_screen.pause();
+	}
+    }
+    
+    public void resume()
+    {
+	for(Class<? extends Screen> _clazz : activeScreens)
+	{
+	    Screen _screen = getScreen(_clazz);
+	    if(_screen == null)
+		throw new NullPointerException("[Resume] Active screen is not in the global list of screens");
+	    else
+		_screen.resume();
+	}
+    }
+    
+    public void dispose()
+    {
+	for(Screen _screen : screens.values())
+	    _screen.dispose();
     }
     
     public void addScreen(Screen screen)
     {
 	if(screen == null)
-	    throw new NullPointerException("Screen is null");
+	    throw new NullPointerException("Can't add the screen");
 	
-	screens.put(screen.getClass(), screen);
+	if(screens.containsKey(screen.getClass())) // Already added
+	{
+	    if(activeScreens.contains(screen.getClass())) // Already active
+		return;
+	    else
+		activeScreens.add(screen.getClass());
+	}
+	else
+	{
+	    screens.put(screen.getClass(), screen);
+	    activeScreens.add(screen.getClass());
+	}
     }
     
-    public <T extends Screen> void setScreen(Class<T> clazz)
+    public void removeScreen(Class<? extends Screen> screen)
     {
-	if(clazz == null)
-	    throw new NullPointerException("Screen class is null");
-	    
-	Screen _screen = screens.get(clazz);
-	if(_screen == null)
-	    throw new NullPointerException("Can't find screen. Maybe it's not added first");
-	
-	core.setScreen(screens.get(clazz));
+	if(activeScreens.contains(screen))
+	    activeScreens.remove(screen);
+    }
+    
+    public Screen getScreen(Class<? extends Screen> screen)
+    {
+	return screens.get(screen);
     }
 
 }

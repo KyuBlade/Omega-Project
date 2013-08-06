@@ -2,24 +2,32 @@ package com.team.omega.core;
 
 import java.util.Locale;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.team.omega.core.screen.IdentificationScreen;
 import com.team.omega.core.screen.ScreenManager;
 
-public class GameCore extends Game
+public class GameCore extends BaseGame
 {
 
     private AssetManager assetManager;
     private ScreenManager screenManager;
     
-    private boolean isLoading = true;
+    private static GameCore instance;
     
     public GameCore()
     {
 	
+    }
+    
+    public static GameCore getInstance()
+    {
+	if(instance == null)
+	    instance = new GameCore();
+	
+	return instance;
     }
 
     @Override
@@ -27,22 +35,17 @@ public class GameCore extends Game
     {
 	Gdx.app.setLogLevel(Gdx.app.LOG_DEBUG);
 	assetManager = new AssetManager();
-	screenManager = new ScreenManager(this);
+	screenManager = new ScreenManager();
 	
 	LocalizationHandler.getInstance().setLanguage(Locale.US);
 	
 	// Load resources
 	assetManager.load("data/skins/default/default-skin.atlas", TextureAtlas.class);
 	assetManager.load("data/textures/tilesets/atlas-textures.atlas", TextureAtlas.class);
-    }
-
-    @Override
-    public void dispose()
-    {
-	super.dispose();
 	
-	Gdx.app.log("GameCore", "Dispose");
-	assetManager.dispose();
+	assetManager.finishLoading();
+	    
+	screenManager.addScreen(new IdentificationScreen());
     }
 
     @Override
@@ -50,34 +53,44 @@ public class GameCore extends Game
     {
 	super.render();
 	
-	if(!isLoading)
-	    return;
+	Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 	
-	if(assetManager.update())
-	{
-	    isLoading = false;
-	    
-	    screenManager.addScreen(new IdentificationScreen(this));
-	    screenManager.setScreen(IdentificationScreen.class);
-	}
+	screenManager.render(Gdx.graphics.getDeltaTime());
     }
 
     @Override
     public void resize(int width, int height)
     {
 	super.resize(width, height);
+	
+	screenManager.resize(width, height);
     }
 
     @Override
     public void pause()
     {
 	super.pause();
+	
+	screenManager.pause();
     }
 
     @Override
     public void resume()
     {
 	super.resume();
+	
+	screenManager.resume();
+    }
+    
+    @Override
+    public void dispose()
+    {
+	super.dispose();
+	
+	Gdx.app.log("GameCore", "Dispose");
+	assetManager.dispose();
+	screenManager.dispose();
     }
     
     public AssetManager getAssetManager()

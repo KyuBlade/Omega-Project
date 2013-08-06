@@ -17,7 +17,7 @@ public class Main
 	cfg.vSyncEnabled = false;
 	cfg.foregroundFPS = 0;
 	
-	new LwjglApplication(new GameCore(), cfg);
+	new LwjglApplication(GameCore.getInstance(), cfg);
     }
     
 }

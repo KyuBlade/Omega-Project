@@ -2,7 +2,6 @@ package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -11,22 +10,18 @@ import com.team.omega.core.GameCore;
 
 public class BaseScreen implements Screen
 {
-
-    protected GameCore core;
-    protected boolean isActive;
     
     protected Stage stage;
     protected Skin skin;
     
-    public BaseScreen(GameCore core)
+    public BaseScreen()
     {
-	this.core = core;
-	isActive = true;
-	
 	stage = new Stage();
 	Gdx.input.setInputProcessor(stage);
 	
-	TextureAtlas _atlas = core.getAssetManager().get("data/skins/default/default-skin.atlas");
+	// TODO: May do overload and be used once for all screen
+	// So make a SkinManager
+	TextureAtlas _atlas = GameCore.getInstance().getAssetManager().get("data/skins/default/default-skin.atlas");
 	skin = new Skin(Gdx.files.internal("data/skins/default/default.json"), _atlas);
 	
 	Gdx.app.debug("Screen", this.getClass().getSimpleName() + " created");
@@ -35,11 +30,8 @@ public class BaseScreen implements Screen
     @Override
     public void render(float delta)
     {
-	if(!isActive)
-	    return;
-	
-	Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+	stage.act(Gdx.graphics.getDeltaTime());
+	stage.draw();
     }
 
     @Override
@@ -50,30 +42,28 @@ public class BaseScreen implements Screen
     @Override
     public void show()
     {
-	isActive = true;
     }
 
     @Override
     public void hide()
     {
-	isActive = false;
     }
 
     @Override
     public void pause()
     {
-	isActive = false;
     }
 
     @Override
     public void resume()
     {
-	isActive = true;
     }
-
+    
     @Override
     public void dispose()
     {
+	stage.dispose();
+	skin.dispose();
     }
 
 }

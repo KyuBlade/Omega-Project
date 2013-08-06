@@ -19,7 +19,6 @@ public class IdentificationScreen extends BaseScreen
 {
     
     private Table table;
-    private NinePatch patches;
     
     private Label userLabel;
     private Label passwordLabel;
@@ -29,9 +28,9 @@ public class IdentificationScreen extends BaseScreen
     
     private ImageTextButton submit;
     
-    public IdentificationScreen(GameCore core)
+    public IdentificationScreen()
     {
-	super(core);
+	super();
 	
 	table = new Table(skin);
 	table.setFillParent(true);
@@ -79,9 +78,6 @@ public class IdentificationScreen extends BaseScreen
     {
 	super.render(delta);
 	
-	stage.act(Gdx.graphics.getDeltaTime());
-	stage.draw();
-	
 	Table.drawDebug(stage);
     }
 
@@ -89,9 +85,6 @@ public class IdentificationScreen extends BaseScreen
     public void dispose()
     {
 	super.dispose();
-	
-	stage.dispose();
-	skin.dispose();
     }
 
 }
