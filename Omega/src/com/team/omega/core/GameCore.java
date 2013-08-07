@@ -41,7 +41,7 @@ public class GameCore extends BaseGame
 	LocalizationHandler.getInstance().setLanguage(Locale.US);
 	
 	// Load resources
-	assetManager.load("data/skins/default/pack/default-skin.atlas", TextureAtlas.class);
+	assetManager.load("data/skins/default/default-skin.atlas", TextureAtlas.class);
 	assetManager.load("data/textures/tilesets/atlas-textures.atlas", TextureAtlas.class);
 	
 	assetManager.finishLoading();

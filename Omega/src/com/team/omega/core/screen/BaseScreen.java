@@ -21,7 +21,7 @@ public class BaseScreen implements Screen
 	
 	// TODO: May do overload and be used once for all screen
 	// So make a SkinManager
-	TextureAtlas _atlas = GameCore.getInstance().getAssetManager().get("data/skins/default/pack/default-skin.atlas");
+	TextureAtlas _atlas = GameCore.getInstance().getAssetManager().get("data/skins/default/default-skin.atlas");
 	skin = new Skin(Gdx.files.internal("data/skins/default/default.json"), _atlas);
 	
 	Gdx.app.debug("Screen", this.getClass().getSimpleName() + " created");
