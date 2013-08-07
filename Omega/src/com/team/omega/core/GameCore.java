@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.team.omega.core.screen.DebugScreen;
 import com.team.omega.core.screen.IdentificationScreen;
 import com.team.omega.core.screen.ScreenManager;
 
@@ -47,8 +48,9 @@ public class GameCore extends BaseGame
 	assetManager.load("data/textures/tilesets/atlas-textures.atlas", TextureAtlas.class);
 	
 	assetManager.finishLoading();
-	    
+	
 	screenManager.addScreen(new IdentificationScreen());
+	screenManager.addScreen(new DebugScreen());
     }
 
     @Override
