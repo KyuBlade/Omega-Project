@@ -35,7 +35,7 @@ public class ScreenManager implements Disposable
     public void resize(int width, int height)
     {
 	for(Screen _screen : screens.values())
-	    _screen.pause();
+	    _screen.resize(width, height);
     }
     
     public void pause()
