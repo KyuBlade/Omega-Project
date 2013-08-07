@@ -75,7 +75,7 @@ public class Panel extends Table
     public void setStyle(PanelStyle style)
     {
 	if (style == null)
-	    throw new IllegalArgumentException("style cannot be null.");
+	    throw new IllegalArgumentException("style cannot be null");
 	this.style = style;
 	
 	invalidateHierarchy();
@@ -88,27 +88,15 @@ public class Panel extends Table
 
     public void draw(SpriteBatch batch, float parentAlpha)
     {
-	validate();
-	
-	Drawable _background = style.background;
-	
-	if (_background != null)
-	{
-	    Color color = getColor();
-	    batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-	    _background.draw(batch, getX(), getY(), getWidth(), getHeight());
-	}
+	setBackground(style.background);
+	super.draw(batch, parentAlpha);
 
-	Array<Actor> children = getChildren();
+	/*Array<Actor> children = getChildren();
 	for (int i = 0; i < children.size; i++)
 	    children.get(i).translate(offsetX, offsetY);
 	super.draw(batch, parentAlpha);
 	for (int i = 0; i < children.size; i++)
-	    children.get(i).translate(-offsetX, -offsetY);
-    }
-
-    protected void drawBackground(SpriteBatch batch, float parentAlpha)
-    {
+	    children.get(i).translate(-offsetX, -offsetY);*/
     }
 
     public float getPrefWidth()

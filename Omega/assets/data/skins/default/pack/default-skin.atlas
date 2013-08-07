@@ -5,14 +5,14 @@ filter: Nearest,Nearest
 repeat: none
 backgrounds/black_alpha80
   rotate: false
-  xy: 286, 63
+  xy: 96, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 buttons/button_down
   rotate: false
-  xy: 256, 96
+  xy: 0, 0
   size: 32, 32
   split: 8, 8, 8, 8
   orig: 32, 32
@@ -20,7 +20,7 @@ buttons/button_down
   index: -1
 buttons/button_over
   rotate: false
-  xy: 256, 64
+  xy: 32, 0
   size: 32, 32
   split: 8, 8, 8, 8
   orig: 32, 32
@@ -28,30 +28,31 @@ buttons/button_over
   index: -1
 buttons/button_up
   rotate: false
-  xy: 288, 96
+  xy: 64, 0
   size: 32, 32
   split: 7, 7, 7, 7
   orig: 32, 32
   offset: 0, 0
   index: -1
-fonts/default
+panels/black_alpha
   rotate: false
-  xy: 0, 0
-  size: 256, 128
-  orig: 256, 128
+  xy: 135, 22
+  size: 10, 10
+  split: 3, 3, 3, 3
+  orig: 10, 10
   offset: 0, 0
   index: -1
 panels/panel_brown
   rotate: false
-  xy: 256, 34
+  xy: 96, 2
   size: 30, 30
-  split: 5, 6, 7, 8
+  split: 6, 6, 6, 8
   orig: 30, 30
   offset: 0, 0
   index: -1
 textfields/background
   rotate: false
-  xy: 320, 120
+  xy: 126, 6
   size: 8, 8
   split: 1, 1, 1, 1
   orig: 8, 8
@@ -59,7 +60,7 @@ textfields/background
   index: -1
 textfields/background_focus
   rotate: false
-  xy: 256, 26
+  xy: 135, 14
   size: 8, 8
   split: 3, 3, 3, 3
   orig: 8, 8
@@ -67,14 +68,14 @@ textfields/background_focus
   index: -1
 textfields/blue_cursor
   rotate: false
-  xy: 288, 78
+  xy: 126, 14
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 textfields/selection
   rotate: false
-  xy: 288, 73
+  xy: 145, 27
   size: 5, 5
   split: 1, 1, 1, 1
   orig: 5, 5

@@ -2,6 +2,7 @@ package com.team.omega.core;
 
 import java.util.Locale;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
@@ -33,14 +34,14 @@ public class GameCore extends BaseGame
     @Override
     public void create()
     {
-	Gdx.app.setLogLevel(Gdx.app.LOG_DEBUG);
+	Gdx.app.setLogLevel(Application.LOG_DEBUG);
 	assetManager = new AssetManager();
 	screenManager = new ScreenManager();
 	
 	LocalizationHandler.getInstance().setLanguage(Locale.US);
 	
 	// Load resources
-	assetManager.load("data/skins/default/default-skin.atlas", TextureAtlas.class);
+	assetManager.load("data/skins/default/pack/default-skin.atlas", TextureAtlas.class);
 	assetManager.load("data/textures/tilesets/atlas-textures.atlas", TextureAtlas.class);
 	
 	assetManager.finishLoading();
@@ -53,7 +54,7 @@ public class GameCore extends BaseGame
     {
 	super.render();
 	
-	Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+	Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 	
 	screenManager.render(Gdx.graphics.getDeltaTime());
