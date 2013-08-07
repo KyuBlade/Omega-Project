@@ -10,6 +10,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
+import com.team.omega.core.LocalizationHandler;
 import com.team.omega.core.screen.IdentificationScreen;
 import com.team.omega.utils.LogHandler;
 
@@ -85,7 +86,7 @@ public class LoginServerFactory
 	} catch (IOException ex)
 	{
 	    state = ConnectionState.IDLE;
-	    GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup("Unable to connect to server");
+	    GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup(LocalizationHandler.getInstance().getDialog("login.error.unreachable"));
 	    LogHandler.severe("Cannot connect to the loginserver ! ");
 	    LogHandler.severe("Cause : " + ex.getMessage());
 

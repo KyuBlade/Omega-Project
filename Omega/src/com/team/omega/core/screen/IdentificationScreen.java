@@ -94,7 +94,7 @@ public class IdentificationScreen extends BaseScreen
     public void showPopup(String message)
     {
 	Dialog dialogServerUnreachable = new Dialog(message, skin);
-	dialogServerUnreachable.button(new TextButton("Ok", skin));
+	dialogServerUnreachable.button(new TextButton(LocalizationHandler.getInstance().getDialog("common.choice.ok"), skin));
 	dialogServerUnreachable.setTitleAlignment(Align.center);
 	dialogServerUnreachable.setMovable(false);
 	dialogServerUnreachable.center();
