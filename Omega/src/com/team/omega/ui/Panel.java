@@ -1,15 +1,14 @@
 package com.team.omega.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
-public class Panel extends Table
+public class Panel extends WidgetGroup
 {
-
+    
     private PanelStyle style;
 
     public Panel(Skin skin)
@@ -19,59 +18,16 @@ public class Panel extends Table
 
     public Panel(Skin skin, String styleName)
     {
-	super(skin);
-	initialize();
 	setStyle(skin.get(styleName, PanelStyle.class));
-	setWidth(getPrefWidth());
-	setHeight(getPrefHeight());
-    }
-
-    public Panel(Actor child, Skin skin, String styleName)
-    {
-	this(child, skin.get(styleName, PanelStyle.class));
-    }
-
-    public Panel(Actor child, PanelStyle style)
-    {
-	initialize();
-	add(child);
-	setStyle(style);
-	setWidth(getPrefWidth());
-	setHeight(getPrefHeight());
-    }
-
-    public Panel(PanelStyle style)
-    {
-	initialize();
-	setStyle(style);
-	setWidth(getPrefWidth());
-	setHeight(getPrefHeight());
-    }
-    
-    public Panel()
-    {
-	initialize();
-    }
-
-    private void initialize()
-    {	
-	setTouchable(Touchable.enabled);
-    }
-
-    public Panel(Drawable background)
-    {
-	this(new PanelStyle(background));
-    }
-
-    public Panel(Actor child, Skin skin)
-    {
-	this(child, skin.get(PanelStyle.class));
+	//setWidth(getPrefWidth());
+	//setHeight(getPrefHeight());
     }
 
     public void setStyle(PanelStyle style)
     {
 	if (style == null)
 	    throw new IllegalArgumentException("style cannot be null");
+	
 	this.style = style;
 	
 	invalidateHierarchy();
@@ -81,40 +37,22 @@ public class Panel extends Table
     {
 	return style;
     }
-
-    public void draw(SpriteBatch batch, float parentAlpha)
+    
+    @Override
+    public void draw (SpriteBatch batch, float parentAlpha)
     {
-	setBackground(style.background);
+	if(style.background != null)
+	    drawBackground(batch, parentAlpha);
+	
 	super.draw(batch, parentAlpha);
-    }
-
-    public float getPrefWidth()
+}
+    
+    protected void drawBackground (SpriteBatch batch, float parentAlpha)
     {
-	float width = super.getPrefWidth();
-	
-	return width;
+	Gdx.app.debug("Bg", "x : " + getX() + " - y : " + getY() 
+		+ " - width : " + getWidth() + " - height : " + getHeight());
+	style.background.draw(batch, getX(), getY(), getWidth(), getHeight());
     }
-
-    public float getPrefHeight()
-    {
-	float height = super.getPrefHeight();
-	
-	if (style.background != null)
-	    height = Math.max(height, style.background.getMinHeight());
-	
-	return height;
-    }
-
-    public float getMinWidth()
-    {
-	return getPrefWidth();
-    }
-
-    public float getMinHeight()
-    {
-	return getPrefHeight();
-    }
-
 
     static public class PanelStyle
     {

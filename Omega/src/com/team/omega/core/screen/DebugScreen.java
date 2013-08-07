@@ -7,18 +7,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class DebugScreen extends BaseScreen
 {
-    
-    private Table layout;
+
     private Label fps;
     
     public DebugScreen()
     {
 	super();
 	
-	this.layout = new Table(skin).right().top().padRight(10f);
-	layout.setFillParent(true);
 	this.fps = new Label("", skin);
-	layout.add(fps);
+	
+	Table _table = new Table(skin);
+	_table.right().top().padRight(10f).add(fps);
+	
+	layout.add(_table);
 	
 	stage.addActor(layout);
     }

@@ -23,8 +23,6 @@ import com.team.omega.utils.ThreadFactory;
 public class IdentificationScreen extends BaseScreen
 {
     
-    private Table mainPanel;
-    private Panel internalPanel;
     private Image background;
     
     private Label userLabel;
@@ -39,9 +37,7 @@ public class IdentificationScreen extends BaseScreen
     {
 	super();
 	
-	mainPanel = new Table(skin);
-	mainPanel.setFillParent(true);
-	stage.addActor(mainPanel);
+	Gdx.input.setInputProcessor(stage);
 	
 	Texture _bgTexture = new Texture(Gdx.files.internal("data/skins/default/backgrounds/login_bg.jpg"));
 	background = new Image(_bgTexture);
@@ -72,31 +68,26 @@ public class IdentificationScreen extends BaseScreen
 	    
 	});	
 	
-	mainPanel.debug();
-	
 	Stack _stack = new Stack();
+	Table _table = new Table(skin);
 	
-	internalPanel = new Panel(skin, "black_alpha");
-	internalPanel.debug();
-	internalPanel.add(userLabel);
-	internalPanel.add(userInput);
-	internalPanel.row();
-	internalPanel.add(passwordLabel);
-	internalPanel.add(passwordInput);
-	internalPanel.row();
-	internalPanel.add(submit).colspan(2);
+	_table.add(userLabel);
+	_table.add(userInput);
+	_table.row();
+	_table.add(passwordLabel);
+	_table.add(passwordInput);
+	_table.row();
+	_table.add(submit).colspan(2);
 	
 	_stack.add(background);
-	_stack.add(internalPanel);;
-	mainPanel.add(_stack);
+	_stack.add(_table);
+	layout.add(_stack);
     }
 
     @Override
     public void render(float delta)
     {
 	super.render(delta);
-	
-	Table.drawDebug(stage);
     }
 
     @Override

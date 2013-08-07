@@ -5,19 +5,29 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.team.omega.core.GameCore;
 
 
 public class BaseScreen implements Screen
 {
     
+    protected Table layout;
     protected Stage stage;
     protected Skin skin;
     
     public BaseScreen()
     {
 	stage = new Stage();
-	Gdx.input.setInputProcessor(stage);
+	
+	layout = new Table();
+	layout.setFillParent(true);
+	stage.addActor(layout);
+	
+	// Debug purpose
+	layout.debug();
+	layout.debugTable();
+	layout.debugCell();
 	
 	// TODO: May do overload and be used once for all screen
 	// So make a SkinManager
@@ -32,6 +42,8 @@ public class BaseScreen implements Screen
     {
 	stage.act(Gdx.graphics.getDeltaTime());
 	stage.draw();
+	
+	Table.drawDebug(stage);
     }
 
     @Override
