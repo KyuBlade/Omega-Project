@@ -37,6 +37,8 @@ public class BaseScreen implements Screen
     @Override
     public void resize(int width, int height)
     {
+	Gdx.app.debug("Resizing", "Resize to " + width + "x" + height);
+	stage.setViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     }
 
     @Override
