@@ -1,20 +1,16 @@
 package com.team.omega.ui;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.utils.Array;
 
 public class Panel extends Table
 {
 
     private PanelStyle style;
-    private float offsetX;
-    private float offsetY;
 
     public Panel(Skin skin)
     {
@@ -90,21 +86,11 @@ public class Panel extends Table
     {
 	setBackground(style.background);
 	super.draw(batch, parentAlpha);
-
-	/*Array<Actor> children = getChildren();
-	for (int i = 0; i < children.size; i++)
-	    children.get(i).translate(offsetX, offsetY);
-	super.draw(batch, parentAlpha);
-	for (int i = 0; i < children.size; i++)
-	    children.get(i).translate(-offsetX, -offsetY);*/
     }
 
     public float getPrefWidth()
     {
 	float width = super.getPrefWidth();
-	
-	if (style.background != null)
-	    width = Math.max(width, style.background.getMinWidth());
 	
 	return width;
     }

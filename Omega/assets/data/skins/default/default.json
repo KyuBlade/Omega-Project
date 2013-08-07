@@ -24,7 +24,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: { background: panels/panel_brown, stageBackground: backgrounds/black_alpha80, titleFont: default-font, titleFontColor: white }
 },
 com.team.omega.ui.Panel$PanelStyle: {
-	default: { background: panels/black_alpha }, 
-	login_main: { background: backgrounds/login_bg }
+	default: {}, 
+	black_alpha: { background: panels/black_alpha }
 }
 }

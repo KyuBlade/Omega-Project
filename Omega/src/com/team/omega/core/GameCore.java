@@ -6,6 +6,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.team.omega.core.screen.IdentificationScreen;
 import com.team.omega.core.screen.ScreenManager;
@@ -40,6 +41,7 @@ public class GameCore extends BaseGame
 	
 	LocalizationHandler.getInstance().setLanguage(Locale.US);
 	
+	Texture.setEnforcePotImages(false);
 	// Load resources
 	assetManager.load("data/skins/default/default-skin.atlas", TextureAtlas.class);
 	assetManager.load("data/textures/tilesets/atlas-textures.atlas", TextureAtlas.class);

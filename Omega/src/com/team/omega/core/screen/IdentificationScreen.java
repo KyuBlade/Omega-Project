@@ -3,10 +3,13 @@ package com.team.omega.core.screen;
 import net.team.omega.core.network.LoginServerFactory;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -20,8 +23,9 @@ import com.team.omega.utils.ThreadFactory;
 public class IdentificationScreen extends BaseScreen
 {
     
-    private Table table;
+    private Table mainPanel;
     private Panel internalPanel;
+    private Image background;
     
     private Label userLabel;
     private Label passwordLabel;
@@ -35,9 +39,12 @@ public class IdentificationScreen extends BaseScreen
     {
 	super();
 	
-	table = new Table(skin);
-	table.setFillParent(true);
-	stage.addActor(table);
+	mainPanel = new Table(skin);
+	mainPanel.setFillParent(true);
+	stage.addActor(mainPanel);
+	
+	Texture _bgTexture = new Texture(Gdx.files.internal("data/skins/default/backgrounds/login_bg.jpg"));
+	background = new Image(_bgTexture);
 	
 	userLabel = new Label(LocalizationHandler.getInstance().getDialog("login.user"), skin);
 	userInput = new TextField("", skin);
@@ -65,8 +72,12 @@ public class IdentificationScreen extends BaseScreen
 	    
 	});	
 	
-	table.debug();
-	internalPanel = new Panel(skin);
+	mainPanel.debug();
+	
+	Stack _stack = new Stack();
+	
+	internalPanel = new Panel(skin, "black_alpha");
+	internalPanel.debug();
 	internalPanel.add(userLabel);
 	internalPanel.add(userInput);
 	internalPanel.row();
@@ -74,7 +85,10 @@ public class IdentificationScreen extends BaseScreen
 	internalPanel.add(passwordInput);
 	internalPanel.row();
 	internalPanel.add(submit).colspan(2);
-	table.add(internalPanel);
+	
+	_stack.add(background);
+	_stack.add(internalPanel);;
+	mainPanel.add(_stack);
     }
 
     @Override
