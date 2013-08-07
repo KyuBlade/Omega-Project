@@ -1,6 +1,6 @@
 package com.team.omega.core.screen;
 
-import net.team.omega.network.core.LoginServerFactory;
+import net.team.omega.core.network.LoginServerFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.team.omega.core.LocalizationHandler;
+import com.team.omega.ui.Panel;
 import com.team.omega.utils.ThreadFactory;
 
 
@@ -20,6 +21,7 @@ public class IdentificationScreen extends BaseScreen
 {
     
     private Table table;
+    private Panel internalPanel;
     
     private Label userLabel;
     private Label passwordLabel;
@@ -64,14 +66,15 @@ public class IdentificationScreen extends BaseScreen
 	});	
 	
 	table.debug();
-	table.add(userLabel);
-	table.add(userInput);
-	table.row();
-	table.add(passwordLabel);
-	table.add(passwordInput);
-	table.row();
-	table.add(submit).colspan(2);
-	table.row();
+	internalPanel = new Panel(skin);
+	internalPanel.add(userLabel);
+	internalPanel.add(userInput);
+	internalPanel.row();
+	internalPanel.add(passwordLabel);
+	internalPanel.add(passwordInput);
+	internalPanel.row();
+	internalPanel.add(submit).colspan(2);
+	table.add(internalPanel);
     }
 
     @Override
