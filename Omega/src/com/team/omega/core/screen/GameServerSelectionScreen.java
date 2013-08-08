@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
@@ -34,7 +35,8 @@ public class GameServerSelectionScreen extends BaseScreen
 	serverState = new Label(LocalizationHandler.getInstance().getDialog("gameserver.selection.state"), skin);
 	serverPing = new Label(LocalizationHandler.getInstance().getDialog("gameserver.selection.ping"), skin);
 
-	serverList = new List(new Object[] {"", "", "", ""}, skin);
+	serverList = new List(new String[] {"test", "test2", "test3", "test4" , "test2", "test3", "test4" , "test2", "test3", "test4" , "test2", "test3", "test4" , "test2", "test3", "test4"}, skin);
+	
 	scrollPane = new ScrollPane(serverList);
 	
 	backButton = new TextButton(LocalizationHandler.getInstance().getDialog("common.choice.back"), skin);
@@ -48,7 +50,7 @@ public class GameServerSelectionScreen extends BaseScreen
 	_panel.add(serverPing);
 	
 	_panel.row();
-	_panel.add(scrollPane).fill().colspan(3);
+	_panel.add(scrollPane).width(400).height(200).colspan(3);
 	
 	_panel.row();
 	_panel.add(backButton);

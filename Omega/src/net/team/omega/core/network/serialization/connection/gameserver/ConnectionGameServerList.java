@@ -22,8 +22,8 @@ public class ConnectionGameServerList extends MessageData
         }
         
         GameServerSelectionScreen _screen = GameCore.getInstance().getScreenManager().addScreen(GameServerSelectionScreen.class);
-        if(_screen != null)
-            _screen.getServerList().setItems(gameservers.toArray());
+        /*if(_screen != null)
+            _screen.getServerList().setItems(gameservers.toArray());*/
         
     }
 
