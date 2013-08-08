@@ -79,9 +79,10 @@ public class IdentificationScreen extends BaseScreen
 	_table.row();
 	_table.add(submit).colspan(2);
 	
-	_stack.add(background);
-	_stack.add(_table);
-	layout.add(_stack);
+	layout.add(background);
+	
+	
+	layout.add(_table);
     }
 
     @Override

@@ -15,13 +15,11 @@ public class DebugScreen extends BaseScreen
 	super();
 	
 	this.fps = new Label("", skin);
+	Gdx.app.debug("Layout", "" + layout.getWidth());
 	
-	Table _table = new Table(skin);
-	_table.right().top().padRight(10f).add(fps);
-	
+	Table _table = new Table().top().right();
+	_table.add(fps);
 	layout.add(_table);
-	
-	stage.addActor(layout);
     }
     
     @Override

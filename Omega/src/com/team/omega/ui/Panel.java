@@ -51,6 +51,7 @@ public class Panel extends WidgetGroup
     {
 	Gdx.app.debug("Bg", "x : " + getX() + " - y : " + getY() 
 		+ " - width : " + getWidth() + " - height : " + getHeight());
+	
 	style.background.draw(batch, getX(), getY(), getWidth(), getHeight());
     }
 

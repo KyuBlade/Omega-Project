@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.team.omega.core.GameCore;
@@ -14,7 +15,7 @@ import com.team.omega.core.GameCore;
 public class BaseScreen implements Screen
 {
     
-    protected Table layout;
+    protected Stack layout;
     protected Stage stage;
     protected Skin skin;
     
@@ -22,12 +23,12 @@ public class BaseScreen implements Screen
     {
 	stage = new Stage();
 	
-	layout = new Table();
+	layout = new Stack();
 	layout.setFillParent(true);
 	stage.addActor(layout);
 	
 	// Debug purpose
-	layout.debug();
+	//layout.debug();
 	
 	// TODO: May do overload and be used once for all screen
 	// So make a SkinManager
