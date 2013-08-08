@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -69,10 +68,10 @@ public class IdentificationScreen extends BaseScreen
 	_panel.pad(10f);
 	_panel.add(userLabel);
 	_panel.add(userInput);
-	_panel.row();
+	_panel.row().padTop(5f);
 	_panel.add(passwordLabel);
 	_panel.add(passwordInput);
-	_panel.row();
+	_panel.row().padTop(10f);
 	_panel.add(submit).colspan(2);
 	
 	layout.setBackground(background.getDrawable());

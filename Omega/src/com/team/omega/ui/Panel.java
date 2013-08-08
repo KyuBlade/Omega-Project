@@ -1,7 +1,5 @@
 package com.team.omega.ui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -37,16 +35,6 @@ public class Panel extends Table
     public PanelStyle getStyle()
     {
 	return style;
-    }
-
-    
-    @Override
-    public void draw (SpriteBatch batch, float parentAlpha)
-    {
-	super.draw(batch, parentAlpha);
-	
-	Gdx.app.debug("Bg", "x : " + getX() + " - y : " + getY() 
-		+ " - width : " + getWidth() + " - height : " + getHeight());
     }
 
     static public class PanelStyle

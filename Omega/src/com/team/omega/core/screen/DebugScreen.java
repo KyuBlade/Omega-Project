@@ -2,8 +2,7 @@ package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.team.omega.ui.Panel;
 
 
 public class DebugScreen extends BaseScreen
@@ -16,12 +15,11 @@ public class DebugScreen extends BaseScreen
 	super();
 	
 	this.fps = new Label("", skin);
-	layout.debug();
-	//Table _table = new Table();
-	//_table.setFillParent(true);
-	//_table.debug();
-	//_table.add(fps);
-	layout.add(fps).top();
+	layout.top().right();
+	Panel _table = new Panel(skin, "black_alpha");
+	_table.add(fps).pad(5f);
+	
+	layout.add(_table);
     }
     
     @Override

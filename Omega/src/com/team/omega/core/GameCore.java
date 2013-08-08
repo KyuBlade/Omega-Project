@@ -52,8 +52,8 @@ public class GameCore extends BaseGame
 	
 	assetManager.finishLoading();
 	
-	screenManager.addScreen(new IdentificationScreen());
-	screenManager.addScreen(new DebugScreen());
+	screenManager.addScreen(IdentificationScreen.class);
+	screenManager.addScreen(DebugScreen.class);
     }
 
     @Override
