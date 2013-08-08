@@ -15,20 +15,20 @@ import com.team.omega.core.GameCore;
 public class BaseScreen implements Screen
 {
     
-    protected Stack layout;
+    protected static Stack layout;
     protected Stage stage;
     protected Skin skin;
     
     public BaseScreen()
     {
 	stage = new Stage();
-	
-	layout = new Stack();
-	layout.setFillParent(true);
-	stage.addActor(layout);
-	
-	// Debug purpose
-	//layout.debug();
+
+	if (layout == null)
+	{
+	    layout = new Stack();
+	    layout.setFillParent(true);
+	    stage.addActor(layout);
+	}
 	
 	// TODO: May do overload and be used once for all screen
 	// So make a SkinManager
