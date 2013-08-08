@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.team.omega.core.Constants;
+import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.ui.Panel;
 import com.team.omega.utils.ThreadFactory;
@@ -36,8 +36,7 @@ public class IdentificationScreen extends BaseScreen
     {
 	super();
 	
-	Texture _bgTexture = new Texture(Gdx.files.internal("data/skins/default/backgrounds/login_bg.jpg"));
-	background = new Image(_bgTexture);
+	background = new Image(GameCore.getInstance().getAssetManager().get("data/skins/default/backgrounds/login_bg.jpg", Texture.class));
 	
 	userLabel = new Label(LocalizationHandler.getInstance().getDialog("login.user"), skin);
 	userInput = new TextField("", skin);
@@ -45,6 +44,11 @@ public class IdentificationScreen extends BaseScreen
 	passwordInput = new TextField("", skin);
 	passwordInput.setPasswordMode(true);
 	passwordInput.setPasswordCharacter('*');
+	
+	// For debug speed
+	userInput.setText("test");
+	passwordInput.setText("testpass");
+	
 	submit = new ImageTextButton(LocalizationHandler.getInstance().getDialog("login.loging"), skin);
 	submit.addListener(new ChangeListener() {
 	    

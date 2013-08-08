@@ -26,5 +26,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 com.team.omega.ui.Panel$PanelStyle: {
 	default: {}, 
 	black_alpha: { background: panels/black_alpha }
+},
+com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+	default: {  selection: textfields/selection }
 }
 }

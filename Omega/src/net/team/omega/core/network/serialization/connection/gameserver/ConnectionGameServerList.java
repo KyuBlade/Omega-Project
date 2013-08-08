@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.datas.GameServer;
 
+import com.team.omega.core.GameCore;
+import com.team.omega.core.screen.GameServerSelectionScreen;
+
 public class ConnectionGameServerList extends MessageData
 {
 
@@ -18,7 +21,7 @@ public class ConnectionGameServerList extends MessageData
             // Add to list
         }
         
-        // Go to game server selection screen
+        GameCore.getInstance().getScreenManager().addScreen(GameServerSelectionScreen.class);
     }
 
 }

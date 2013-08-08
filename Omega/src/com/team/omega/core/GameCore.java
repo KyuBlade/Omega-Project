@@ -49,6 +49,7 @@ public class GameCore extends BaseGame
 	// Load resources
 	assetManager.load("data/skins/default/default-skin.atlas", TextureAtlas.class);
 	assetManager.load("data/textures/tilesets/atlas-textures.atlas", TextureAtlas.class);
+	assetManager.load("data/skins/default/backgrounds/login_bg.jpg", Texture.class);
 	
 	assetManager.finishLoading();
 	
