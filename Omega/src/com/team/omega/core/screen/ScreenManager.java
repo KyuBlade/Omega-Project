@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -73,22 +74,34 @@ public class ScreenManager implements Disposable
 	    _screen.dispose();
     }
     
-    public void addScreen(Screen screen)
+    public void addScreen(Class<? extends Screen> screen)
     {
 	if(screen == null)
 	    throw new NullPointerException("Can't add the screen");
 	
-	if(screens.containsKey(screen.getClass())) // Already added
+	if(screens.containsKey(screen)) // Already added
 	{
-	    if(activeScreens.contains(screen.getClass())) // Already active
+	    if(activeScreens.contains(screen)) // Already active
 		return;
 	    else
-		activeScreens.add(screen.getClass());
+		activeScreens.add(screen);
 	}
 	else
 	{
-	    screens.put(screen.getClass(), screen);
-	    activeScreens.add(screen.getClass());
+	    // Instanciate screen
+	    Screen _screen;
+	    try
+	    {
+		_screen = screen.newInstance();
+	    } catch (InstantiationException | IllegalAccessException e)
+	    {
+		Gdx.app.error("ScreenManager", "Unable to instanciate screen " + screen.getSimpleName());
+		
+		return;
+	    }
+	    
+	    screens.put(screen, _screen);
+	    activeScreens.add(screen);
 	}
     }
     
