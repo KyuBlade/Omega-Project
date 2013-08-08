@@ -28,6 +28,9 @@ com.team.omega.ui.Panel$PanelStyle: {
 	black_alpha: { background: panels/black_alpha }
 },
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-	default: {  selection: textfields/selection }
+	default: { font: default-font,  selection: textfields/selection }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	default: { background: panels/panel_brown, hScroll: panels/black_alpha, hScrollKnob: textfields/background_focus, vScroll: panels/black_alpha, vScrollKnob: textfields/background_focus }
 }
 }
