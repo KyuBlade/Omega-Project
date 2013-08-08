@@ -37,7 +37,11 @@ public class GameServerSelectionScreen extends BaseScreen
 	
 	layout.setBackground(background.getDrawable());
 	layout.add(_panel);
-	
+    }
+    
+    public List getServerList()
+    {
+	return serverList;
     }
     
 }

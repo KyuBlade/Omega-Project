@@ -74,17 +74,17 @@ public class ScreenManager implements Disposable
 	    _screen.dispose();
     }
     
-    public void addScreen(Class<? extends Screen> screen)
+    public <T extends Screen> T addScreen(Class<T> screen)
     {
 	if(screen == null)
 	    throw new NullPointerException("Can't add the screen");
 	
 	if(screens.containsKey(screen)) // Already added
 	{
-	    if(activeScreens.contains(screen)) // Already active
-		return;
-	    else
+	    if(!activeScreens.contains(screen)) // Already active
 		activeScreens.add(screen);
+	    
+	    return (T) screens.get(screen);
 	}
 	else
 	{
@@ -97,11 +97,13 @@ public class ScreenManager implements Disposable
 	    {
 		Gdx.app.error("ScreenManager", "Unable to instanciate screen " + screen.getSimpleName());
 		
-		return;
+		return null;
 	    }
 	    
 	    screens.put(screen, _screen);
 	    activeScreens.add(screen);
+	    
+	    return (T) _screen;
 	}
     }
     
