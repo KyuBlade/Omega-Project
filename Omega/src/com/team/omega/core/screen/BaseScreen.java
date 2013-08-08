@@ -50,13 +50,16 @@ public class BaseScreen implements Screen
     public void resize(int width, int height)
     {
 	Gdx.app.debug("Resizing", "Resize to " + width + "x" + height);
-	Vector2 size = Scaling.fit.apply(800, 480, width, height);
+	
+	float _staticWidth = GameCore.getInstance().getConfigManager().getInitialWidth();
+	float _staticHeight = GameCore.getInstance().getConfigManager().getInitialHeight();
+	Vector2 size = Scaling.fit.apply(_staticWidth, _staticHeight, width, height);
         int viewportX = (int)(width - size.x) / 2;
         int viewportY = (int)(height - size.y) / 2;
         int viewportWidth = (int)size.x;
         int viewportHeight = (int)size.y;
         Gdx.gl.glViewport(viewportX, viewportY, viewportWidth, viewportHeight);
-        stage.setViewport(width, height, true, viewportX, viewportY, viewportWidth, viewportHeight);
+        stage.setViewport(_staticWidth, _staticHeight, true, viewportX, viewportY, viewportWidth, viewportHeight);
     }
 
     @Override

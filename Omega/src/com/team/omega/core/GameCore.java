@@ -17,6 +17,7 @@ public class GameCore extends BaseGame
 
     private AssetManager assetManager;
     private ScreenManager screenManager;
+    private ConfigManager configManager;
     
     private static GameCore instance;
     
@@ -37,6 +38,8 @@ public class GameCore extends BaseGame
     public void create()
     {
 	Gdx.app.setLogLevel(Application.LOG_DEBUG);
+	
+	configManager = new ConfigManager();
 	assetManager = new AssetManager();
 	screenManager = new ScreenManager();
 	
@@ -58,7 +61,7 @@ public class GameCore extends BaseGame
     {
 	super.render();
 	
-	Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+	Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
 	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 	
 	screenManager.render(Gdx.graphics.getDeltaTime());
@@ -106,6 +109,11 @@ public class GameCore extends BaseGame
     public ScreenManager getScreenManager()
     {
 	return screenManager;
+    }
+    
+    public ConfigManager getConfigManager()
+    {
+	return configManager;
     }
     
 }
