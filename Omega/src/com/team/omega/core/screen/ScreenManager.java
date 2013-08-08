@@ -22,6 +22,8 @@ public class ScreenManager implements Disposable
     
     public void render(float delta)
     {
+	MasterScreen.masterRender(delta);
+	
 	for(Class<? extends Screen> _clazz : activeScreens)
 	{
 	    Screen _screen = getScreen(_clazz);
@@ -34,6 +36,8 @@ public class ScreenManager implements Disposable
     
     public void resize(int width, int height)
     {
+	MasterScreen.masterResize(width, height);
+	
 	for(Screen _screen : screens.values())
 	    _screen.resize(width, height);
     }
@@ -64,6 +68,7 @@ public class ScreenManager implements Disposable
     
     public void dispose()
     {
+	MasterScreen.masterDispose();
 	for(Screen _screen : screens.values())
 	    _screen.dispose();
     }

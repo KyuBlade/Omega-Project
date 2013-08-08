@@ -1,34 +1,31 @@
 package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Scaling;
 import com.team.omega.core.GameCore;
 
 
-public class BaseScreen implements Screen
+public class BaseScreen extends MasterScreen
 {
     
-    protected static Stack layout;
-    protected Stage stage;
+    /** 
+     * Internal screen layout
+     */
+    protected Stack layout;
+    
+    /**
+     * Style
+     */
     protected Skin skin;
     
     public BaseScreen()
     {
-	stage = new Stage();
-
-	if (layout == null)
-	{
-	    layout = new Stack();
-	    layout.setFillParent(true);
-	    stage.addActor(layout);
-	}
+	layout = new Stack();
+	layout.setFillParent(true);
+	
+	globalLayout.add(layout);
 	
 	// TODO: May do overload and be used once for all screen
 	// So make a SkinManager
@@ -41,26 +38,13 @@ public class BaseScreen implements Screen
     @Override
     public void render(float delta)
     {
-	stage.act(Gdx.graphics.getDeltaTime());
-	stage.draw();
 	
-	Table.drawDebug(stage);
     }
 
     @Override
     public void resize(int width, int height)
     {
-	Gdx.app.debug("Resizing", "Resize to " + width + "x" + height);
 	
-	float _staticWidth = GameCore.getInstance().getConfigManager().getInitialWidth();
-	float _staticHeight = GameCore.getInstance().getConfigManager().getInitialHeight();
-	Vector2 size = Scaling.fit.apply(_staticWidth, _staticHeight, width, height);
-        int viewportX = (int)(width - size.x) / 2;
-        int viewportY = (int)(height - size.y) / 2;
-        int viewportWidth = (int)size.x;
-        int viewportHeight = (int)size.y;
-        Gdx.gl.glViewport(viewportX, viewportY, viewportWidth, viewportHeight);
-        stage.setViewport(_staticWidth, _staticHeight, true, viewportX, viewportY, viewportWidth, viewportHeight);
     }
 
     @Override
@@ -86,7 +70,6 @@ public class BaseScreen implements Screen
     @Override
     public void dispose()
     {
-	stage.dispose();
 	skin.dispose();
     }
 

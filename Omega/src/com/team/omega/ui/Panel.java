@@ -19,8 +19,8 @@ public class Panel extends Table
     public Panel(Skin skin, String styleName)
     {
 	setStyle(skin.get(styleName, PanelStyle.class));
-	//setWidth(getPrefWidth());
-	//setHeight(getPrefHeight());
+	setWidth(getPrefWidth());
+	setHeight(getPrefHeight());
     }
 
     public void setStyle(PanelStyle style)
@@ -29,6 +29,7 @@ public class Panel extends Table
 	    throw new IllegalArgumentException("style cannot be null");
 	
 	this.style = style;
+	this.setBackground(style.background);
 	
 	invalidateHierarchy();
     }
@@ -37,12 +38,13 @@ public class Panel extends Table
     {
 	return style;
     }
+
     
     @Override
     public void draw (SpriteBatch batch, float parentAlpha)
     {
-	if(style.background != null)
-	    drawBackground(batch, parentAlpha);
+	/*if(style.background != null)
+	    drawBackground(batch, parentAlpha);*/
 	
 	super.draw(batch, parentAlpha);
 }

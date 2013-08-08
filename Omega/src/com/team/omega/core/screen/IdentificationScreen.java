@@ -4,6 +4,7 @@ import net.team.omega.core.network.LoginServerFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -13,7 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.ui.Panel;
 import com.team.omega.utils.ThreadFactory;
@@ -48,10 +50,10 @@ public class IdentificationScreen extends BaseScreen
 	passwordInput.setPasswordMode(true);
 	passwordInput.setPasswordCharacter('*');
 	submit = new ImageTextButton(LocalizationHandler.getInstance().getDialog("login.loging"), skin);
-	submit.addListener(new ClickListener() {
+	submit.addListener(new ChangeListener() {
 	    
 	    @Override
-	    public void clicked(InputEvent event, float x, float y) 
+	    public void changed (ChangeEvent event, Actor actor)
 	    {
 		Gdx.app.debug("Login", "Login clicked");
 		ThreadFactory.newThread(new Runnable(){
@@ -67,20 +69,18 @@ public class IdentificationScreen extends BaseScreen
 	    
 	});	
 	
-	Panel _table = new Panel(skin, "black_alpha");
-	
-	_table.add(userLabel);
-	_table.add(userInput);
-	_table.row();
-	_table.add(passwordLabel);
-	_table.add(passwordInput);
-	_table.row();
-	_table.add(submit).colspan(2);
+	Panel _panel = new Panel(skin, "black_alpha");
+	_panel.debug();
+	_panel.add(userLabel);
+	_panel.add(userInput);
+	_panel.row();
+	_panel.add(passwordLabel);
+	_panel.add(passwordInput);
+	_panel.row();
+	_panel.add(submit).colspan(2);
 	
 	layout.add(background);
-	
-	
-	layout.add(_table);
+	layout.add(_panel);
     }
 
     @Override
