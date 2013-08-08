@@ -3,7 +3,7 @@ package com.team.omega.core.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.team.omega.core.GameCore;
 
 
@@ -13,7 +13,7 @@ public class BaseScreen extends MasterScreen
     /** 
      * Internal screen layout
      */
-    protected Stack layout;
+    protected Table layout;
     
     /**
      * Style
@@ -22,7 +22,7 @@ public class BaseScreen extends MasterScreen
     
     public BaseScreen()
     {
-	layout = new Stack();
+	layout = new Table();
 	layout.setFillParent(true);
 	
 	globalLayout.add(layout);

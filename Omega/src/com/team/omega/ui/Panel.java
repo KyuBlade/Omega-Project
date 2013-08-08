@@ -43,18 +43,10 @@ public class Panel extends Table
     @Override
     public void draw (SpriteBatch batch, float parentAlpha)
     {
-	/*if(style.background != null)
-	    drawBackground(batch, parentAlpha);*/
-	
 	super.draw(batch, parentAlpha);
-}
-    
-    protected void drawBackground (SpriteBatch batch, float parentAlpha)
-    {
+	
 	Gdx.app.debug("Bg", "x : " + getX() + " - y : " + getY() 
 		+ " - width : " + getWidth() + " - height : " + getHeight());
-	
-	style.background.draw(batch, getX(), getY(), getWidth(), getHeight());
     }
 
     static public class PanelStyle

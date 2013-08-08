@@ -5,17 +5,15 @@ import net.team.omega.core.network.LoginServerFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.ui.Panel;
 import com.team.omega.utils.ThreadFactory;
@@ -37,8 +35,6 @@ public class IdentificationScreen extends BaseScreen
     public IdentificationScreen()
     {
 	super();
-	
-	Gdx.input.setInputProcessor(stage);
 	
 	Texture _bgTexture = new Texture(Gdx.files.internal("data/skins/default/backgrounds/login_bg.jpg"));
 	background = new Image(_bgTexture);
@@ -68,9 +64,9 @@ public class IdentificationScreen extends BaseScreen
 	    }
 	    
 	});	
-	
+
 	Panel _panel = new Panel(skin, "black_alpha");
-	_panel.debug();
+	_panel.pad(10f);
 	_panel.add(userLabel);
 	_panel.add(userInput);
 	_panel.row();
@@ -79,7 +75,7 @@ public class IdentificationScreen extends BaseScreen
 	_panel.row();
 	_panel.add(submit).colspan(2);
 	
-	layout.add(background);
+	layout.setBackground(background.getDrawable());
 	layout.add(_panel);
     }
 

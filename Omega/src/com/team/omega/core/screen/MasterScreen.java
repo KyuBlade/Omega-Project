@@ -25,6 +25,8 @@ public class MasterScreen implements Screen
     
     static {
 	globalLayout.setFillParent(true);
+	
+	Gdx.input.setInputProcessor(stage);
 	stage.addActor(globalLayout);
     }
     
@@ -90,5 +92,5 @@ public class MasterScreen implements Screen
     public void dispose()
     {
     }
-
+    
 }
