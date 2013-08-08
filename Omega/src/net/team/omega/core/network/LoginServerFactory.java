@@ -45,6 +45,7 @@ public class LoginServerFactory
 	    @Override
 	    public void disconnected(Connection connection)
 	    {
+		state = ConnectionState.IDLE;
 		LogHandler.info("Disconnected from loginserver.");
 	    }
 
