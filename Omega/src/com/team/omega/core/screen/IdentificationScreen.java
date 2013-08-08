@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.team.omega.core.Constants;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.ui.Panel;
 import com.team.omega.utils.ThreadFactory;
@@ -56,7 +57,13 @@ public class IdentificationScreen extends BaseScreen
 		    @Override
 		    public void run()
 		    {
-			LoginServerFactory.getInstance().connect(userInput.getText(), passwordInput.getText());
+			String _user = userInput.getText();
+			String _pass = passwordInput.getText();
+			
+			if(_user.isEmpty() || _pass.isEmpty())
+			    return;
+			
+			LoginServerFactory.getInstance().connect(_user, _pass);
 		    }
 		    
 		});
