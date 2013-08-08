@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -68,8 +67,7 @@ public class IdentificationScreen extends BaseScreen
 	    
 	});	
 	
-	Stack _stack = new Stack();
-	Table _table = new Table(skin);
+	Panel _table = new Panel(skin, "black_alpha");
 	
 	_table.add(userLabel);
 	_table.add(userInput);
