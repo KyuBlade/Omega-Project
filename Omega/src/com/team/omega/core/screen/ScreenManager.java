@@ -1,9 +1,9 @@
 package com.team.omega.core.screen;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,7 +14,7 @@ public class ScreenManager implements Disposable
 {
     
     private Map<Class<? extends Screen>, Screen> screens = new HashMap<>();
-    private List<Class<? extends Screen>> activeScreens = new ArrayList<>();
+    private List<Class<? extends Screen>> activeScreens = new CopyOnWriteArrayList<>();
     
     public ScreenManager()
     {
@@ -24,58 +24,46 @@ public class ScreenManager implements Disposable
     public void render(float delta)
     {
 	MasterScreen.masterRender(delta);
-	
-	synchronized (activeScreens)
+
+	for (Class<? extends Screen> _clazz : activeScreens)
 	{
-	    for (Class<? extends Screen> _clazz : activeScreens)
-	    {
-		Screen _screen = getScreen(_clazz);
-		if (_screen == null)
-		    throw new NullPointerException("[Render] Active screen is not in the global list of screens");
-		else
-		    _screen.render(delta);
-	    }
+	    Screen _screen = getScreen(_clazz);
+	    if (_screen == null)
+		throw new NullPointerException("[Render] Active screen is not in the global list of screens");
+	    else
+		_screen.render(delta);
 	}
     }
     
     public void resize(int width, int height)
     {
 	MasterScreen.masterResize(width, height);
-	
-	synchronized (screens)
-	{
-	    for (Screen _screen : screens.values())
-		_screen.resize(width, height);
-	}
+
+	for (Screen _screen : screens.values())
+	    _screen.resize(width, height);
     }
     
     public void pause()
     {
-	synchronized (activeScreens)
+	for (Class<? extends Screen> _clazz : activeScreens)
 	{
-	    for (Class<? extends Screen> _clazz : activeScreens)
-	    {
-		Screen _screen = getScreen(_clazz);
-		if (_screen == null)
-		    throw new NullPointerException("[Pause] Active screen is not in the global list of screens");
-		else
-		    _screen.pause();
-	    }
+	    Screen _screen = getScreen(_clazz);
+	    if (_screen == null)
+		throw new NullPointerException("[Pause] Active screen is not in the global list of screens");
+	    else
+		_screen.pause();
 	}
     }
 
     public void resume()
     {
-	synchronized (activeScreens)
+	for (Class<? extends Screen> _clazz : activeScreens)
 	{
-	    for (Class<? extends Screen> _clazz : activeScreens)
-	    {
-		Screen _screen = getScreen(_clazz);
-		if (_screen == null)
-		    throw new NullPointerException("[Resume] Active screen is not in the global list of screens");
-		else
-		    _screen.resume();
-	    }
+	    Screen _screen = getScreen(_clazz);
+	    if (_screen == null)
+		throw new NullPointerException("[Resume] Active screen is not in the global list of screens");
+	    else
+		_screen.resume();
 	}
     }
 
@@ -83,11 +71,8 @@ public class ScreenManager implements Disposable
     {
 	MasterScreen.masterDispose();
 
-	synchronized (screens)
-	{
-	    for (Screen _screen : screens.values())
-		_screen.dispose();
-	}
+	for (Screen _screen : screens.values())
+	    _screen.dispose();
     }
     
     public synchronized <T extends Screen> T addScreen(Class<T> screen)
