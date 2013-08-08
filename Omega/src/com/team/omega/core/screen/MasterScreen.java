@@ -2,8 +2,10 @@ package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
@@ -23,7 +25,16 @@ public class MasterScreen implements Screen
      */
     protected final static Stage stage = new Stage();
     
+    /**
+     * Style
+     */
+    protected static Skin skin;
+    
+    
     static {
+	TextureAtlas _atlas = GameCore.getInstance().getAssetManager().get("data/skins/default/default-skin.atlas");
+	skin = new Skin(Gdx.files.internal("data/skins/default/default.json"), _atlas);
+	
 	globalLayout.setFillParent(true);
 	
 	Gdx.input.setInputProcessor(stage);

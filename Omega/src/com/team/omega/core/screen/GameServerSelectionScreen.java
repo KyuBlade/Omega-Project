@@ -26,7 +26,7 @@ public class GameServerSelectionScreen extends BaseScreen
 	serverName = new Label("gameserver.selection.name", skin);
 	serverState = new Label("gameserver.selection.state", skin);
 	serverPing = new Label("gameserver.selection.ping", skin);
-	serverList = new List(null, skin);
+	serverList = new List(new Object[] {}, skin);
 	
 	Panel _panel = new Panel(skin, "black_alpha");
 	_panel.add(serverName);
@@ -35,6 +35,7 @@ public class GameServerSelectionScreen extends BaseScreen
 	
 	_panel.add(serverList);
 	
+	layout.setBackground(background.getDrawable());
 	layout.add(_panel);
 	
     }

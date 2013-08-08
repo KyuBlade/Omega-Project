@@ -1,10 +1,7 @@
 package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.team.omega.core.GameCore;
 
 
 public class BaseScreen extends MasterScreen
@@ -15,22 +12,12 @@ public class BaseScreen extends MasterScreen
      */
     protected Table layout;
     
-    /**
-     * Style
-     */
-    protected Skin skin;
-    
     public BaseScreen()
     {
 	layout = new Table();
 	layout.setFillParent(true);
 	
 	globalLayout.add(layout);
-	
-	// TODO: May do overload and be used once for all screen
-	// So make a SkinManager
-	TextureAtlas _atlas = GameCore.getInstance().getAssetManager().get("data/skins/default/default-skin.atlas");
-	skin = new Skin(Gdx.files.internal("data/skins/default/default.json"), _atlas);
 	
 	Gdx.app.debug("Screen", this.getClass().getSimpleName() + " created");
     }
