@@ -10,7 +10,7 @@ public class Constants
     public static final int SERVER_UDP_PORT = 30458;
     
     // Internal connection to LoginServer
-    public static final String LOGIN_SERVER_HOST = "25.185.18.225";
+    public static final String LOGIN_SERVER_HOST = "127.0.0.1";
     public static final int LOGIN_SERVER_TCP_PORT = 49442;
     public static final int LOGIN_SERVER_UDP_PORT = 49443;
     public static final int LOGIN_SERVER_TIMEOUT = 5000;
