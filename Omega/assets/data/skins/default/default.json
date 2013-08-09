@@ -21,7 +21,8 @@ com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: { background: textfields/background, focusedBackground: textfields/background_focus, cursor: textfields/blue_cursor, selection: textfields/selection, font: default-font, fontColor: white }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
-	default: { background: panels/panel_brown, stageBackground: backgrounds/black_alpha80, titleFont: default-font, titleFontColor: white }
+	default: { background: panels/panel_brown, stageBackground: backgrounds/black_alpha80, titleFont: default-font, titleFontColor: white },
+	no-background: { stageBackground: backgrounds/black_alpha80, titleFont: default-font, titleFontColor: white }
 },
 com.team.omega.ui.Panel$PanelStyle: {
 	default: {}, 

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.team.omega.core.screen.DebugScreen;
 import com.team.omega.core.screen.IdentificationScreen;
 import com.team.omega.core.screen.ScreenManager;
+import com.team.omega.core.screen.WaitingScreen;
 
 public class GameCore extends BaseGame
 {
@@ -55,6 +56,7 @@ public class GameCore extends BaseGame
 	
 	screenManager.addScreen(IdentificationScreen.class);
 	screenManager.addScreen(DebugScreen.class);
+	screenManager.addScreen(WaitingScreen.class);
     }
 
     @Override
