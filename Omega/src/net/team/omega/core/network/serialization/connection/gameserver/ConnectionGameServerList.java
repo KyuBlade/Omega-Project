@@ -2,11 +2,9 @@ package net.team.omega.core.network.serialization.connection.gameserver;
 
 import java.util.ArrayList;
 
-import net.team.omega.core.network.GameServerState;
 import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.datas.GameServer;
 
-import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.core.screen.GameServerSelectionScreen;

@@ -32,7 +32,7 @@ public class ConnectionLogin extends MessageData
 	
 	Criteria _criteria = _session.createCriteria(Account.class)
 	    .add(Restrictions.and(
-		    Restrictions.eq("user", user), 
+		    Restrictions.eq("name", user), 
 		    Restrictions.eq("password", CryptUtils.securePassword(password)))).setMaxResults(1);
 	
 	@SuppressWarnings("unchecked")

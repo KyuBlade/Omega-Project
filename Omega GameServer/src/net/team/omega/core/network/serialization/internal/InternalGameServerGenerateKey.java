@@ -17,13 +17,21 @@ public class InternalGameServerGenerateKey extends MessageData
     @Override
     public void process()
     {
+	WaitingConnection _wCon;
 	String _key = UUID.randomUUID().toString().replace("-", "");
-	
-	InternalGameServerGeneratedKey message = new InternalGameServerGeneratedKey(account, _key);
 
-	WaitingConnection wCon = new WaitingConnection(account, _key);
-	WaitingConnectionQueue.getInstance().addToQueue(wCon);
+	WaitingConnection _usedCon = WaitingConnectionQueue.getInstance().getInQueue(account);
+	if (_usedCon != null)
+	    _wCon = _usedCon;
+	else
+	    _wCon = new WaitingConnection(account, _key);
 	
+	if(_wCon == null)
+	    throw new NullPointerException("Unable to get a WaitingConnection");
+	
+	WaitingConnectionQueue.getInstance().addToQueue(_wCon);
+	    
+	InternalGameServerGeneratedKey message = new InternalGameServerGeneratedKey(account, _key);
 	InternalGameServerFactory.getInstance().getClient().sendTCP(message);
     }
     
