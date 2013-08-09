@@ -104,4 +104,9 @@ public class MasterScreen implements Screen
     {
     }
     
+    public static Skin getSkin()
+    {
+	return skin;
+    }
+    
 }

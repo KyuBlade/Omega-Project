@@ -30,7 +30,10 @@ com.team.omega.ui.Panel$PanelStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: { font: default-font,  selection: textfields/selection }
 },
+com.team.omega.ui.list.TabbedList$TabbedListStyle: {
+	default: { font: default-font,  selection: textfields/selection }
+},
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-	default: { background: buttons/button_down, corner:buttons/button_down, hScroll: scrolls/hScroll, hScrollKnob: scrolls/hScroll_knob, vScroll: scrolls/vScroll, vScrollKnob: scrolls/vScroll_knob }
+	default: { background: buttons/button_down, corner: textfields/selection, hScroll: scrolls/hScroll, hScrollKnob: scrolls/hScroll_knob, vScroll: scrolls/vScroll, vScrollKnob: scrolls/vScroll_knob }
 }
 }

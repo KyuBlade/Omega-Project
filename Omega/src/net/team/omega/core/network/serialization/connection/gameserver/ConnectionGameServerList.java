@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.datas.GameServer;
 
+import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
+import com.team.omega.core.LocalizationHandler;
 import com.team.omega.core.screen.GameServerSelectionScreen;
+import com.team.omega.ui.list.ListRow;
 
 public class ConnectionGameServerList extends MessageData
 {
@@ -16,14 +19,55 @@ public class ConnectionGameServerList extends MessageData
     @Override
     public void process()
     {
+	ListRow[] _items = new ListRow[gameservers.size()];
+	int i = 0;
         for(GameServer _gs : gameservers)
         {
-            // Add to list
+            ListRow _item = new ListRow();
+            String[] _value = new String[3];
+            _value[0] = _gs.getName();
+            
+            String _state = "";
+            switch(_gs.getState())
+            {
+        	case Constants.GAME_SERVER_STATE_IDLE:
+        	    _state = "gameserver.state.idle";
+        	    
+        	    break;
+        	    
+        	case Constants.GAME_SERVER_STATE_OFFLINE:
+        	    _state = "gameserver.state.offline";
+        	    
+        	    break;
+        	    
+        	case Constants.GAME_SERVER_STATE_ONLINE:
+        	    _state = "gameserver.state.online";
+        	    
+        	    break;
+        	    
+        	default:
+        	    _state = "common.error.undefined";
+        	    
+        	    break;
+            }
+            _state = LocalizationHandler.getInstance().getDialog(_state);
+            _value[1] = _state;
+            _value[2] = "9999";
+            
+            _item.setContent(_value);
+            
+            // Add datas to the row
+            Object[] _datas = {_gs.getId(), _gs.getIp(), _gs.getTcpPort(), _gs.getUdpPort()};
+            _item.setStore(_datas);
+            
+            _items[i] = _item;
+            
+            i++;
         }
         
         GameServerSelectionScreen _screen = GameCore.getInstance().getScreenManager().addScreen(GameServerSelectionScreen.class);
-        /*if(_screen != null)
-            _screen.getServerList().setItems(gameservers.toArray());*/
+        if(_screen != null)
+            _screen.getServerList().setItems(_items);
         
     }
 
