@@ -56,7 +56,6 @@ public class GameCore extends BaseGame
 	
 	screenManager.addScreen(IdentificationScreen.class);
 	screenManager.addScreen(DebugScreen.class);
-	screenManager.addScreen(WaitingScreen.class);
     }
 
     @Override

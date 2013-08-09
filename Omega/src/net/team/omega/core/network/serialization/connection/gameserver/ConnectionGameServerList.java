@@ -8,6 +8,7 @@ import net.team.omega.core.network.serialization.datas.GameServer;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.core.screen.GameServerSelectionScreen;
+import com.team.omega.core.screen.IdentificationScreen;
 import com.team.omega.ui.list.ListRow;
 
 public class ConnectionGameServerList extends MessageData
@@ -69,6 +70,7 @@ public class ConnectionGameServerList extends MessageData
             i++;
         }
         
+        GameCore.getInstance().getScreenManager().removeScreen(IdentificationScreen.class);
         GameServerSelectionScreen _screen = GameCore.getInstance().getScreenManager().addScreen(GameServerSelectionScreen.class);
         if(_screen != null)
             _screen.getServerList().setItems(_items);

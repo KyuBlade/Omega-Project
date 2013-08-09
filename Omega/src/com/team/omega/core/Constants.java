@@ -26,4 +26,10 @@ public final class Constants
     public static final byte GAME_SERVER_STATE_ONLINE = 2;
     public static final byte GAME_SERVER_STATE_IDLE = 3;
     
+    // Screens depth
+    public static final int IDENTIFICATION_SCREEN_DEPTH = 1;
+    public static final int GAMESERVER_SELECTION_SCREEN_DEPTH = 2;
+    public static final int WAITING_SCREEN_DEPTH = 19;
+    public static final int DEBUG_SCREEN_DEPTH = 20;
+    
 }

@@ -2,6 +2,7 @@ package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.team.omega.core.Constants;
 import com.team.omega.ui.Panel;
 
 
@@ -10,9 +11,9 @@ public class DebugScreen extends BaseScreen
 
     private Label fps;
     
-    public DebugScreen()
+    public DebugScreen(ScreenManager screenManager)
     {
-	super();
+	super(screenManager, Constants.DEBUG_SCREEN_DEPTH);
 	
 	this.fps = new Label("", skin);
 	layout.top().right();

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.ui.Panel;
@@ -31,8 +32,10 @@ public class GameServerSelectionScreen extends BaseScreen
     
     private GameServer selectedGameServer;
     
-    public GameServerSelectionScreen()
+    public GameServerSelectionScreen(ScreenManager screenManager)
     {
+	super(screenManager, Constants.GAMESERVER_SELECTION_SCREEN_DEPTH);
+	
 	background = new Image(GameCore.getInstance().getAssetManager().get("data/skins/default/backgrounds/login_bg.jpg", Texture.class));
 	
 	String _serverName = LocalizationHandler.getInstance().getDialog("gameserver.selection.name");
@@ -78,6 +81,8 @@ public class GameServerSelectionScreen extends BaseScreen
 	
 	layout.setBackground(background.getDrawable());
 	layout.add(_panel);
+	
+	GameCore.getInstance().getScreenManager().removeScreen(WaitingScreen.class);
     }
     
     public TabbedList getServerList()

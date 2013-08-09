@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.ui.Panel;
@@ -32,9 +33,11 @@ public class IdentificationScreen extends BaseScreen
     
     private ImageTextButton submit;
     
-    public IdentificationScreen()
+    public IdentificationScreen(ScreenManager screenManager)
     {
-	super();
+	super(screenManager, Constants.IDENTIFICATION_SCREEN_DEPTH);
+	
+	Gdx.input.setInputProcessor(stage);
 	
 	background = new Image(GameCore.getInstance().getAssetManager().get("data/skins/default/backgrounds/login_bg.jpg", Texture.class));
 	
@@ -67,6 +70,7 @@ public class IdentificationScreen extends BaseScreen
 			if(_user.isEmpty() || _pass.isEmpty())
 			    return;
 			
+			GameCore.getInstance().getScreenManager().addScreen(WaitingScreen.class);
 			LoginServerFactory.getInstance().connect(_user, _pass);
 		    }
 		    
