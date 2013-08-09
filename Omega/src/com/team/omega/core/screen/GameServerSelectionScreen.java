@@ -5,6 +5,7 @@ import net.team.omega.core.network.LoginServerFactory;
 import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerSelect;
 import net.team.omega.core.network.serialization.datas.GameServer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -35,6 +36,8 @@ public class GameServerSelectionScreen extends BaseScreen
     public GameServerSelectionScreen(ScreenManager screenManager)
     {
 	super(screenManager, Constants.GAMESERVER_SELECTION_SCREEN_DEPTH);
+	
+	Gdx.input.setInputProcessor(stage);
 	
 	background = new Image(GameCore.getInstance().getAssetManager().get("data/skins/default/backgrounds/login_bg.jpg", Texture.class));
 	
