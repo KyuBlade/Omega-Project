@@ -37,25 +37,26 @@ public class GameServerSelectionScreen extends BaseScreen
 
 	serverList = new List(new String[] {"test", "test2", "test3", "test4" , "test2", "test3", "test4" , "test2", "test3", "test4" , "test2", "test3", "test4" , "test2", "test3", "test4"}, skin);
 	
-	scrollPane = new ScrollPane(serverList);
+	scrollPane = new ScrollPane(serverList, skin);
+	scrollPane.setFadeScrollBars(false);
 	
 	backButton = new TextButton(LocalizationHandler.getInstance().getDialog("common.choice.back"), skin);
 	selectButton = new TextButton(LocalizationHandler.getInstance().getDialog("gameserver.selection.select"), skin);
 	
 	Panel _panel = new Panel(skin, "black_alpha");
-	_panel.debug();
-	_panel.defaults().width(100f);
-	_panel.add(serverName);
+	//_panel.debug();
+	_panel.pad(20f);
+	_panel.defaults().center();
+	_panel.add(serverName).width(250);
 	_panel.add(serverState);
 	_panel.add(serverPing);
 	
 	_panel.row();
 	_panel.add(scrollPane).width(400).height(200).colspan(3);
 	
-	_panel.row();
-	_panel.add(backButton);
-	_panel.add();
-	_panel.add(selectButton);
+	_panel.row().colspan(2).padTop(20f);
+	_panel.add(backButton).left().padLeft(50f);
+	_panel.add(selectButton).right().padRight(50f);
 	
 	layout.setBackground(background.getDrawable());
 	layout.add(_panel);

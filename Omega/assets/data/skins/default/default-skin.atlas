@@ -5,14 +5,14 @@ filter: Nearest,Nearest
 repeat: none
 backgrounds/black_alpha80
   rotate: false
-  xy: 798, 63
+  xy: 542, 63
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 buttons/button_down
   rotate: false
-  xy: 768, 96
+  xy: 512, 96
   size: 32, 32
   split: 8, 8, 8, 8
   orig: 32, 32
@@ -20,7 +20,7 @@ buttons/button_down
   index: -1
 buttons/button_over
   rotate: false
-  xy: 768, 64
+  xy: 512, 64
   size: 32, 32
   split: 8, 8, 8, 8
   orig: 32, 32
@@ -28,7 +28,7 @@ buttons/button_over
   index: -1
 buttons/button_up
   rotate: false
-  xy: 800, 96
+  xy: 544, 96
   size: 32, 32
   split: 7, 7, 7, 7
   orig: 32, 32
@@ -41,16 +41,9 @@ default-skin
   orig: 512, 128
   offset: 0, 0
   index: -1
-fonts/default
-  rotate: false
-  xy: 512, 0
-  size: 256, 128
-  orig: 256, 128
-  offset: 0, 0
-  index: -1
 panels/black_alpha
   rotate: false
-  xy: 832, 118
+  xy: 576, 118
   size: 10, 10
   split: 3, 3, 3, 3
   orig: 10, 10
@@ -58,15 +51,31 @@ panels/black_alpha
   index: -1
 panels/panel_brown
   rotate: false
-  xy: 768, 34
+  xy: 512, 34
   size: 30, 30
   split: 6, 6, 6, 8
   orig: 30, 30
   offset: 0, 0
   index: -1
+scrolls/vScroll
+  rotate: false
+  xy: 553, 86
+  size: 5, 10
+  split: 2, 2, 2, 2
+  orig: 5, 10
+  offset: 0, 0
+  index: -1
+scrolls/vScroll_knob
+  rotate: false
+  xy: 576, 108
+  size: 5, 10
+  split: 2, 2, 2, 2
+  orig: 5, 10
+  offset: 0, 0
+  index: -1
 textfields/background
   rotate: false
-  xy: 768, 26
+  xy: 512, 26
   size: 8, 8
   split: 1, 1, 1, 1
   orig: 8, 8
@@ -74,7 +83,7 @@ textfields/background
   index: -1
 textfields/background_focus
   rotate: false
-  xy: 800, 70
+  xy: 544, 70
   size: 8, 8
   split: 3, 3, 3, 3
   orig: 8, 8
@@ -82,14 +91,14 @@ textfields/background_focus
   index: -1
 textfields/blue_cursor
   rotate: false
-  xy: 800, 78
+  xy: 544, 78
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 textfields/selection
   rotate: false
-  xy: 809, 91
+  xy: 586, 123
   size: 5, 5
   split: 1, 1, 1, 1
   orig: 5, 5

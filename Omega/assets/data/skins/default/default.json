@@ -31,6 +31,6 @@ com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: { font: default-font,  selection: textfields/selection }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-	default: { background: buttons/button_down, corner:buttons/button_down, hScroll: buttons/button_down, hScrollKnob: buttons/button_down, vScroll: buttons/button_down, vScrollKnob: buttons/button_down }
+	default: { background: buttons/button_down, corner:buttons/button_down, hScroll: buttons/button_down, hScrollKnob: buttons/button_down, vScroll: scrolls/vScroll, vScrollKnob: scrolls/vScroll_knob }
 }
 }
