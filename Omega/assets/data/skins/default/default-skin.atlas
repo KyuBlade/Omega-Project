@@ -57,9 +57,25 @@ panels/panel_brown
   orig: 30, 30
   offset: 0, 0
   index: -1
+scrolls/hScroll
+  rotate: false
+  xy: 553, 91
+  size: 10, 5
+  split: 2, 2, 2, 2
+  orig: 10, 5
+  offset: 0, 0
+  index: -1
+scrolls/hScroll_knob
+  rotate: false
+  xy: 576, 113
+  size: 10, 5
+  split: 2, 2, 2, 2
+  orig: 10, 5
+  offset: 0, 0
+  index: -1
 scrolls/vScroll
   rotate: false
-  xy: 553, 86
+  xy: 586, 118
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -67,7 +83,7 @@ scrolls/vScroll
   index: -1
 scrolls/vScroll_knob
   rotate: false
-  xy: 576, 108
+  xy: 512, 16
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -98,7 +114,7 @@ textfields/blue_cursor
   index: -1
 textfields/selection
   rotate: false
-  xy: 586, 123
+  xy: 520, 29
   size: 5, 5
   split: 1, 1, 1, 1
   orig: 5, 5
