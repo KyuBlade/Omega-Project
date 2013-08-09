@@ -1,9 +1,8 @@
 package net.team.omega.core.network.serialization.data;
 
-import net.team.omega.core.network.serialization.RawData;
 
 
-public class Account extends RawData
+public class Account
 {
 
     private int id;

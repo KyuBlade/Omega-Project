@@ -6,11 +6,11 @@ public class Account
 {
 
     private int id;
-    private String user;
+    private String name;
     private String password;
     private String email;
     private short rights;
-    private boolean banned;
+    private boolean isBanned;
 
     public int getId()
     {
@@ -22,14 +22,14 @@ public class Account
 	this.id = id;
     }
 
-    public String getUser()
+    public String getName()
     {
-	return user;
+	return name;
     }
 
-    public void setUser(String user)
+    public void setName(String name)
     {
-	this.user = user;
+	this.name = name;
     }
 
     public String getPassword()
@@ -64,12 +64,12 @@ public class Account
 
     public boolean isBanned()
     {
-	return banned;
+	return isBanned;
     }
 
-    public void setBanned(boolean banned)
+    public void setIsBanned(boolean isBanned)
     {
-	this.banned = banned;
+	this.isBanned = isBanned;
     }
 
 }
