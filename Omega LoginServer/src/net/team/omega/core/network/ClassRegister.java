@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.team.omega.core.database.table.Account;
 import net.team.omega.core.database.table.GameServer;
+import net.team.omega.core.network.gameserver.GameServerState;
 import net.team.omega.core.network.serialization.connection.ConnectionLogin;
 import net.team.omega.core.network.serialization.connection.ConnectionLoginAccept;
 import net.team.omega.core.network.serialization.connection.ConnectionLoginBanned;
@@ -29,6 +30,8 @@ public class ClassRegister
     private static Class<?>[] gameserverClass =
 	    {
         	Account.class, 
+        	
+        	GameServerState.class, 
             	
         	InternalGameServerDatas.class, 
         	InternalGameServerUpdate.class, 
@@ -44,7 +47,8 @@ public class ClassRegister
 	    {
                 ArrayList.class, 
                 
-                GameServer.class,
+                GameServer.class, 
+                GameServerState.class, 
                 
                 ConnectionLogin.class, 
                 ConnectionLoginAccept.class, 

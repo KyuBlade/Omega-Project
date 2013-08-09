@@ -13,9 +13,4 @@ public class ConnectionGameServerSelect extends MessageData
         this.gameserver = gameserver;
     }
     
-    public void setGameServer(GameServer gameserver)
-    {
-        this.gameserver = gameserver;
-    }
-    
 }

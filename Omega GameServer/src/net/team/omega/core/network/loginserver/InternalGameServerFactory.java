@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.team.omega.Constants;
 import net.team.omega.core.network.ClassRegister;
+import net.team.omega.core.network.GameServerState;
 import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.NetworkData;
 import net.team.omega.core.network.serialization.internal.InternalGameServerDatas;
@@ -69,7 +70,7 @@ public class InternalGameServerFactory
 		client.sendTCP(_dataMessage);
 
 		// Update GameServer state on LoginServer
-		InternalGameServerUpdate _updateMessage = new InternalGameServerUpdate(Constants.GAME_SERVER_STATE_ONLINE);
+		InternalGameServerUpdate _updateMessage = new InternalGameServerUpdate(GameServerState.ONLINE);
 		client.sendTCP(_updateMessage);
 	    }
 

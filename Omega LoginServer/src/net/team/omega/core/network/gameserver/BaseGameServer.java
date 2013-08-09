@@ -11,9 +11,9 @@ public class BaseGameServer extends Server
 	return new GameServerConnection();
     }
 
-    public GameServerConnection[] getConnections()
+    /*public GameServerConnection[] getConnections()
     {
 	return (GameServerConnection[]) super.getConnections();
-    }
+    }*/
 
 }

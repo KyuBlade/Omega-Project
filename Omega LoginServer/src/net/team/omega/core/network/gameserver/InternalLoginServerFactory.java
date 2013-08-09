@@ -75,7 +75,7 @@ public class InternalLoginServerFactory
 			return;
 		    }
 		    
-		    _connection.getGameserverDatas().getGameServer().setState(Constants.GAME_SERVER_STATE_OFFLINE);
+		    _connection.getGameserverDatas().getGameServer().setState(GameServerState.OFFLINE);
 		    
 		    LogHandler.info("[Internal]GameServer " + ((GameServerConnection) connection).getGameserverDatas().getGameServer().getName() + " was disconnected");
 		}

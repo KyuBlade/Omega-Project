@@ -1,6 +1,6 @@
 package net.team.omega.core.database.table;
 
-import net.team.omega.Constants;
+import net.team.omega.core.network.gameserver.GameServerState;
 import net.team.omega.core.network.loginserver.LoginServerFactory;
 import net.team.omega.core.network.serialization.RawData;
 
@@ -12,11 +12,11 @@ public class GameServer extends RawData
     private String ip;
     private int tcpPort;
     private int udpPort;
-    private byte state;
+    private GameServerState state;
 
     public GameServer()
     {
-	state = Constants.GAME_SERVER_STATE_OFFLINE;
+	state = GameServerState.OFFLINE;
     }
 
     public byte getId()
@@ -69,12 +69,12 @@ public class GameServer extends RawData
 	this.udpPort = udpPort;
     }
 
-    public byte getState()
+    public GameServerState getState()
     {
 	return state;
     }
 
-    public void setState(byte state)
+    public void setState(GameServerState state)
     {
 	this.state = state;
 	

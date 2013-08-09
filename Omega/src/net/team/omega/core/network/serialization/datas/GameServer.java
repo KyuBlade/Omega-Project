@@ -1,5 +1,6 @@
 package net.team.omega.core.network.serialization.datas;
 
+import net.team.omega.core.network.GameServerState;
 import net.team.omega.core.network.serialization.RawData;
 
 
@@ -11,7 +12,7 @@ public class GameServer extends RawData
     private String ip;
     private int tcpPort;
     private int udpPort;
-    private byte state;
+    private GameServerState state;
     
     public GameServer()
     {
@@ -50,7 +51,7 @@ public class GameServer extends RawData
         return udpPort;
     }
     
-    public byte getState()
+    public GameServerState getState()
     {
         return state;
     }

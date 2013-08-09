@@ -2,6 +2,7 @@ package net.team.omega.core.network.serialization.connection.gameserver;
 
 import java.util.ArrayList;
 
+import net.team.omega.core.network.GameServerState;
 import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.datas.GameServer;
 
@@ -30,18 +31,23 @@ public class ConnectionGameServerList extends MessageData
             String _state = "";
             switch(_gs.getState())
             {
-        	case Constants.GAME_SERVER_STATE_IDLE:
+        	case IDLE:
         	    _state = "gameserver.state.idle";
         	    
         	    break;
         	    
-        	case Constants.GAME_SERVER_STATE_OFFLINE:
+        	case OFFLINE:
         	    _state = "gameserver.state.offline";
         	    
         	    break;
         	    
-        	case Constants.GAME_SERVER_STATE_ONLINE:
+        	case ONLINE:
         	    _state = "gameserver.state.online";
+        	    
+        	    break;
+        	    
+        	case FULL:
+        	    _state = "gameserver.state.full";
         	    
         	    break;
         	    
@@ -57,7 +63,7 @@ public class ConnectionGameServerList extends MessageData
             _item.setContent(_value);
             
             // Add datas to the row
-            Object[] _datas = {_gs.getId(), _gs.getIp(), _gs.getTcpPort(), _gs.getUdpPort()};
+            Object[] _datas = {_gs};
             _item.setStore(_datas);
             
             _items[i] = _item;

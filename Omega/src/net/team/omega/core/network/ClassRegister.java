@@ -40,6 +40,7 @@ public class ClassRegister
             ArrayList.class, 
             
             GameServer.class,
+            GameServerState.class, 
             
             ConnectionLogin.class, 
             ConnectionLoginAccept.class, 

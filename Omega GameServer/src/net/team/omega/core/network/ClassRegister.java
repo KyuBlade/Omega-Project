@@ -59,6 +59,8 @@ public class ClassRegister
     private static Class<?>[] loginClass = 
 	{
 		Account.class, 
+		
+		GameServerState.class, 
             	
 		InternalGameServerDatas.class, 
 		InternalGameServerUpdate.class, 

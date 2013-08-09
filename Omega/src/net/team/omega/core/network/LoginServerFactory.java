@@ -21,11 +21,6 @@ public class LoginServerFactory
     private ConnectionState state = ConnectionState.IDLE;
 
     private static LoginServerFactory instance;
-    
-    private enum ConnectionState
-    {
-	CONNECTING, CONNECTED, IDLE
-    }
 
     public LoginServerFactory()
     {

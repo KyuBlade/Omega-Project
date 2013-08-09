@@ -1,6 +1,10 @@
 package com.team.omega.core.screen;
 
-import com.badlogic.gdx.Gdx;
+import net.team.omega.core.network.GameServerState;
+import net.team.omega.core.network.LoginServerFactory;
+import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerSelect;
+import net.team.omega.core.network.serialization.datas.GameServer;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -36,15 +40,6 @@ public class GameServerSelectionScreen extends BaseScreen
 	serverList = new TabbedList(new ListRow[]{}, skin);
 	serverList.setColumnGap(100);
 	serverList.setHeader(_serverName + "\t" + _serverState + "\t" + _serverPing);
-	serverList.addListener(new ChangeListener(){
-
-	    @Override
-	    public void changed(ChangeEvent event, Actor actor)
-	    {
-		Gdx.app.debug("List change", "Name : " + ((TabbedList) actor).getSelection().getStore()[1]);
-	    }
-	    
-	});
 	
 	scrollPane = new ScrollPane(serverList, skin);
 	scrollPane.setFadeScrollBars(false);
@@ -52,6 +47,20 @@ public class GameServerSelectionScreen extends BaseScreen
 	
 	backButton = new TextButton(LocalizationHandler.getInstance().getDialog("common.choice.back"), skin);
 	selectButton = new TextButton(LocalizationHandler.getInstance().getDialog("gameserver.selection.select"), skin);
+	selectButton.addListener(new ChangeListener(){
+
+	    @Override
+	    public void changed(ChangeEvent event, Actor actor)
+	    {
+		GameServer _gameserver = (GameServer) serverList.getSelection().getStore()[0];
+		if(_gameserver != null)
+		{
+		    if(_gameserver.getState() == GameServerState.ONLINE)
+			LoginServerFactory.getInstance().send(new ConnectionGameServerSelect(_gameserver));
+		}
+	    }
+	    
+	});
 	
 	Panel _panel = new Panel(skin, "black_alpha");
 	//_panel.debug();

@@ -1,25 +1,20 @@
 package net.team.omega.core.network.serialization.internal;
 
-import net.team.omega.Constants;
+import net.team.omega.core.network.GameServerState;
 import net.team.omega.core.network.serialization.MessageData;
 
 
 public class InternalGameServerUpdate extends MessageData
 {
 
-    private byte state;
+    private GameServerState state;
     
     public InternalGameServerUpdate()
     {
-	state = Constants.GAME_SERVER_STATE_OFFLINE;
+	state = GameServerState.OFFLINE;
     }
     
-    public InternalGameServerUpdate(byte state)
-    {
-	this.state = state;
-    }
-    
-    public void setState(byte state)
+    public InternalGameServerUpdate(GameServerState state)
     {
 	this.state = state;
     }
