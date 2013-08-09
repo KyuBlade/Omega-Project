@@ -35,6 +35,7 @@ public class ConnectionLogin extends MessageData
 		    Restrictions.eq("user", user), 
 		    Restrictions.eq("password", CryptUtils.securePassword(password)))).setMaxResults(1);
 	
+	@SuppressWarnings("unchecked")
 	List<Account> _result = _criteria.list();
 	
 	_session.close();
@@ -43,9 +44,9 @@ public class ConnectionLogin extends MessageData
 	{
 	    Account _account = _result.get(0);
 	    connection.getClientDatas().setAccount(_account); // Bind account to current connection
-	    if (_account.isBanned())
+	    if (_account.getIsBanned())
 	    {
-		LogHandler.warning("Client " + _account.getUser() + " (" + connection.getRemoteAddressTCP().getHostName() + ") try to connect but was banned !");
+		LogHandler.warning("Client " + _account.getName() + " (" + connection.getRemoteAddressTCP().getHostName() + ") try to connect but was banned !");
 		connection.sendTCP(new ConnectionLoginBanned()); // Send banned message
 
 		return;

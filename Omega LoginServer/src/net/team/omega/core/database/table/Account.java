@@ -62,7 +62,7 @@ public class Account
 	this.rights = rights;
     }
 
-    public boolean isBanned()
+    public boolean getIsBanned()
     {
 	return isBanned;
     }
