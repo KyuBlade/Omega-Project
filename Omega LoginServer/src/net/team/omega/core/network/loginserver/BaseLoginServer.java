@@ -13,11 +13,6 @@ public class BaseLoginServer extends Server
 	return new ClientConnection();
     }
 
-    public ClientConnection[] getClientConnections()
-    {
-	return (ClientConnection[]) super.getConnections();
-    }
-
     @Override
     public void sendToAllTCP(Object object)
     {

@@ -26,12 +26,9 @@ public class InternalGameServerGenerateKey extends MessageData
 	else
 	    _wCon = new WaitingConnection(account, _key);
 	
-	if(_wCon == null)
-	    throw new NullPointerException("Unable to get a WaitingConnection");
-	
 	WaitingConnectionQueue.getInstance().addToQueue(_wCon);
 	    
-	InternalGameServerGeneratedKey message = new InternalGameServerGeneratedKey(account, _key);
+	InternalGameServerGeneratedKey message = new InternalGameServerGeneratedKey(_wCon);
 	InternalGameServerFactory.getInstance().getClient().sendTCP(message);
     }
     

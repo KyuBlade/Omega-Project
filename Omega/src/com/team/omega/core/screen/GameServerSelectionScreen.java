@@ -29,6 +29,8 @@ public class GameServerSelectionScreen extends BaseScreen
     private TextButton backButton;
     private TextButton selectButton;
     
+    private GameServer selectedGameServer;
+    
     public GameServerSelectionScreen()
     {
 	background = new Image(GameCore.getInstance().getAssetManager().get("data/skins/default/backgrounds/login_bg.jpg", Texture.class));
@@ -55,6 +57,7 @@ public class GameServerSelectionScreen extends BaseScreen
 		GameServer _gameserver = (GameServer) serverList.getSelection().getStore()[0];
 		if(_gameserver != null)
 		{
+		    selectedGameServer = _gameserver;
 		    if(_gameserver.getState() == GameServerState.ONLINE)
 			LoginServerFactory.getInstance().send(new ConnectionGameServerSelect(_gameserver));
 		}
@@ -80,6 +83,11 @@ public class GameServerSelectionScreen extends BaseScreen
     public TabbedList getServerList()
     {
 	return serverList;
+    }
+    
+    public GameServer getSelectedGameServer()
+    {
+	return selectedGameServer;
     }
     
 }

@@ -6,6 +6,8 @@ import net.team.omega.core.network.loginserver.LoginServerFactory;
 import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerKey;
 
+import com.esotericsoftware.kryonet.Connection;
+
 
 public class InternalGameServerGeneratedKey extends MessageData
 {
@@ -18,11 +20,12 @@ public class InternalGameServerGeneratedKey extends MessageData
 	ConnectionGameServerKey message = new ConnectionGameServerKey();
 	message.setKey(waitingCon.getKey());
 	
-	for(ClientConnection _con : LoginServerFactory.getInstance().getServer().getClientConnections())
+	for(Connection _con : LoginServerFactory.getInstance().getServer().getConnections())
 	{
-	    if(_con.getClientDatas().getAccount().getId() == waitingCon.getAccount().getId())
+	    ClientConnection _cCon = (ClientConnection) _con;
+	    if(_cCon.getClientDatas().getAccount().getId() == waitingCon.getAccount().getId())
 	    {
-		_con.sendTCP(message);
+		_cCon.sendTCP(message);
 		
 		break;
 	    }

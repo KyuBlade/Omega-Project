@@ -3,7 +3,7 @@ package net.team.omega.core.network;
 import java.io.IOException;
 
 import net.team.omega.core.network.serialization.MessageData;
-import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerSelect;
+import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerConnect;
 import net.team.omega.core.network.serialization.datas.GameServer;
 
 import com.esotericsoftware.kryonet.Client;
@@ -32,7 +32,7 @@ public class GameServerFactory
         return instance;
     }
 
-    public void start(final GameServer gameserver)
+    public void start(final GameServer gameserver, final String key)
     {
         try
         {
@@ -49,8 +49,7 @@ public class GameServerFactory
                     
                     // Fake mode here
                     
-                    ConnectionGameServerSelect message = new ConnectionGameServerSelect(gameserver);
-                    LoginServerFactory.getInstance().send(message);
+                    client.sendTCP(new ConnectionGameServerConnect(key));
                 }
 
                 @Override
@@ -86,6 +85,13 @@ public class GameServerFactory
 
     public void sendTCP(Object object)
     {
+	if(object == null)
+	{
+	    LogHandler.severe("Unable to send over tcp because object is null");
+	    
+	    return;
+	}
+	    
         int byteCount = client.sendTCP(object);
         
         if(object instanceof MessageData)
@@ -97,6 +103,13 @@ public class GameServerFactory
     
     public void sendUDP(Object object)
     {
+	if(object == null)
+	{
+	    LogHandler.severe("Unable to send over udp because object is null");
+	    
+	    return;
+	}
+	
         int byteCount = client.sendUDP(object);
         
         if(object instanceof MessageData)
