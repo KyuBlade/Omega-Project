@@ -35,6 +35,7 @@ public class ServerCore
 	// Add systems to world
 	LogHandler.info("Setup world");
 	
+	
 	// Initialize world
 	LogHandler.info("Initializing world");
 	world.initialize();

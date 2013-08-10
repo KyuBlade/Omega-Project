@@ -1,9 +1,7 @@
-package net.team.omega.core.entity;
-
-import net.team.omega.logging.LogHandler;
-import net.team.omega.utils.WorldTimerUtils;
+package com.team.omega.core.entity;
 
 import com.artemis.World;
+import com.badlogic.gdx.Gdx;
 
 
 public class WorldManager extends World implements Runnable
@@ -12,15 +10,12 @@ public class WorldManager extends World implements Runnable
     private Thread worldThread;
     private boolean isRunning = true;
     
-    private WorldTimerUtils timer;
-    
     private String name;
     
     public WorldManager(String name)
     {
 	super();
 	
-	timer = new WorldTimerUtils();
 	this.name = name;
 	
 	worldThread = new Thread(this);
@@ -53,23 +48,19 @@ public class WorldManager extends World implements Runnable
     {
 	while(isRunning)
 	{
-	    // Update delta
-	    timer.updateDelta();
-	    
 	    // Update the world
-	    update(timer.getDelta());
+	    update(Gdx.graphics.getDeltaTime());
 	}
 	
-	LogHandler.info("World " + name + " is now closed");
+	Gdx.app.debug("WorldManager", "World " + name + " is now closed");
     }
     
     /**
-     * Close and save the world.
+     * Close the world.
      * When world is closed, you can't reactivate it without create a new one.
      */
     public void close()
     {
-	// TODO: save the world
 	
 	// Exit the world thread
 	isRunning = false;
