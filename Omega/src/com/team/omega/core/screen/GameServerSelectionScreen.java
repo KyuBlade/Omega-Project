@@ -37,8 +37,6 @@ public class GameServerSelectionScreen extends BaseScreen
     {
 	super(screenManager, Constants.GAMESERVER_SELECTION_SCREEN_DEPTH);
 	
-	Gdx.input.setInputProcessor(stage);
-	
 	background = new Image(GameCore.getInstance().getAssetManager().get("data/skins/default/backgrounds/login_bg.jpg", Texture.class));
 	
 	String _serverName = LocalizationHandler.getInstance().getDialog("gameserver.selection.name");
@@ -54,6 +52,17 @@ public class GameServerSelectionScreen extends BaseScreen
 	scrollPane.setFlickScroll(false);
 	
 	backButton = new TextButton(LocalizationHandler.getInstance().getDialog("common.choice.back"), skin);
+	backButton.addListener(new ChangeListener(){
+
+	    @Override
+	    public void changed(ChangeEvent event, Actor actor)
+	    {
+		GameCore.getInstance().getScreenManager().addScreen(IdentificationScreen.class);
+		LoginServerFactory.getInstance().disconnect();
+		GameCore.getInstance().getScreenManager().removeScreen(GameServerSelectionScreen.class);
+	    }
+	    
+	});
 	selectButton = new TextButton(LocalizationHandler.getInstance().getDialog("gameserver.selection.select"), skin);
 	selectButton.addListener(new ChangeListener(){
 
@@ -72,7 +81,6 @@ public class GameServerSelectionScreen extends BaseScreen
 	});
 	
 	Panel _panel = new Panel(skin, "black_alpha");
-	//_panel.debug();
 	_panel.pad(20f);
 	
 	_panel.row();

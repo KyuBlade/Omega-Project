@@ -80,11 +80,15 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     @Override
     public void show()
     {
+	inputProcessor.addProcessor(stage);
+	setActive(true);
     }
 
     @Override
     public void hide()
     {
+	inputProcessor.removeProcessor(stage);
+	setActive(false);
     }
 
     @Override

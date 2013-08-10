@@ -81,7 +81,7 @@ public class ScreenManager implements Disposable
 		_screen = screen.getConstructor(ScreenManager.class).newInstance(this);
 	    } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
 	    {
-		Gdx.app.error("ScreenManager", "Unable to instanciate screen " + screen.getSimpleName());
+		Gdx.app.error("ScreenManager", "Unable to instanciate screen " + screen.getSimpleName(), e);
 
 		return null;
 	    }
@@ -89,7 +89,7 @@ public class ScreenManager implements Disposable
 	    screens.put(screen, _screen);
 	}
 
-	((BaseScreen) _screen).setActive(true);
+	((BaseScreen) _screen).show();;
 	
 	updateScreens();
 
@@ -101,7 +101,7 @@ public class ScreenManager implements Disposable
 	BaseScreen _screen = screens.get(screen);
 	
 	if(_screen != null)
-	    _screen.setActive(false);
+	    _screen.hide();
 	
 	updateScreens();
     }

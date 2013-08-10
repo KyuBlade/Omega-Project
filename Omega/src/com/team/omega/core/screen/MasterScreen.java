@@ -1,6 +1,7 @@
 package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -15,8 +16,15 @@ public class MasterScreen implements Screen
      */
     protected static Skin skin;
     
+    /**
+     * Propagate inputs
+     */
+    protected static InputMultiplexer inputProcessor;
     
     static {
+	inputProcessor = new InputMultiplexer();
+	Gdx.input.setInputProcessor(inputProcessor);
+	
 	TextureAtlas _atlas = GameCore.getInstance().getAssetManager().get("data/skins/default/default-skin.atlas");
 	skin = new Skin(Gdx.files.internal("data/skins/default/default.json"), _atlas);
     }
@@ -60,6 +68,11 @@ public class MasterScreen implements Screen
     public static Skin getSkin()
     {
 	return skin;
+    }
+    
+    public static InputMultiplexer getInputProcessor()
+    {
+	return inputProcessor;
     }
     
 }

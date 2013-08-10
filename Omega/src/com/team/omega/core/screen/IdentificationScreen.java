@@ -37,8 +37,6 @@ public class IdentificationScreen extends BaseScreen
     {
 	super(screenManager, Constants.IDENTIFICATION_SCREEN_DEPTH);
 	
-	Gdx.input.setInputProcessor(stage);
-	
 	background = new Image(GameCore.getInstance().getAssetManager().get("data/skins/default/backgrounds/login_bg.jpg", Texture.class));
 	
 	userLabel = new Label(LocalizationHandler.getInstance().getDialog("login.user"), skin);
