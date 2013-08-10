@@ -43,6 +43,8 @@ public class CharacterList extends MessageData
 	@SuppressWarnings("unchecked")
 	List<Player> _result = _criteria.list();
 	
+	_session.close();
+	
 	for(Player _char : _result)
 	    characterList.add(new SamplePlayer(_char.getId(), _char.getName(), _char.getBreed(), _char.getLevel()));
 	
