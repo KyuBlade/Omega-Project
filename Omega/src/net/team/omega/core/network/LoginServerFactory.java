@@ -5,6 +5,7 @@ import java.io.IOException;
 import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.connection.ConnectionLogin;
 
+import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -12,7 +13,6 @@ import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.core.screen.IdentificationScreen;
-import com.team.omega.utils.LogHandler;
 
 public class LoginServerFactory
 {
@@ -34,14 +34,14 @@ public class LoginServerFactory
 	    public void connected(Connection connection)
 	    {
 		state = ConnectionState.CONNECTED;
-		LogHandler.info("Connected to loginserver.");
+		Gdx.app.debug("LoginServerFactory", "Connected to loginserver.");
 	    }
 
 	    @Override
 	    public void disconnected(Connection connection)
 	    {
 		state = ConnectionState.IDLE;
-		LogHandler.info("Disconnected from loginserver.");
+		Gdx.app.debug("LoginServerFactory", "Disconnected from loginserver.");
 	    }
 
 	    @Override
@@ -49,7 +49,7 @@ public class LoginServerFactory
 	    {
 		if (object instanceof MessageData)
 		{
-		    LogHandler.system("Recv << " + object.toString());
+		    Gdx.app.debug("LoginServerFactory", "Recv << " + object.toString());
 		    ((MessageData) object).process();
 		}
 	    }
@@ -83,9 +83,7 @@ public class LoginServerFactory
 	{
 	    state = ConnectionState.IDLE;
 	    GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup(LocalizationHandler.getInstance().getDialog("login.error.unreachable"));
-	    LogHandler.severe("Cannot connect to the loginserver ! ");
-	    LogHandler.severe("Cause : " + ex.getMessage());
-
+	    Gdx.app.error("LoginServerFactory", "Cannot connect to the loginserver !");
 	}
     }
     
@@ -94,7 +92,7 @@ public class LoginServerFactory
         if(client == null || !client.isConnected())
             return;
         
-        LogHandler.system("Send >> " + object.getClass().getSimpleName());
+        Gdx.app.debug("LoginServerFactory", "Send >> " + object.getClass().getSimpleName());
         client.sendTCP(object);
     }
     

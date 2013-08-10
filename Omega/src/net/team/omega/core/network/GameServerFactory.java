@@ -6,11 +6,11 @@ import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerConnect;
 import net.team.omega.core.network.serialization.datas.GameServer;
 
+import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.team.omega.core.Constants;
-import com.team.omega.utils.LogHandler;
 
 public class GameServerFactory
 {
@@ -45,7 +45,7 @@ public class GameServerFactory
                 @Override
                 public void connected(Connection connection)
                 {
-                    LogHandler.info("Connected to gameserver");
+                    Gdx.app.debug("GameServerFactory", "Connected to gameserver");
                     
                     // Fake mode here
                     
@@ -55,7 +55,7 @@ public class GameServerFactory
                 @Override
                 public void disconnected(Connection connection)
                 {
-                    LogHandler.info("Disconnected from gameserver.");
+                    Gdx.app.debug("GameServerFactory", "Disconnected from gameserver");
                     
                 }
 
@@ -66,7 +66,7 @@ public class GameServerFactory
                     {
                 	MessageData _message = (MessageData) object;
                         if(_message.onDebugDisplay())
-                            LogHandler.system("Recv << " + object.toString());
+                            Gdx.app.debug("GameServerFactory", "Recv << " + object.toString());
                         
                         _message.process();;
                     }
@@ -78,8 +78,7 @@ public class GameServerFactory
             client.connect(Constants.GAME_SERVER_TIMEOUT, gameserver.getIp(), gameserver.getTcpPort(), gameserver.getUdpPort());
         } catch (IOException ex)
         {
-            LogHandler.severe("Cannot connect to the gameserver (" + gameserver.getName() + ") ! ");
-            LogHandler.severe("Cause : " + ex.getMessage());
+            Gdx.app.error("GameServerFactory", "Cannot connect to the gameserver (" + gameserver.getName() + ") ! ", ex);
         }
     }
 
@@ -87,7 +86,7 @@ public class GameServerFactory
     {
 	if(object == null)
 	{
-	    LogHandler.severe("Unable to send over tcp because object is null");
+	    Gdx.app.error("GameServerFactory", "Unable to send over tcp because object is null");
 	    
 	    return;
 	}
@@ -97,7 +96,7 @@ public class GameServerFactory
         if(object instanceof MessageData)
         {
             if(((MessageData) object).onDebugDisplay())
-                LogHandler.system("Send(TCP) [" + byteCount + "] >> " + object.getClass().getSimpleName());
+                Gdx.app.debug("GameServerFactory", "Send(TCP) [" + byteCount + "] >> " + object.getClass().getSimpleName());
         }
     }
     
@@ -105,7 +104,7 @@ public class GameServerFactory
     {
 	if(object == null)
 	{
-	    LogHandler.severe("Unable to send over udp because object is null");
+	    Gdx.app.error("GameServerFactory", "Unable to send over udp because object is null");
 	    
 	    return;
 	}
@@ -115,7 +114,7 @@ public class GameServerFactory
         if(object instanceof MessageData)
         {
             if(((MessageData) object).onDebugDisplay())
-                LogHandler.system("Send(UDP) [" + byteCount + "] >> " + object.getClass().getSimpleName());
+                Gdx.app.debug("GameServerFactory", "Send(UDP) [" + byteCount + "] >> " + object.getClass().getSimpleName());
         }
     }
     

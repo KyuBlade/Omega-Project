@@ -16,6 +16,7 @@ public class Main
 	cfg.height = Config.DISPLAY_HEIGHT;
 	cfg.vSyncEnabled = false;
 	cfg.foregroundFPS = 0;
+	cfg.fullscreen = false;
 	
 	new LwjglApplication(GameCore.getInstance(), cfg);
     }
