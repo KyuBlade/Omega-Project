@@ -5,7 +5,6 @@ import net.team.omega.core.network.LoginServerFactory;
 import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerSelect;
 import net.team.omega.core.network.serialization.datas.GameServer;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -74,7 +73,10 @@ public class GameServerSelectionScreen extends BaseScreen
 		{
 		    selectedGameServer = _gameserver;
 		    if(_gameserver.getState() == GameServerState.ONLINE)
+		    {
+			GameCore.getInstance().getScreenManager().addScreen(WaitingScreen.class);
 			LoginServerFactory.getInstance().send(new ConnectionGameServerSelect(_gameserver));
+		    }
 		}
 	    }
 	    
@@ -92,8 +94,22 @@ public class GameServerSelectionScreen extends BaseScreen
 	
 	layout.setBackground(background.getDrawable());
 	layout.add(_panel);
+    }
+    
+    @Override
+    public void show()
+    {
+	super.show();
 	
 	GameCore.getInstance().getScreenManager().removeScreen(WaitingScreen.class);
+    }
+    
+    @Override
+    public void hide()
+    {
+	super.hide();
+	
+	
     }
     
     public TabbedList getServerList()

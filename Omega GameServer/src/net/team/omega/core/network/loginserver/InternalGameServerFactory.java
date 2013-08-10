@@ -85,11 +85,10 @@ public class InternalGameServerFactory
 	    @Override
 	    public void received(Connection connection, Object object)
 	    {
-		if (object instanceof NetworkData)
+		if (object instanceof MessageData)
 		{
 		    LogHandler.system("[Internal]Recv << " + object.toString());
-		    if (object instanceof MessageData)
-			((MessageData) object).process();
+		    ((MessageData) object).process();
 		}
 	    }
 
