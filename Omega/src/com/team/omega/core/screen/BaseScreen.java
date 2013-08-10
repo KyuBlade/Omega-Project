@@ -64,7 +64,7 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     @Override
     public void resize(int width, int height)
     {
-	Gdx.app.debug("Resizing", "Resize to " + width + "x" + height);
+	Gdx.app.debug("Resizing " + this.getClass().getSimpleName(), "Resize to " + width + "x" + height);
 
 	float _staticWidth = GameCore.getInstance().getConfigManager().getInitialWidth();
 	float _staticHeight = GameCore.getInstance().getConfigManager().getInitialHeight();
@@ -145,20 +145,9 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
 	screenManager.updateScreens();
     }
 
-    /*@Override
-    public int compare(BaseScreen c1, BaseScreen c2)
-    {
-	int value = 0;
-	if (c1.depth > c2.depth)
-	    value = 1;
-	else if (c1.depth < c2.depth)
-	    value = -1;
-	else if (c1.depth == c2.depth)
-	    value = 0;
-	    
-	return value;
-    }*/
-
+    /**
+     * Used internally to sort screen by depth
+     */
     @Override
     public int compareTo(BaseScreen c)
     {

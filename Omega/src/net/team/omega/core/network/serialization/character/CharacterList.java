@@ -3,12 +3,11 @@ package net.team.omega.core.network.serialization.character;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
-import com.team.omega.core.GameCore;
-import com.team.omega.core.screen.CharacterSelectionScreen;
-
 import net.team.omega.core.network.serialization.MessageData;
 import net.team.omega.core.network.serialization.datas.SamplePlayer;
+
+import com.team.omega.core.GameCore;
+import com.team.omega.core.screen.CharacterSelectionScreen;
 
 public class CharacterList extends MessageData
 {
@@ -22,10 +21,7 @@ public class CharacterList extends MessageData
     @Override
     public void process()
     {
-	for(SamplePlayer _sample : characterList)
-	    Gdx.app.debug("CharacterList", _sample.getName());
-	
-	GameCore.getInstance().getScreenManager().addScreen(CharacterSelectionScreen.class);
+	GameCore.getInstance().getScreenManager().addScreen(CharacterSelectionScreen.class).addPlayers(characterList);
     }
     
 }
