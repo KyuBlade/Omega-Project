@@ -37,7 +37,8 @@ public class ClassRegister
             	
             ConnectionGameServerAccept.class, 
             ConnectionGameServerConnect.class, 
-            	
+            
+            CharacterList.SamplePlayer.class, 
             CharacterCreation.class, 
             CharacterCreationNameTaken.class, 
             CharacterCreationMaxCapacityReached.class, 

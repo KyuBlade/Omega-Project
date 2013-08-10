@@ -27,6 +27,7 @@
         <property name="hibernate.c3p0.checkoutTimeout">2000</property> 
         
         <!-- Mapping -->
+        <mapping resource="net/team/omega/core/database/table/Character.hbm.xml" />
 		
     </session-factory>
 </hibernate-configuration>

@@ -1,12 +1,22 @@
 package net.team.omega.core.network.serialization.character;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.team.omega.core.database.HibernateFactory;
+import net.team.omega.core.database.table.Player;
 import net.team.omega.core.network.gameserver.ClientConnection;
 import net.team.omega.core.network.serialization.MessageData;
+import net.team.omega.logging.LogHandler;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 public class CharacterList extends MessageData
 {
 
-    //private List<RemoteEntity> characterList = new ArrayList<RemoteEntity>();
+    private List<SamplePlayer> characterList = new ArrayList<>();
 
     public CharacterList()
     {
@@ -16,65 +26,46 @@ public class CharacterList extends MessageData
     @Override
     public void process(ClientConnection connection)
     {
-	/*PreparedStatement _pQuery = SQLFactory.getInstance().prepareQuery("SELECT * FROM characters WHERE AccountID = ?");
-	ResultSet _result;
+	int _accountId = 0;
+	try {
+	_accountId = connection.getClientData().getAccount().getId();
+	} catch (NullPointerException e) {
+	    LogHandler.warning("Unable to get characterList");
+	    
+	    return;
+	}
+	
+	Session _session = HibernateFactory.getSession();
 
-	try
+	Criteria _criteria = _session.createCriteria(Player.class)
+		.add(Restrictions.eq("accountId", _accountId));
+
+	@SuppressWarnings("unchecked")
+	List<Player> _result = _criteria.list();
+	
+	for(Player _char : _result)
+	    characterList.add(new SamplePlayer(_char.getId(), _char.getName(), _char.getBreed(), _char.getLevel()));
+	
+	connection.sendTCP(this);
+    }
+    
+    @SuppressWarnings("unused")
+    public static class SamplePlayer
+    {
+	
+	private int id;
+	private String name;
+	private int level;
+	private short breed;
+	
+	public SamplePlayer(int id, String name, short breed, int level)
 	{
-	    _pQuery.setInt(1, MasterEntityData.getInstance().getComponent(connection.getAccount(), AccountComponent.class).getAccountId());
-
-	    _result = _pQuery.executeQuery();
-
-	    while (_result.next())
-	    {
-		int _playerId = _result.getInt("ID");
-		String _name = _result.getString("Name");
-		int _life = _result.getInt("Life");
-		int _modelId = _result.getInt("ModelID");
-		float _posX = _result.getFloat("PosX");
-		float _posY = _result.getFloat("PosY");
-		float _posZ = _result.getFloat("PosZ");
-		float _rotX = _result.getFloat("RotX");
-		float _rotY = _result.getFloat("RotY");
-		float _rotZ = _result.getFloat("RotZ");
-		long _survivalTime = _result.getLong("SurvivalTime");
-		int _accountId = _result.getInt("AccountID");
-
-		// Check if character already loaded
-		ComponentFilter<PlayerComponent> _f = FieldFilter.create(PlayerComponent.class, "playerId", _playerId);
-		EntityId _entityId = MasterEntityData.getInstance().findEntity(_f);
-		
-		LogHandler.getInstance().system("Loaded : " + _entityId);
-		
-		if (_entityId == null)
-		{
-		    _entityId = MasterEntityData.getInstance().createEntity();
-		    MasterEntityData.getInstance().setComponents(_entityId, 
-			    new PlayerComponent(_playerId, _accountId), 
-			    new SurvivalTimeComponent(_survivalTime), 
-			    new NameComponent(_name), 
-			    new ModelTransactionComponent(_modelId), 
-			    new HealthComponent(0, _life, Constants.CHARACTER_DATA_MAX_LIFE),
-			    new LocationComponent(_posX, _posY, _posZ),
-			    new RotationComponent(_rotX, _rotY, _rotZ), 
-			    new InitializedComponent(false), 
-			    new SpeedComponent(1.0f), 
-			    new BasicMovementComponent(), 
-			    new HumanMovementComponent());
-		}
-		
-		characterList.add(new RemoteEntity(_entityId, NameComponent.class, ModelTransactionComponent.class, SurvivalTimeComponent.class));
-		
-	    }
-
-	    _pQuery.close();
-
-	    connection.sendTCP(this);
-	} catch (SQLException e)
-	{
-	    LogHandler.getInstance().severe("Unable to get character list of account " + MasterEntityData.getInstance().getComponent(connection.getAccount(), AccountComponent.class).getAccountId());
-	    LogHandler.getInstance().severe("Cause : " + e.getMessage());
-	}*/
+	    this.id = id;
+	    this.name = name;
+	    this.breed = breed;
+	    this.level = level;
+	}
+	
     }
 
 }

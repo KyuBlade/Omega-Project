@@ -21,6 +21,7 @@ import net.team.omega.core.network.serialization.connection.gameserver.Connectio
 import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerList;
 import net.team.omega.core.network.serialization.connection.gameserver.ConnectionGameServerSelect;
 import net.team.omega.core.network.serialization.datas.GameServer;
+import net.team.omega.core.network.serialization.datas.SamplePlayer;
 import net.team.omega.core.network.serialization.game.PlayerCreate;
 import net.team.omega.core.network.serialization.game.PlayerDataRequest;
 import net.team.omega.core.network.serialization.game.PlayerRemove;
@@ -60,6 +61,7 @@ public class ClassRegister
             ConnectionGameServerAccept.class, 
             ConnectionGameServerConnect.class, 
             
+            SamplePlayer.class, 
             CharacterCreation.class, 
             CharacterCreationNameTaken.class, 
             CharacterCreationMaxCapacityReached.class, 

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10 ao?t 2013 15:53:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="net.team.omega.core.database.table.Player" table="characters">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="Name" />
+        </property>
+        <property name="breed" type="short">
+            <column name="Breed" />
+        </property>
+        <property name="level" type="int">
+            <column name="Level" />
+        </property>
+        <property name="life" type="int">
+            <column name="Life" />
+        </property>
+        <property name="x" type="float">
+            <column name="X" />
+        </property>
+        <property name="y" type="float">
+            <column name="Y" />
+        </property>
+        <property name="accountId" type="int">
+            <column name="AccountId" />
+        </property>
+    </class>
+</hibernate-mapping>
