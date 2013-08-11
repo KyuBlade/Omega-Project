@@ -6,6 +6,7 @@ import net.team.omega.core.network.serialization.character.CharacterList;
 
 import com.team.omega.core.GameCore;
 import com.team.omega.core.screen.CharacterCreationScreen;
+import com.team.omega.core.screen.GameServerSelectionScreen;
 
 
 public class ConnectionGameServerAccept extends MessageData
@@ -17,7 +18,7 @@ public class ConnectionGameServerAccept extends MessageData
     public void process()
     {
         if(needCharacterCreation)
-            GameCore.getInstance().getScreenManager().addScreen(CharacterCreationScreen.class);
+            GameCore.getInstance().getScreenManager().addScreen(CharacterCreationScreen.class).setRequestFrom(GameServerSelectionScreen.class);
         else
             GameServerFactory.getInstance().sendTCP(new CharacterList());
     }

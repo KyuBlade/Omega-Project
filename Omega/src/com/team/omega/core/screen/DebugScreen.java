@@ -27,8 +27,8 @@ public class DebugScreen extends BaseScreen
 	
 	Panel _graphics = new Panel(skin, "black_alpha");
 	_graphics.defaults().left();
-	_graphics.add(fps).row();
-	_graphics.add(resolution);
+	_graphics.add(resolution).row();
+	_graphics.add(fps);
 	_graphicsTable.top().right().add(_graphics);
 	
 	screens = new Panel(skin, "black_alpha");

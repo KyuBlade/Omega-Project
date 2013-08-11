@@ -5,14 +5,14 @@ filter: Nearest,Nearest
 repeat: none
 backgrounds/black_alpha80
   rotate: false
-  xy: 160, 1
+  xy: 192, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 buttons/button_down
   rotate: false
-  xy: 0, 0
+  xy: 160, 96
   size: 32, 32
   split: 8, 8, 8, 8
   orig: 32, 32
@@ -20,7 +20,7 @@ buttons/button_down
   index: -1
 buttons/button_over
   rotate: false
-  xy: 32, 0
+  xy: 128, 32
   size: 32, 32
   split: 8, 8, 8, 8
   orig: 32, 32
@@ -28,15 +28,134 @@ buttons/button_over
   index: -1
 buttons/button_up
   rotate: false
-  xy: 64, 0
+  xy: 128, 0
   size: 32, 32
   split: 7, 7, 7, 7
   orig: 32, 32
   offset: 0, 0
   index: -1
+icons/races/archer/archer_race_checked
+  rotate: false
+  xy: 128, 96
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/musician/musician_race_checked
+  rotate: false
+  xy: 128, 96
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/templar/templar_race_checked
+  rotate: false
+  xy: 128, 96
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/assassin/assassin_race_checked
+  rotate: false
+  xy: 128, 96
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/mage/mage_race_checked
+  rotate: false
+  xy: 128, 96
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/warrior/warrior_race_checked
+  rotate: false
+  xy: 128, 96
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/archer/archer_race_up
+  rotate: false
+  xy: 128, 64
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/warrior/warrior_race_up
+  rotate: false
+  xy: 128, 64
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/mage/mage_race_up
+  rotate: false
+  xy: 128, 64
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/templar/templar_race_up
+  rotate: false
+  xy: 128, 64
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/musician/musician_race_up
+  rotate: false
+  xy: 128, 64
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/assassin/assassin_race_up
+  rotate: false
+  xy: 128, 64
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/races/original_race
+  rotate: false
+  xy: 0, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+icons/sex/female_checked
+  rotate: false
+  xy: 224, 96
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/sex/female_up
+  rotate: false
+  xy: 160, 32
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/sex/male_checked
+  rotate: false
+  xy: 192, 64
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+icons/sex/male_up
+  rotate: false
+  xy: 224, 64
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 panels/black_alpha
   rotate: false
-  xy: 199, 22
+  xy: 233, 54
   size: 10, 10
   split: 3, 3, 3, 3
   orig: 10, 10
@@ -44,7 +163,7 @@ panels/black_alpha
   index: -1
 panels/character_selection_cell
   rotate: false
-  xy: 96, 0
+  xy: 160, 64
   size: 32, 32
   split: 5, 5, 7, 7
   orig: 32, 32
@@ -52,7 +171,7 @@ panels/character_selection_cell
   index: -1
 panels/character_selection_cell_checked
   rotate: false
-  xy: 128, 0
+  xy: 192, 96
   size: 32, 32
   split: 5, 5, 7, 7
   orig: 32, 32
@@ -60,23 +179,39 @@ panels/character_selection_cell_checked
   index: -1
 panels/character_selection_cell_over
   rotate: false
-  xy: 128, 0
+  xy: 192, 96
   size: 32, 32
   split: 5, 5, 7, 7
   orig: 32, 32
   offset: 0, 0
   index: -1
+panels/light_brown
+  rotate: false
+  xy: 160, 0
+  size: 32, 32
+  split: 8, 8, 8, 8
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 panels/panel_brown
   rotate: false
-  xy: 160, 2
+  xy: 192, 2
   size: 30, 30
   split: 6, 6, 6, 8
   orig: 30, 30
   offset: 0, 0
   index: -1
+panels/title_brown
+  rotate: false
+  xy: 192, 32
+  size: 32, 32
+  split: 6, 6, 5, 6
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 scrolls/hScroll
   rotate: false
-  xy: 209, 27
+  xy: 243, 59
   size: 10, 5
   split: 2, 2, 2, 2
   orig: 10, 5
@@ -84,7 +219,7 @@ scrolls/hScroll
   index: -1
 scrolls/hScroll_knob
   rotate: false
-  xy: 209, 22
+  xy: 243, 54
   size: 10, 5
   split: 2, 2, 2, 2
   orig: 10, 5
@@ -92,7 +227,7 @@ scrolls/hScroll_knob
   index: -1
 scrolls/vScroll
   rotate: false
-  xy: 219, 22
+  xy: 232, 36
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -100,7 +235,7 @@ scrolls/vScroll
   index: -1
 scrolls/vScroll_knob
   rotate: false
-  xy: 224, 22
+  xy: 237, 36
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -108,7 +243,7 @@ scrolls/vScroll_knob
   index: -1
 textfields/background
   rotate: false
-  xy: 190, 6
+  xy: 224, 38
   size: 8, 8
   split: 1, 1, 1, 1
   orig: 8, 8
@@ -116,7 +251,7 @@ textfields/background
   index: -1
 textfields/background_focus
   rotate: false
-  xy: 199, 14
+  xy: 233, 46
   size: 8, 8
   split: 3, 3, 3, 3
   orig: 8, 8
@@ -124,14 +259,14 @@ textfields/background_focus
   index: -1
 textfields/blue_cursor
   rotate: false
-  xy: 190, 14
+  xy: 224, 46
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 textfields/selection
   rotate: false
-  xy: 198, 9
+  xy: 224, 33
   size: 5, 5
   split: 1, 1, 1, 1
   orig: 5, 5

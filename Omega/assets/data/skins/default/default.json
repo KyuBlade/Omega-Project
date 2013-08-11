@@ -9,6 +9,17 @@ com.badlogic.gdx.graphics.Color: {
 	red: { a: 1, b: 0, g: 0, r: 1 },
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over },
+	warrior_race: { up: icons/races/warrior/warrior_race_up, down: icons/races/warrior/warrior_race_checked, checked: icons/races/warrior/warrior_race_checked }, 
+	assassin_race: { up: icons/races/assassin/assassin_race_up, down: icons/races/assassin/assassin_race_checked, checked: icons/races/assassin/assassin_race_checked }, 
+	templar_race: { up: icons/races/templar/templar_race_up, down: icons/races/templar/templar_race_checked, checked: icons/races/templar/templar_race_checked }, 
+	mage_race: { up: icons/races/mage/mage_race_up, down: icons/races/mage/mage_race_checked, checked: icons/races/mage/mage_race_checked }, 
+	archer_race: { up: icons/races/archer/archer_race_up, down: icons/races/archer/archer_race_checked, checked: icons/races/archer/archer_race_checked }, 
+	musician_race: { up: icons/races/musician/musician_race_up, down: icons/races/musician/musician_race_checked, checked: icons/races/musician/musician_race_checked }, 
+	male: { up: icons/sex/male_up, down: icons/sex/male_checked, checked: icons/sex/male_checked }, 
+	female: { up: icons/sex/female_up, down: icons/sex/female_checked, checked: icons/sex/female_checked }
+},
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white },
 	toggle: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white, downFontColor: red }
@@ -30,7 +41,9 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 com.team.omega.ui.Panel$PanelStyle: {
 	default: {}, 
 	black_alpha: { background: panels/black_alpha }, 
-	player_cell: { background: panels/character_selection_cell, backgroundChecked: panels/character_selection_cell_checked, backgroundOver: panels/character_selection_cell_over }
+	player_cell: { background: panels/character_selection_cell, backgroundChecked: panels/character_selection_cell_checked, backgroundOver: panels/character_selection_cell_over },
+	title: { background: panels/title_brown }, 
+	light_brown: { background: panels/light_brown }
 },
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: { font: default-font,  selection: textfields/selection }

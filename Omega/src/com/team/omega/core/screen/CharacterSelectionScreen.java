@@ -32,6 +32,8 @@ public class CharacterSelectionScreen extends BaseScreen
     private Table appendTable;
     
     private TextButton backButton;
+    private TextButton newButton;
+    private TextButton deleteButton;
     private TextButton selectButton;
     
     private PanelGroup panelGroup;
@@ -59,6 +61,19 @@ public class CharacterSelectionScreen extends BaseScreen
 
 	});
         
+        newButton = new TextButton(LocalizationHandler.getInstance().getDialog("character.selection.new"), skin);
+        newButton.addListener(new ChangeListener(){
+
+	    @Override
+	    public void changed(ChangeEvent event, Actor actor)
+	    {
+		screenManager.addScreen(CharacterCreationScreen.class).setRequestFrom(CharacterSelectionScreen.class);;
+		screenManager.removeScreen(CharacterSelectionScreen.class);
+	    }
+            
+        });
+        deleteButton = new TextButton(LocalizationHandler.getInstance().getDialog("character.selection.delete"), skin);
+        
         selectButton = new TextButton(LocalizationHandler.getInstance().getDialog("character.selection.select"), skin);
         selectButton.addListener(new ChangeListener() {
 
@@ -72,11 +87,14 @@ public class CharacterSelectionScreen extends BaseScreen
 	
         appendTable = new Table();
 	characterPanel = new Panel(skin, "black_alpha");
-	characterPanel.padLeft(40f).padRight(40f).padTop(20f).padBottom(20f).row().colspan(2);
+	characterPanel.padLeft(40f).padRight(40f).padTop(20f).padBottom(20f).row().colspan(4);
 	characterPanel.add(appendTable);
 	
-	characterPanel.row().spaceTop(10f);
+	characterPanel.row().spaceTop(10f).minWidth(100f);
+	characterPanel.defaults().maxWidth(50f);
 	characterPanel.add(backButton);
+	characterPanel.add(newButton);
+	characterPanel.add(deleteButton);
 	characterPanel.add(selectButton);
 	
 	layout.add(characterPanel);
