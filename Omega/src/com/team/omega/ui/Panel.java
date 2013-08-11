@@ -29,6 +29,8 @@ public class Panel extends Table
 
     public Panel(Skin skin, String styleName)
     {
+	super(skin);
+	
 	this.id = autoIncrement++;
 	setStyle(skin.get(styleName, PanelStyle.class));
 	initialize();
