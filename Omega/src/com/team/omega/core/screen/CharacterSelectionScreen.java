@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.team.omega.core.network.GameServerFactory;
 import net.team.omega.core.network.serialization.datas.SamplePlayer;
 
 import com.badlogic.gdx.Gdx;
@@ -51,7 +52,9 @@ public class CharacterSelectionScreen extends BaseScreen
 	    @Override
 	    public void changed(ChangeEvent event, Actor actor)
 	    {
-		Gdx.app.debug("Button", "Want to get back");
+		GameServerFactory.getInstance().disconnect();
+		GameCore.getInstance().getScreenManager().addScreen(GameServerSelectionScreen.class);
+		GameCore.getInstance().getScreenManager().removeScreen(CharacterSelectionScreen.class);
 	    }
 
 	});
@@ -67,8 +70,7 @@ public class CharacterSelectionScreen extends BaseScreen
 
 	});
 	
-	appendTable = new Table();
-	
+        appendTable = new Table();
 	characterPanel = new Panel(skin, "black_alpha");
 	characterPanel.padLeft(40f).padRight(40f).padTop(20f).padBottom(20f).row().colspan(2);
 	characterPanel.add(appendTable);
@@ -92,21 +94,20 @@ public class CharacterSelectionScreen extends BaseScreen
 
     public void addPlayers(List<SamplePlayer> players)
     {
-	panelGroup = new PanelGroup();
+	// Check if character list changed
+	if(playerBind.values().size() == players.size())
+	    return;
+	
+	appendTable.reset();
+	
+	if(panelGroup == null)
+	    panelGroup = new PanelGroup();
+	
 	for (final SamplePlayer _sample : players)
 	{
 	    Panel _panel = new Panel(skin, "player_cell"); // Contain player details
 	    _panel.pad(50f);
 	    _panel.setTouchable(Touchable.enabled);
-	    _panel.addListener(new ChangeListener() {
-
-		@Override
-		public void changed(ChangeEvent event, Actor actor)
-		{
-		    Gdx.app.debug("PanelListener", _sample.getName());
-		}
-
-	    });
 
 	    _panel.add(new Label(LocalizationHandler.getInstance().getDialog("character.name") + ": " + _sample.getName(), skin)).row();
 	    _panel.add(new Label(LocalizationHandler.getInstance().getDialog("character.level") + ": " + _sample.getLevel(), skin)).row();
@@ -114,7 +115,7 @@ public class CharacterSelectionScreen extends BaseScreen
 
 	    playerBind.put(_panel.getId(), _sample);
 	    panelGroup.add(_panel);
-	    appendTable.add(_panel).space(10f);
+	    appendTable.add(_panel).spaceRight(10f);
 	}
     }
 
