@@ -127,4 +127,9 @@ public class ScreenManager implements Disposable
 	Collections.sort(depthList);
     }
     
+    public List<BaseScreen> getActiveScreen()
+    {
+	return depthList;
+    }
+    
 }
