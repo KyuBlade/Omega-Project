@@ -19,7 +19,7 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     /** 
      * Draw the internal screen layout
      */
-    protected Stage stage = new Stage();
+    protected Stage stage;
     
     /**
      * If true, rendered by the {@link ScreenManager}
@@ -40,6 +40,8 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     
     public BaseScreen(ScreenManager screenManager, int depth)
     {
+	stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, mainBatch);
+	
 	layout = new Table();
 	layout.setFillParent(true);
 	

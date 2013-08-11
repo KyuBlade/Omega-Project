@@ -10,25 +10,44 @@ public class DebugScreen extends BaseScreen
 {
 
     private Label fps;
+    private Label resolution;
     
     public DebugScreen(ScreenManager screenManager)
     {
 	super(screenManager, Constants.DEBUG_SCREEN_DEPTH);
 	
 	this.fps = new Label("", skin);
-	layout.top().right();
-	Panel _table = new Panel(skin, "black_alpha");
-	_table.add(fps).pad(5f);
+	this.resolution = new Label("", skin);
 	
-	layout.add(_table);
+	//layout.top().right();
+	
+	Panel _tableTopLeft = new Panel(skin, "black_alpha");
+	
+	Panel _tableTopRight = new Panel(skin, "black_alpha");
+	_tableTopRight.top().right();
+	_tableTopRight.add(fps).pad(5f).row();
+	_tableTopRight.add(resolution).pad(5f);
+	
+	Panel _tableBottomLeft = new Panel(skin, "black_alpha");
+	
+	Panel _tableBottomRight = new Panel(skin, "black_alpha");
+	
+	layout.add(_tableTopLeft).expand();
+	stage.addActor(_tableTopRight);
+	layout.add().expand().row();
+	//layout.add(_tableTopRight).expand().row();
+	layout.add(_tableBottomLeft).expand();
+	layout.add(_tableBottomRight).expand();
+	layout.debug();
     }
     
     @Override
     public void render(float delta)
     {
-	super.render(delta);
-	
 	fps.setText("Fps : " + Gdx.graphics.getFramesPerSecond());
+	fps.setText("Resolution : " + Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight());
+	
+	super.render(delta);
     }
 
 }

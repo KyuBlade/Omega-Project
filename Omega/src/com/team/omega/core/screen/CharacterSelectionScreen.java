@@ -38,7 +38,7 @@ public class CharacterSelectionScreen extends BaseScreen
     
     private Map<Integer, SamplePlayer> playerBind = new HashMap<>();
     
-    public CharacterSelectionScreen(ScreenManager screenManager)
+    public CharacterSelectionScreen(final ScreenManager screenManager)
     {
 	super(screenManager, Constants.CHARACTER_SELECTION_SCREEN_DEPTH);
 	
@@ -53,8 +53,8 @@ public class CharacterSelectionScreen extends BaseScreen
 	    public void changed(ChangeEvent event, Actor actor)
 	    {
 		GameServerFactory.getInstance().disconnect();
-		GameCore.getInstance().getScreenManager().addScreen(GameServerSelectionScreen.class);
-		GameCore.getInstance().getScreenManager().removeScreen(CharacterSelectionScreen.class);
+		screenManager.addScreen(GameServerSelectionScreen.class);
+		screenManager.removeScreen(CharacterSelectionScreen.class);
 	    }
 
 	});
@@ -87,9 +87,9 @@ public class CharacterSelectionScreen extends BaseScreen
     {
 	super.show();
 	
-	GameCore.getInstance().getScreenManager().removeScreen(GameServerSelectionScreen.class);
-	GameCore.getInstance().getScreenManager().removeScreen(CharacterCreationScreen.class);
-	GameCore.getInstance().getScreenManager().removeScreen(WaitingScreen.class);
+	screenManager.removeScreen(GameServerSelectionScreen.class);
+	screenManager.removeScreen(CharacterCreationScreen.class);
+	screenManager.removeScreen(WaitingScreen.class);
     }
 
     public void addPlayers(List<SamplePlayer> players)

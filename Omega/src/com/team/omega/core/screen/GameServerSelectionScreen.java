@@ -32,7 +32,7 @@ public class GameServerSelectionScreen extends BaseScreen
     
     private GameServer selectedGameServer;
     
-    public GameServerSelectionScreen(ScreenManager screenManager)
+    public GameServerSelectionScreen(final ScreenManager screenManager)
     {
 	super(screenManager, Constants.GAMESERVER_SELECTION_SCREEN_DEPTH);
 	
@@ -56,9 +56,9 @@ public class GameServerSelectionScreen extends BaseScreen
 	    @Override
 	    public void changed(ChangeEvent event, Actor actor)
 	    {
-		GameCore.getInstance().getScreenManager().addScreen(IdentificationScreen.class);
+		screenManager.addScreen(IdentificationScreen.class);
 		LoginServerFactory.getInstance().disconnect();
-		GameCore.getInstance().getScreenManager().removeScreen(GameServerSelectionScreen.class);
+		screenManager.removeScreen(GameServerSelectionScreen.class);
 	    }
 	    
 	});
@@ -74,7 +74,7 @@ public class GameServerSelectionScreen extends BaseScreen
 		    selectedGameServer = _gameserver;
 		    if(_gameserver.getState() == GameServerState.ONLINE)
 		    {
-			GameCore.getInstance().getScreenManager().addScreen(WaitingScreen.class);
+			screenManager.addScreen(WaitingScreen.class);
 			LoginServerFactory.getInstance().send(new ConnectionGameServerSelect(_gameserver));
 		    }
 		}
@@ -101,15 +101,13 @@ public class GameServerSelectionScreen extends BaseScreen
     {
 	super.show();
 	
-	GameCore.getInstance().getScreenManager().removeScreen(WaitingScreen.class);
+	screenManager.removeScreen(WaitingScreen.class);
     }
     
     @Override
     public void hide()
     {
 	super.hide();
-	
-	
     }
     
     public TabbedList getServerList()

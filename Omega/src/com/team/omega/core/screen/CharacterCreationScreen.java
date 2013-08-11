@@ -25,9 +25,9 @@ public class CharacterCreationScreen extends BaseScreen
     {
 	super.show();
 	
-	GameCore.getInstance().getScreenManager().removeScreen(GameServerSelectionScreen.class);
-	GameCore.getInstance().getScreenManager().removeScreen(CharacterSelectionScreen.class);
-	GameCore.getInstance().getScreenManager().removeScreen(WaitingScreen.class);
+	screenManager.removeScreen(GameServerSelectionScreen.class);
+	screenManager.removeScreen(CharacterSelectionScreen.class);
+	screenManager.removeScreen(WaitingScreen.class);
     }
     
 }

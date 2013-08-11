@@ -33,7 +33,7 @@ public class IdentificationScreen extends BaseScreen
     
     private ImageTextButton submit;
     
-    public IdentificationScreen(ScreenManager screenManager)
+    public IdentificationScreen(final ScreenManager screenManager)
     {
 	super(screenManager, Constants.IDENTIFICATION_SCREEN_DEPTH);
 	
@@ -68,7 +68,7 @@ public class IdentificationScreen extends BaseScreen
 			if(_user.isEmpty() || _pass.isEmpty())
 			    return;
 			
-			GameCore.getInstance().getScreenManager().addScreen(WaitingScreen.class);
+			screenManager.addScreen(WaitingScreen.class);
 			LoginServerFactory.getInstance().connect(_user, _pass);
 		    }
 		    
