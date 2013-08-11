@@ -30,7 +30,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 com.team.omega.ui.Panel$PanelStyle: {
 	default: {}, 
 	black_alpha: { background: panels/black_alpha }, 
-	player_cell: { background: panels/character_selection_cell }
+	player_cell: { background: panels/character_selection_cell, backgroundChecked: panels/character_selection_cell_checked, backgroundOver: panels/character_selection_cell_over }
 },
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: { font: default-font,  selection: textfields/selection }

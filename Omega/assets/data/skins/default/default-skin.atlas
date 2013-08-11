@@ -5,7 +5,7 @@ filter: Nearest,Nearest
 repeat: none
 backgrounds/black_alpha80
   rotate: false
-  xy: 128, 1
+  xy: 160, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -36,7 +36,7 @@ buttons/button_up
   index: -1
 panels/black_alpha
   rotate: false
-  xy: 167, 22
+  xy: 199, 22
   size: 10, 10
   split: 3, 3, 3, 3
   orig: 10, 10
@@ -50,9 +50,25 @@ panels/character_selection_cell
   orig: 32, 32
   offset: 0, 0
   index: -1
+panels/character_selection_cell_checked
+  rotate: false
+  xy: 128, 0
+  size: 32, 32
+  split: 5, 5, 7, 7
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+panels/character_selection_cell_over
+  rotate: false
+  xy: 128, 0
+  size: 32, 32
+  split: 5, 5, 7, 7
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 panels/panel_brown
   rotate: false
-  xy: 128, 2
+  xy: 160, 2
   size: 30, 30
   split: 6, 6, 6, 8
   orig: 30, 30
@@ -60,7 +76,7 @@ panels/panel_brown
   index: -1
 scrolls/hScroll
   rotate: false
-  xy: 177, 27
+  xy: 209, 27
   size: 10, 5
   split: 2, 2, 2, 2
   orig: 10, 5
@@ -68,7 +84,7 @@ scrolls/hScroll
   index: -1
 scrolls/hScroll_knob
   rotate: false
-  xy: 177, 22
+  xy: 209, 22
   size: 10, 5
   split: 2, 2, 2, 2
   orig: 10, 5
@@ -76,7 +92,7 @@ scrolls/hScroll_knob
   index: -1
 scrolls/vScroll
   rotate: false
-  xy: 187, 22
+  xy: 219, 22
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -84,7 +100,7 @@ scrolls/vScroll
   index: -1
 scrolls/vScroll_knob
   rotate: false
-  xy: 192, 22
+  xy: 224, 22
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -92,7 +108,7 @@ scrolls/vScroll_knob
   index: -1
 textfields/background
   rotate: false
-  xy: 158, 6
+  xy: 190, 6
   size: 8, 8
   split: 1, 1, 1, 1
   orig: 8, 8
@@ -100,7 +116,7 @@ textfields/background
   index: -1
 textfields/background_focus
   rotate: false
-  xy: 167, 14
+  xy: 199, 14
   size: 8, 8
   split: 3, 3, 3, 3
   orig: 8, 8
@@ -108,14 +124,14 @@ textfields/background_focus
   index: -1
 textfields/blue_cursor
   rotate: false
-  xy: 158, 14
+  xy: 190, 14
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 textfields/selection
   rotate: false
-  xy: 166, 9
+  xy: 198, 9
   size: 5, 5
   split: 1, 1, 1, 1
   orig: 5, 5

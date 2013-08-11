@@ -1,7 +1,8 @@
 package com.team.omega.core.screen;
 
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.team.omega.core.network.serialization.datas.SamplePlayer;
 
@@ -14,11 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.esotericsoftware.tablelayout.Cell;
 import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.ui.Panel;
+import com.team.omega.ui.PanelGroup;
 
 
 public class CharacterSelectionScreen extends BaseScreen
@@ -31,6 +32,10 @@ public class CharacterSelectionScreen extends BaseScreen
     
     private TextButton backButton;
     private TextButton selectButton;
+    
+    private PanelGroup panelGroup;
+    
+    private Map<Integer, SamplePlayer> playerBind = new HashMap<>();
     
     public CharacterSelectionScreen(ScreenManager screenManager)
     {
@@ -57,7 +62,7 @@ public class CharacterSelectionScreen extends BaseScreen
 	    @Override
 	    public void changed(ChangeEvent event, Actor actor)
 	    {
-		Gdx.app.debug("Button", "Want to connect in game");
+		Gdx.app.debug("Button", "Want to connect in game character " + playerBind.get(panelGroup.getChecked().getId()).getName());
 	    }
 
 	});
@@ -87,6 +92,7 @@ public class CharacterSelectionScreen extends BaseScreen
 
     public void addPlayers(List<SamplePlayer> players)
     {
+	panelGroup = new PanelGroup();
 	for (final SamplePlayer _sample : players)
 	{
 	    Panel _panel = new Panel(skin, "player_cell"); // Contain player details
@@ -106,6 +112,8 @@ public class CharacterSelectionScreen extends BaseScreen
 	    _panel.add(new Label(LocalizationHandler.getInstance().getDialog("character.level") + ": " + _sample.getLevel(), skin)).row();
 	    _panel.add(new Label(LocalizationHandler.getInstance().getDialog("character.breed") + ": " + _sample.getBreed(), skin));
 
+	    playerBind.put(_panel.getId(), _sample);
+	    panelGroup.add(_panel);
 	    appendTable.add(_panel).space(10f);
 	}
     }
