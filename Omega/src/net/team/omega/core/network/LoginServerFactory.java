@@ -82,7 +82,7 @@ public class LoginServerFactory
 	} catch (IOException ex)
 	{
 	    state = ConnectionState.IDLE;
-	    GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup(LocalizationHandler.getInstance().getDialog("login.error.unreachable"));
+	    GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup("", LocalizationHandler.getInstance().getDialog("login.error.unreachable"));
 	    Gdx.app.error("LoginServerFactory", "Cannot connect to the loginserver !");
 	}
     }

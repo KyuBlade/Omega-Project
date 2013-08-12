@@ -5,13 +5,10 @@ import net.team.omega.core.network.LoginServerFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
@@ -101,17 +98,6 @@ public class IdentificationScreen extends BaseScreen
     public void dispose()
     {
 	super.dispose();
-    }
-    
-    public void showPopup(String message)
-    {
-	screenManager.removeScreen(WaitingScreen.class);
-	Dialog dialogServerUnreachable = new Dialog(message, skin);
-	dialogServerUnreachable.button(new TextButton(LocalizationHandler.getInstance().getDialog("common.choice.ok"), skin));
-	dialogServerUnreachable.setTitleAlignment(Align.center);
-	dialogServerUnreachable.setMovable(false);
-	dialogServerUnreachable.center();
-	dialogServerUnreachable.show(stage);
     }
 
 }

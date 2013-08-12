@@ -14,7 +14,7 @@ public class ConnectionLoginBanned extends MessageData
     @Override
     public void process()
     {
-        GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup(LocalizationHandler.getInstance().getDialog("login.error.banned"));
+        GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup("", LocalizationHandler.getInstance().getDialog("login.error.banned"));
         LoginServerFactory.getInstance().disconnect();
     }
         

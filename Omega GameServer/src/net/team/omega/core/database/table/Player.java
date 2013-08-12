@@ -6,6 +6,7 @@ public class Player
     private int id;
     private String name;
     private short breed;
+    private byte sex;
     private int level;
     private int life;
     private float x, y;
@@ -41,6 +42,16 @@ public class Player
 	this.breed = breed;
     }
 
+    public byte getSex()
+    {
+        return sex;
+    }
+    
+    public void setSex(byte sex)
+    {
+        this.sex = sex;
+    }
+    
     public int getLevel()
     {
 	return level;

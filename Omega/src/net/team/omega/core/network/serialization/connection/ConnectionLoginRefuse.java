@@ -14,7 +14,7 @@ public class ConnectionLoginRefuse extends MessageData
     @Override
     public void process()
     {
-	GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup(LocalizationHandler.getInstance().getDialog("login.error.refuse"));
+	GameCore.getInstance().getScreenManager().getScreen(IdentificationScreen.class).showPopup("", LocalizationHandler.getInstance().getDialog("login.error.refuse"));
         LoginServerFactory.getInstance().disconnect();
     }
     

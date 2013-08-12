@@ -2,25 +2,24 @@ package net.team.omega.core.network.serialization.character;
 
 import net.team.omega.core.network.serialization.MessageData;
 
+@SuppressWarnings("unused")
 public class CharacterCreation extends MessageData
 {
-
-    private int modelID;
+    
     private String name;
+    private int breed;
+    private int sex;
 
     public CharacterCreation()
     {
         
     }
 
-    public void setModelID(int modelID)
+    public CharacterCreation(String name, int breed, int sex)
     {
-        this.modelID = modelID;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
+	this.name = name;
+        this.breed = breed;
+        this.sex = sex;
     }
 
 }

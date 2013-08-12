@@ -2,17 +2,20 @@ package net.team.omega.core.network.serialization.character;
 
 import net.team.omega.core.network.gameserver.ClientConnection;
 import net.team.omega.core.network.serialization.MessageData;
+import net.team.omega.logging.LogHandler;
 
 public class CharacterCreation extends MessageData
 {
 
-    private int modelID;
     private String name;
+    private int breed;
+    private int sex;
 
     @Override
     public void process(ClientConnection connection)
     {
-	/*final Pattern _pattern = Pattern.compile("[^a-zA-Z-_0-9]");
+	LogHandler.info("Name : " + name + " / Breed : " + breed + " / Sex : " + sex);
+ 	/*final Pattern _pattern = Pattern.compile("[^a-zA-Z-_0-9]");
 	int _accountId = connection.getClientData().getAccount().getId();
 
 	if (!name.isEmpty() && name.length() >= Constants.CHARACTER_NAME_MIN_LENGTH && name.length() <= Constants.CHARACTER_NAME_MAX_LENGTH)

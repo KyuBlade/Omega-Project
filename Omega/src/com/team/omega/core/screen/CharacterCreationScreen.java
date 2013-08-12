@@ -1,10 +1,16 @@
 package com.team.omega.core.screen;
 
-import net.team.omega.core.network.GameServerFactory;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.badlogic.gdx.Gdx;
+import net.team.omega.core.network.GameServerFactory;
+import net.team.omega.core.network.serialization.character.CharacterCreation;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -13,9 +19,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.team.omega.core.Breed;
 import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
+import com.team.omega.core.Sex;
 import com.team.omega.ui.Panel;
 
 
@@ -31,6 +39,7 @@ public class CharacterCreationScreen extends BaseScreen
     private Panel racePanel;
     private Panel raceTitlePanel;
     private ButtonGroup raceGroup;
+    private Map<Button, Breed> raceBind = new HashMap<>();
     
     private ImageButton warriorRaceButton;
     private ImageButton assassinRaceButton;
@@ -42,6 +51,7 @@ public class CharacterCreationScreen extends BaseScreen
     private Panel sexTitlePanel;
     private Panel sexPanel;
     private ButtonGroup sexGroup;
+    private Map<Button, Sex> sexBind = new HashMap<>();
     
     private ImageButton maleButton;
     private ImageButton femaleButton;
@@ -80,6 +90,13 @@ public class CharacterCreationScreen extends BaseScreen
 	archerRaceButton = new ImageButton(skin, "archer_race");
 	musicianRaceButton = new ImageButton(skin, "musician_race");
 	
+	raceBind.put(warriorRaceButton, Breed.WARRIOR);
+	raceBind.put(assassinRaceButton, Breed.ASSASSIN);
+	raceBind.put(templarRaceButton, Breed.TEMPLAR);
+	raceBind.put(mageRaceButton, Breed.MAGE);
+	raceBind.put(archerRaceButton, Breed.ARCHER);
+	raceBind.put(musicianRaceButton, Breed.MUSICIAN);
+	
 	raceGroup.add(warriorRaceButton, assassinRaceButton, templarRaceButton, mageRaceButton, archerRaceButton, musicianRaceButton);
 	
 	((Label) raceTitlePanel.add(LocalizationHandler.getInstance().getDialog("character.breed") + " : ").minWidth(200f).getWidget()).setAlignment(Align.center);
@@ -102,6 +119,8 @@ public class CharacterCreationScreen extends BaseScreen
 	maleButton = new ImageButton(skin, "male");
 	femaleButton = new ImageButton(skin, "female");
 	
+	sexBind.put(maleButton,  Sex.MALE);
+	sexBind.put(femaleButton,  Sex.FEMALE);
 	sexGroup.add(maleButton, femaleButton);
 	
 	((Label) sexTitlePanel.add(LocalizationHandler.getInstance().getDialog("character.sex") + " : ").minWidth(200f).getWidget()).setAlignment(Align.center);
@@ -147,7 +166,40 @@ public class CharacterCreationScreen extends BaseScreen
 	    }
 	    
 	});
+	
 	createButton = new TextButton(LocalizationHandler.getInstance().getDialog("character.creation.create"), skin);
+	createButton.addListener(new ChangeListener()
+	{
+
+	    @Override
+	    public void changed(ChangeEvent event, Actor actor)
+	    {
+		String _name = nameInput.getText();
+		Breed _breed = raceBind.get(raceGroup.getChecked());
+		Sex _sex = sexBind.get(sexGroup.getChecked());
+		
+		if( _name.isEmpty() || _breed == null || _sex == null)
+		{
+		    showPopup("", LocalizationHandler.getInstance().getDialog("character.creation.error.unfilled"));
+		    return;
+		}
+		
+		if (_name.length() >= Constants.CHARACTER_NAME_MIN_LENGTH && _name.length() <= Constants.CHARACTER_NAME_MAX_LENGTH)
+		{
+		    Pattern _pattern = Pattern.compile("[^a-zA-Z-_0-9]");
+		    Matcher matcher = _pattern.matcher(_name);
+		    if (!matcher.find())
+		    {
+			screenManager.addScreen(WaitingScreen.class);
+			GameServerFactory.getInstance().sendTCP(new CharacterCreation(_name, _breed.getId(), _sex.getId()));
+		    }
+		}
+		else
+		    showPopup("", LocalizationHandler.getInstance().getDialog("character.creation.error.namelen", "" + Constants.CHARACTER_NAME_MIN_LENGTH, "" + Constants.CHARACTER_NAME_MAX_LENGTH));
+		   
+	    }
+	    
+	});
 	
 	buttonsPanel.row().pad(10f).spaceRight(90f);
 	buttonsPanel.add(backButton).left();

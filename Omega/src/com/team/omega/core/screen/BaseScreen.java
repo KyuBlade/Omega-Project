@@ -2,10 +2,17 @@ package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.team.omega.core.GameCore;
+import com.team.omega.core.LocalizationHandler;
 
 
 public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
@@ -125,6 +132,38 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     public void setActive(boolean isActive)
     {
         this.isActive = isActive;
+    }
+    
+    /** 
+     * Show a modal popup on top of all the screen children
+     * 
+     * @param title the title of the popup
+     * @param message text you want to display in the popup
+     */
+    public void showPopup(String title, String message)
+    {
+	screenManager.removeScreen(WaitingScreen.class);
+	final Dialog _dialog = new Dialog(title, skin);
+	Label _message = new Label(message, skin);
+	_message.setAlignment(Align.center);
+	
+	TextButton _okButton = new TextButton(LocalizationHandler.getInstance().getDialog("common.choice.ok"), skin);
+	_okButton.addListener(new ChangeListener(){
+
+	    @Override
+	    public void changed(ChangeEvent event, Actor actor)
+	    {
+		_dialog.hide();
+	    }
+	    
+	});
+	
+	_dialog.getContentTable().add(_message).minWidth(300f).pad(10f);
+	_dialog.getButtonTable().add(_okButton).minWidth(100f);
+	_dialog.setTitleAlignment(Align.center);
+	_dialog.setMovable(false);
+	_dialog.center();
+	_dialog.show(stage);
     }
     
     /**

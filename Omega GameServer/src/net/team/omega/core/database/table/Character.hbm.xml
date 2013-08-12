@@ -14,6 +14,9 @@
         <property name="breed" type="short">
             <column name="Breed" />
         </property>
+        <property name="sex" type="byte">
+            <column name="Sex" />
+        </property>
         <property name="level" type="int">
             <column name="Level" />
         </property>

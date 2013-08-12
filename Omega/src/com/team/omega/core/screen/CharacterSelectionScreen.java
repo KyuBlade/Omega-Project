@@ -85,8 +85,6 @@ public class CharacterSelectionScreen extends BaseScreen
 	    }
 
 	});
-	
-	layout.add(characterPanel);
     }
     
     @Override
@@ -108,11 +106,13 @@ public class CharacterSelectionScreen extends BaseScreen
 	if(appendTable == null)
 	      appendTable = new Table();
 	
-	if(!playerBind.isEmpty())
+	if(appendTable != null && characterPanel != null)
 	{
 	    appendTable.reset();
 	    characterPanel.reset();
 	    characterPanel.remove();
+	    panelGroup.clear();
+	    playerBind.clear();
 	}
 	
 	if(panelGroup == null)
@@ -135,10 +135,8 @@ public class CharacterSelectionScreen extends BaseScreen
 	    _panel.add(_playerLevel).row();
 	    _panel.add(_playerRace);
 
-	    playerBind.clear();
 	    playerBind.put(_panel.getId(), _sample);
 	    
-	    panelGroup.clear();
 	    panelGroup.add(_panel);
 	    
 	    appendTable.add(_panel).spaceRight(10f);
