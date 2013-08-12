@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import net.team.omega.core.network.GameServerFactory;
+import net.team.omega.core.network.serialization.character.CharacterDelete;
 import net.team.omega.core.network.serialization.datas.SamplePlayer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -20,8 +22,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
-import com.team.omega.ui.Panel;
-import com.team.omega.ui.PanelGroup;
+import com.team.omega.ui.ChoiceDialog;
+import com.team.omega.ui.panel.Panel;
+import com.team.omega.ui.panel.PanelGroup;
 
 
 public class CharacterSelectionScreen extends BaseScreen
@@ -73,7 +76,38 @@ public class CharacterSelectionScreen extends BaseScreen
 	    }
             
         });
+        
+        final Stage _stage = this.stage;
         deleteButton = new TextButton(LocalizationHandler.getInstance().getDialog("character.selection.delete"), skin);
+        deleteButton.addListener(new ChangeListener(){
+
+	    @Override
+	    public void changed(ChangeEvent event, Actor actor)
+	    {
+		final SamplePlayer _player = playerBind.get(panelGroup.getChecked().getId());
+		if(_player == null)
+		    return;
+		
+		final ChoiceDialog _deleteDialog = new ChoiceDialog("", 
+			LocalizationHandler.getInstance().getDialog("character.selection.delete.confirm", _player.getName()), 
+			LocalizationHandler.getInstance().getDialog("common.choice.refuse"), 
+			LocalizationHandler.getInstance().getDialog("common.choice.accept"), skin);
+		
+		_deleteDialog.show(_stage).getAcceptButton()
+			.addListener(new ChangeListener(){
+
+			    @Override
+			    public void changed(ChangeEvent event, Actor actor)
+			    {
+				_deleteDialog.hide();
+				screenManager.addScreen(WaitingScreen.class);
+				GameServerFactory.getInstance().sendTCP(new CharacterDelete(_player.getId()));
+			    }
+			    
+			});
+	    }
+            
+        });
         
         selectButton = new TextButton(LocalizationHandler.getInstance().getDialog("character.selection.select"), skin);
         selectButton.addListener(new ChangeListener() {
