@@ -105,6 +105,7 @@ public class IdentificationScreen extends BaseScreen
     
     public void showPopup(String message)
     {
+	screenManager.removeScreen(WaitingScreen.class);
 	Dialog dialogServerUnreachable = new Dialog(message, skin);
 	dialogServerUnreachable.button(new TextButton(LocalizationHandler.getInstance().getDialog("common.choice.ok"), skin));
 	dialogServerUnreachable.setTitleAlignment(Align.center);
