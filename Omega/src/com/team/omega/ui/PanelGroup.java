@@ -163,5 +163,11 @@ public class PanelGroup
     {
 	this.uncheckLast = uncheckLast;
     }
+    
+    public void clear()
+    {
+	panels.clear();
+	checkedPanels.clear();
+    }
 
 }

@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
@@ -85,18 +86,6 @@ public class CharacterSelectionScreen extends BaseScreen
 
 	});
 	
-        appendTable = new Table();
-	characterPanel = new Panel(skin, "black_alpha");
-	characterPanel.padLeft(40f).padRight(40f).padTop(20f).padBottom(20f).row().colspan(4);
-	characterPanel.add(appendTable);
-	
-	characterPanel.row().spaceTop(10f).minWidth(100f);
-	characterPanel.defaults().maxWidth(50f);
-	characterPanel.add(backButton);
-	characterPanel.add(newButton);
-	characterPanel.add(deleteButton);
-	characterPanel.add(selectButton);
-	
 	layout.add(characterPanel);
     }
     
@@ -116,7 +105,15 @@ public class CharacterSelectionScreen extends BaseScreen
 	if(playerBind.values().size() == players.size())
 	    return;
 	
-	appendTable.reset();
+	if(appendTable == null)
+	      appendTable = new Table();
+	
+	if(!playerBind.isEmpty())
+	{
+	    appendTable.reset();
+	    characterPanel.reset();
+	    characterPanel.remove();
+	}
 	
 	if(panelGroup == null)
 	    panelGroup = new PanelGroup();
@@ -126,15 +123,39 @@ public class CharacterSelectionScreen extends BaseScreen
 	    Panel _panel = new Panel(skin, "player_cell"); // Contain player details
 	    _panel.pad(50f);
 	    _panel.setTouchable(Touchable.enabled);
+	    
+	    Label _playerName = new Label(LocalizationHandler.getInstance().getDialog("character.name") + ": " + _sample.getName(), skin);
+	    _playerName.setAlignment(Align.center);
+	    Label _playerLevel = new Label(LocalizationHandler.getInstance().getDialog("character.level") + ": " + _sample.getLevel(), skin);
+	    _playerLevel.setAlignment(Align.center);
+	    Label _playerRace = new Label(LocalizationHandler.getInstance().getDialog("character.breed") + ": " + _sample.getBreed(), skin);
+	    _playerRace.setAlignment(Align.center);
+	    
+	    _panel.add(_playerName).row();
+	    _panel.add(_playerLevel).row();
+	    _panel.add(_playerRace);
 
-	    _panel.add(new Label(LocalizationHandler.getInstance().getDialog("character.name") + ": " + _sample.getName(), skin)).row();
-	    _panel.add(new Label(LocalizationHandler.getInstance().getDialog("character.level") + ": " + _sample.getLevel(), skin)).row();
-	    _panel.add(new Label(LocalizationHandler.getInstance().getDialog("character.breed") + ": " + _sample.getBreed(), skin));
-
+	    playerBind.clear();
 	    playerBind.put(_panel.getId(), _sample);
+	    
+	    panelGroup.clear();
 	    panelGroup.add(_panel);
+	    
 	    appendTable.add(_panel).spaceRight(10f);
 	}
+	
+	characterPanel = new Panel(skin, "black_alpha");
+	characterPanel.padLeft(40f).padRight(40f).padTop(20f).padBottom(20f).row().colspan(4);
+	characterPanel.add(appendTable);
+	
+	characterPanel.row().spaceTop(10f).minWidth(100f);
+	characterPanel.defaults().maxWidth(50f);
+	characterPanel.add(backButton);
+	characterPanel.add(newButton);
+	characterPanel.add(deleteButton);
+	characterPanel.add(selectButton);
+	
+	layout.add(characterPanel);
     }
 
 }
