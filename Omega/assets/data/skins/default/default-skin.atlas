@@ -5,7 +5,7 @@ filter: Nearest,Nearest
 repeat: none
 backgrounds/black_alpha80
   rotate: false
-  xy: 192, 1
+  xy: 224, 37
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -155,7 +155,7 @@ icons/sex/male_up
   index: -1
 panels/black_alpha
   rotate: false
-  xy: 233, 54
+  xy: 192, 7
   size: 10, 10
   split: 3, 3, 3, 3
   orig: 10, 10
@@ -195,10 +195,10 @@ panels/light_brown
   index: -1
 panels/panel_brown
   rotate: false
-  xy: 192, 2
-  size: 30, 30
-  split: 6, 6, 6, 8
-  orig: 30, 30
+  xy: 192, 17
+  size: 15, 15
+  split: 4, 4, 3, 3
+  orig: 15, 15
   offset: 0, 0
   index: -1
 panels/title_brown
@@ -211,7 +211,7 @@ panels/title_brown
   index: -1
 scrolls/hScroll
   rotate: false
-  xy: 243, 59
+  xy: 233, 59
   size: 10, 5
   split: 2, 2, 2, 2
   orig: 10, 5
@@ -219,7 +219,7 @@ scrolls/hScroll
   index: -1
 scrolls/hScroll_knob
   rotate: false
-  xy: 243, 54
+  xy: 192, 2
   size: 10, 5
   split: 2, 2, 2, 2
   orig: 10, 5
@@ -227,7 +227,7 @@ scrolls/hScroll_knob
   index: -1
 scrolls/vScroll
   rotate: false
-  xy: 232, 36
+  xy: 202, 7
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -235,7 +235,7 @@ scrolls/vScroll
   index: -1
 scrolls/vScroll_knob
   rotate: false
-  xy: 237, 36
+  xy: 207, 14
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -243,7 +243,7 @@ scrolls/vScroll_knob
   index: -1
 textfields/background
   rotate: false
-  xy: 224, 38
+  xy: 207, 24
   size: 8, 8
   split: 1, 1, 1, 1
   orig: 8, 8
@@ -251,7 +251,7 @@ textfields/background
   index: -1
 textfields/background_focus
   rotate: false
-  xy: 233, 46
+  xy: 224, 38
   size: 8, 8
   split: 3, 3, 3, 3
   orig: 8, 8
@@ -266,7 +266,7 @@ textfields/blue_cursor
   index: -1
 textfields/selection
   rotate: false
-  xy: 224, 33
+  xy: 215, 27
   size: 5, 5
   split: 1, 1, 1, 1
   orig: 5, 5

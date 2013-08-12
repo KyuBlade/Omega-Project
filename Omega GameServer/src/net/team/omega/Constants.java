@@ -33,4 +33,7 @@ public class Constants
     public static final int CHARACTER_NAME_MIN_LENGTH = 3;
     public static final int CHARACTER_NAME_MAX_LENGTH = 12;
     
+    public static final int CHARACTER_START_X = 0;
+    public static final int CHARACTER_START_Y = 0;
+    
 }

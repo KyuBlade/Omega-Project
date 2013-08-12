@@ -38,7 +38,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: { background: panels/panel_brown, stageBackground: backgrounds/black_alpha80, titleFont: default-font, titleFontColor: white },
 	no-background: { stageBackground: backgrounds/black_alpha80, titleFont: default-font, titleFontColor: white }
 },
-com.team.omega.ui.Panel$PanelStyle: {
+com.team.omega.ui.panel.Panel$PanelStyle: {
 	default: {}, 
 	black_alpha: { background: panels/black_alpha }, 
 	player_cell: { background: panels/character_selection_cell, backgroundChecked: panels/character_selection_cell_checked, backgroundOver: panels/character_selection_cell_over },

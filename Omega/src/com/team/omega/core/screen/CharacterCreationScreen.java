@@ -24,7 +24,7 @@ import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.core.Sex;
-import com.team.omega.ui.Panel;
+import com.team.omega.ui.panel.Panel;
 
 
 public class CharacterCreationScreen extends BaseScreen
@@ -195,7 +195,7 @@ public class CharacterCreationScreen extends BaseScreen
 		    }
 		}
 		else
-		    showPopup("", LocalizationHandler.getInstance().getDialog("character.creation.error.namelen", "" + Constants.CHARACTER_NAME_MIN_LENGTH, "" + Constants.CHARACTER_NAME_MAX_LENGTH));
+		    showPopup("", LocalizationHandler.getInstance().getDialog("character.creation.error.name.lenght", "" + Constants.CHARACTER_NAME_MIN_LENGTH, "" + Constants.CHARACTER_NAME_MAX_LENGTH));
 		   
 	    }
 	    

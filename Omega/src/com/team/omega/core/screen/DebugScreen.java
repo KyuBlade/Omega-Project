@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.team.omega.core.Constants;
-import com.team.omega.ui.Panel;
+import com.team.omega.ui.panel.Panel;
 
 
 public class DebugScreen extends BaseScreen
@@ -45,8 +45,11 @@ public class DebugScreen extends BaseScreen
 	resolution.setText("Resolution : " + Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight());
 	
 	screens.clear();
-	for(BaseScreen _screen : screenManager.getActiveScreen())
-	    screens.add(_screen.getDepth() + " : " + _screen.getClass().getSimpleName()).left().row();
+	synchronized(screenManager.getActiveScreen())
+	{
+	    for(BaseScreen _screen : screenManager.getActiveScreen())
+		screens.add(_screen.getDepth() + " : " + _screen.getClass().getSimpleName()).left().row();
+	}
 	
 	super.render(delta);
     }

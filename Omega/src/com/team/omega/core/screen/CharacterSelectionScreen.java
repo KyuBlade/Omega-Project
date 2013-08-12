@@ -99,12 +99,13 @@ public class CharacterSelectionScreen extends BaseScreen
 			    @Override
 			    public void changed(ChangeEvent event, Actor actor)
 			    {
-				_deleteDialog.hide();
 				screenManager.addScreen(WaitingScreen.class);
+				_deleteDialog.hide();
 				GameServerFactory.getInstance().sendTCP(new CharacterDelete(_player.getId()));
 			    }
 			    
 			});
+		
 	    }
             
         });

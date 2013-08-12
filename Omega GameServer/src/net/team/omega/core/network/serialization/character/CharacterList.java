@@ -46,7 +46,7 @@ public class CharacterList extends MessageData
 	_session.close();
 	
 	for(Player _char : _result)
-	    characterList.add(new SamplePlayer(_char.getId(), _char.getName(), _char.getBreed(), _char.getLevel()));
+	    characterList.add(new SamplePlayer(_char.getId(), _char.getName(), _char.getBreed(), _char.getSex(), _char.getLevel()));
 	
 	connection.sendTCP(this);
     }
@@ -58,13 +58,15 @@ public class CharacterList extends MessageData
 	private int id;
 	private String name;
 	private int level;
-	private short breed;
+	private int breed;
+	private int sex;
 	
-	public SamplePlayer(int id, String name, short breed, int level)
+	public SamplePlayer(int id, String name, int breed, int sex, int level)
 	{
 	    this.id = id;
 	    this.name = name;
 	    this.breed = breed;
+	    this.sex = sex;
 	    this.level = level;
 	}
 	

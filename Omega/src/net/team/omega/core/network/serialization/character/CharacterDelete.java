@@ -5,9 +5,12 @@ import net.team.omega.core.network.serialization.MessageData;
 public class CharacterDelete extends MessageData
 {
     
-    public CharacterDelete()
+    @SuppressWarnings("unused")
+    private int id;
+    
+    public CharacterDelete(int id)
     {
-        
+        this.id = id;
     }
     
 }

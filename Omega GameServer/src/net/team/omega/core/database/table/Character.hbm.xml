@@ -11,10 +11,10 @@
         <property name="name" type="java.lang.String">
             <column name="Name" />
         </property>
-        <property name="breed" type="short">
+        <property name="breed" type="int">
             <column name="Breed" />
         </property>
-        <property name="sex" type="byte">
+        <property name="sex" type="int">
             <column name="Sex" />
         </property>
         <property name="level" type="int">

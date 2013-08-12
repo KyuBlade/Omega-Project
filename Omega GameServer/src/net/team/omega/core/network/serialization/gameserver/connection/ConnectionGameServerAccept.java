@@ -20,8 +20,7 @@ public class ConnectionGameServerAccept extends MessageData
     public void preSend(ClientConnection connection)
     {
 	Session _session = HibernateFactory.getSession();
-	Criteria _criteria = _session.createCriteria(Player.class);
-	_criteria.setProjection(Projections.rowCount()).add(Restrictions.eq("accountId", connection.getClientData().getAccount().getId()));
+	Criteria _criteria = _session.createCriteria(Player.class).setProjection(Projections.rowCount()).add(Restrictions.eq("accountId", connection.getClientData().getAccount().getId()));
 	
 	long _count = (long) _criteria.uniqueResult();
 	if(_count > 0)

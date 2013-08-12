@@ -1,12 +1,21 @@
 package net.team.omega.core.network.serialization.character;
 
+
+
+import net.team.omega.core.database.HibernateFactory;
+import net.team.omega.core.database.table.Player;
 import net.team.omega.core.network.gameserver.ClientConnection;
 import net.team.omega.core.network.serialization.MessageData;
+import net.team.omega.core.network.serialization.gameserver.connection.ConnectionGameServerAccept;
+import net.team.omega.logging.LogHandler;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class CharacterDelete extends MessageData
 {
 
-    //private EntityId entityId;
+    private int id;
 
     public CharacterDelete()
     {
@@ -16,52 +25,35 @@ public class CharacterDelete extends MessageData
     @Override
     public void process(ClientConnection connection)
     {
-	// Check if character is owned by user
-	/*Entity _character = MasterEntityData.getInstance().getEntity(entityId, PlayerComponent.class);
-	if (_character == null)
+	Session _session = HibernateFactory.getSession();
+
+	try
 	{
-	    LogHandler.getInstance().warning("Account " + connection.getAccount().getId() + " try to delete an unloaded character");
-	    connection.close();
-
-	    return;
-	}
-	
-	int _playerId = _character.get(PlayerComponent.class).getPlayerId();
-
-	if (MasterEntityData.getInstance().getComponent(connection.getAccount(), AccountComponent.class).getAccountId() == _character.get(PlayerComponent.class).getAccountId())
-	{
-	    // DELETE
-	    try
+	    // Check if character is owned by user
+	    Player _player = (Player) _session.get(Player.class, new Integer(id));
+	    if (_player == null)
 	    {
-		PreparedStatement _pDeleteQuery = SQLFactory.getInstance().prepareQuery("DELETE FROM characters WHERE ID = ?");
-
-		_pDeleteQuery.setInt(1, _character.get(PlayerComponent.class).getPlayerId());
-
-		_pDeleteQuery.executeUpdate();
-		
-		MasterEntityData.getInstance().removeEntity(entityId);
-		
-		ConnectionGameServerAccept _message = RecycleManager.getInstance().newObject(ConnectionGameServerAccept.class);
-		_message.preSend(connection);
-		
-		connection.sendTCP(_message);
-		
-		CharacterDeleted _dMessage = RecycleManager.getInstance().newObject(CharacterDeleted.class);
-		
-		connection.sendTCP(_dMessage);
-	    } catch (SQLException e)
-	    {
-		LogHandler.getInstance().severe("Error when deleting character : " + _playerId);
-    	    	LogHandler.getInstance().severe("Cause : " + e.getMessage());
+		LogHandler.warning("Account " + connection.getClientData().getAccount().getId() + " try to delete a character uncreated (" + id + ")");
+		connection.close();
 	    }
-	}
-	else
+	    else if (_player.getAccountId() != connection.getClientData().getAccount().getId())
+	    {
+		LogHandler.warning("Account " + connection.getClientData().getAccount().getId() + " try to delete an unowned character " + _player.getName() + "(" + id + ")");
+		connection.close();
+	    }
+	    else
+	    {
+		Transaction _t = _session.beginTransaction();
+		_session.delete(_player);
+		_t.commit();
+		LogHandler.info("Account " + connection.getClientData().getAccount().getId() + " deleted character " + _player.getName() + " (" + _player.getId() + ")");
+		
+		connection.sendTCP(new ConnectionGameServerAccept());
+	    }
+	} finally
 	{
-	    LogHandler.getInstance().warning("Account " + connection.getAccount().getId() + " try to delete an unowned character (" + _playerId + ")");
-	    connection.close();
-
-	    return;
-	}*/
+	    _session.close();
+	}
     }
 
 }

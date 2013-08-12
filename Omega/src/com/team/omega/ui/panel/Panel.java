@@ -1,4 +1,4 @@
-package com.team.omega.ui;
+package com.team.omega.ui.panel;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;

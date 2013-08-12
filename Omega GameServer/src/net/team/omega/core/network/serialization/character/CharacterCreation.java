@@ -1,8 +1,21 @@
 package net.team.omega.core.network.serialization.character;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import net.team.omega.Constants;
+import net.team.omega.core.database.HibernateFactory;
+import net.team.omega.core.database.table.Player;
 import net.team.omega.core.network.gameserver.ClientConnection;
 import net.team.omega.core.network.serialization.MessageData;
+import net.team.omega.core.network.serialization.game.StartGame;
 import net.team.omega.logging.LogHandler;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 public class CharacterCreation extends MessageData
 {
@@ -15,8 +28,7 @@ public class CharacterCreation extends MessageData
     public void process(ClientConnection connection)
     {
 	LogHandler.info("Name : " + name + " / Breed : " + breed + " / Sex : " + sex);
- 	/*final Pattern _pattern = Pattern.compile("[^a-zA-Z-_0-9]");
-	int _accountId = connection.getClientData().getAccount().getId();
+ 	final Pattern _pattern = Pattern.compile("[^a-zA-Z-_0-9]");
 
 	if (!name.isEmpty() && name.length() >= Constants.CHARACTER_NAME_MIN_LENGTH && name.length() <= Constants.CHARACTER_NAME_MAX_LENGTH)
 	{
@@ -24,132 +36,56 @@ public class CharacterCreation extends MessageData
 	    if (!matcher.find())
 	    {
 		// Can create a new character?
-		PreparedStatement _pQuery = SQLFactory.getInstance().prepareQuery("SELECT COUNT(ID) AS count FROM characters WHERE AccountID = ?");
-		ResultSet _result;
-
-		try
+		Session _session = HibernateFactory.getSession();
+		Criteria _criteria = _session.createCriteria(Player.class).setProjection(Projections.rowCount()).add(Restrictions.eq("accountId", connection.getClientData().getAccount().getId()));
+		long _count = (long) _criteria.uniqueResult();
+		
+		if (_count >= Constants.CHARACTER_MAX_CAPACITY) // Max capacity reached
 		{
-		    _pQuery.setInt(1, _accountId);
-
-		    _result = _pQuery.executeQuery();
-
-		    while (_result.next())
-		    {
-			int count = _result.getInt("count");
-			if (count >= Constants.CHARACTER_MAX_CAPACITY) // Max capacity reached
-			{
-			    CharacterCreationMaxCapacityReached _message = RecycleManager.getInstance().newObject(CharacterCreationMaxCapacityReached.class);
-			    connection.sendTCP(_message);
-
-			    _pQuery.close();
-
-			    return;
-			}
-		    }
-
-		    _pQuery.close();
-		} catch (SQLException e)
-		{
-		    LogHandler.getInstance().severe("Error when check if account   " + connection.getAccount().getId() + " have reached maximum character capacity");
-		    LogHandler.getInstance().severe("Cause : " + e.getMessage());
-
+		    connection.sendTCP(new CharacterCreationMaxCapacityReached());
+		    _session.close();
+		    
 		    return;
 		}
-
+		
 		// Find if name is already used
-		_pQuery = null;
-		_pQuery = SQLFactory.getInstance().prepareQuery("SELECT COUNT(ID) AS count FROM characters WHERE Name LIKE ?");
-		_result = null;
+		_session.clear();
+		_criteria = _session.createCriteria(Player.class).setProjection(Projections.rowCount()).add(Restrictions.eq("name", name));
+		_count = (long) _criteria.uniqueResult();
+		
+		_session.clear();
 
-		try
+		if (_count == 0) // Name unused
 		{
-		    _pQuery.setString(1, name);
+		    // Create in database
+		    LogHandler.info("Create character");
+		    Transaction _t = _session.beginTransaction();
+		    Player _player = new Player();
+		    _player.setAccountId(connection.getClientData().getAccount().getId());
+		    _player.setBreed(breed);
+		    _player.setName(name);
+		    _player.setSex(sex);
+		    _player.setX(Constants.CHARACTER_START_X);
+		    _player.setY(Constants.CHARACTER_START_Y);
+		    _player.setLevel(1);
+		    
+		    _session.save(_player);
+		    _t.commit();
+		    _session.close();
+		    
+		    // Bind the player to the connection
+		    //connection.setPlayer(_e);
 
-		    _result = _pQuery.executeQuery();
-
-		    while (_result.next())
-		    {
-			int count = _result.getInt("count");
-			if (count == 0) // Name unused
-			{
-			    // Get initial position
-			    Vector3f _initPos = new Vector3f(10.0f, 10.0f, 10.0f);
-
-			    // Get initial rotation
-			    Quaternion _initRot = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
-
-			    // Add new character to database
-			    PreparedStatement _pInsertQuery = SQLFactory.getInstance().prepareQuery("INSERT INTO characters " + "(Name, ModelID, Life, SurvivalTime, PosX, PosY, PosZ, RotX, RotY, RotZ, AccountID) " + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-			    _pInsertQuery.setString(1, name);
-			    _pInsertQuery.setInt(2, modelID);
-			    _pInsertQuery.setInt(3, Constants.CHARACTER_DATA_MAX_LIFE);
-			    _pInsertQuery.setInt(4, 0);
-			    _pInsertQuery.setFloat(5, _initPos.x);
-			    _pInsertQuery.setFloat(6, _initPos.y);
-			    _pInsertQuery.setFloat(7, _initPos.z);
-			    _pInsertQuery.setFloat(8, _initRot.getX());
-			    _pInsertQuery.setFloat(9, _initRot.getY());
-			    _pInsertQuery.setFloat(10, _initRot.getZ());
-			    _pInsertQuery.setInt(11, _accountId);
-
-			    _pInsertQuery.executeUpdate();
-
-			    int _id = -1;
-			    ResultSet _lastID = _pInsertQuery.getGeneratedKeys();
-			    while (_lastID != null && _lastID.next())
-			    {
-				_id = _lastID.getInt(1);
-			    }
-
-			    // Create character entity
-			    EntityId _e = MasterEntityData.getInstance().createEntity();
-
-			    MasterEntityData.getInstance().setComponents(_e, new PlayerComponent(_id, _accountId), 
-				    new SurvivalTimeComponent(0), 
-				    new LocationComponent(new Vector3f(0f, 3f, 0f)), 
-				    new RotationComponent(
-				    new Quaternion(0f, 0f, 0f, 0f)), 
-				    new NameComponent(name), 
-				    new HealthComponent(0, Constants.CHARACTER_DATA_MAX_LIFE, Constants.CHARACTER_DATA_MAX_LIFE), 
-				    new ModelTransactionComponent(modelID), 
-				    new SpeedComponent(1f), 
-				    new InitializedComponent(true), 
-				    new BasicMovementComponent(), 
-				    new HumanMovementComponent());
-
-			    // Bind the player to the connection
-			    connection.setPlayer(_e);
-			    if(connection != null && _e != null)
-			    {}
-
-			    // Send to client CharacterSelection state change
-			    StartGame _message = RecycleManager.getInstance().newObject(StartGame.class);
-
-			    connection.sendTCP(_message);
-			}
-			else
-			// Name already in use
-			{
-			    CharacterCreationNameTaken message = RecycleManager.getInstance().newObject(CharacterCreationNameTaken.class);
-
-			    connection.sendTCP(message);
-			}
-		    }
-
-		    _pQuery.close();
-		} catch (SQLException e)
-		{
-		    LogHandler.getInstance().severe("Error when trying to find or create character name : " + name);
-		    LogHandler.getInstance().severe("Cause : " + e.getMessage());
+		    connection.sendTCP(new StartGame());
 		}
-
+		else // Name already in use
+		    connection.sendTCP(new CharacterCreationNameTaken());
 	    }
 	    else
 		connection.close();
 	}
 	else
-	    connection.close();*/
+	    connection.close();
     }
 
 }
