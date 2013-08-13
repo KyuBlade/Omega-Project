@@ -13,6 +13,7 @@ public class DebugScreen extends BaseScreen
 
     private Label fps;
     private Label resolution;
+    private Label displayModeChange;
     
     private Panel performances;
     private Label javaHeap;
@@ -26,8 +27,9 @@ public class DebugScreen extends BaseScreen
     {
 	super(screenManager, Constants.DEBUG_SCREEN_DEPTH);
 	
-	this.fps = new Label("", skin);
-	this.resolution = new Label("", skin);
+	fps = new Label("", skin);
+	resolution = new Label("", skin);
+	displayModeChange = new Label("", skin);
 	
 	Table _graphicsTable = new Table();
 	Table _screensTable = new Table();
@@ -35,8 +37,9 @@ public class DebugScreen extends BaseScreen
 	Panel _graphics = new Panel(skin, "black_alpha");
 	_graphics.defaults().left();
 	_graphics.add(resolution).row();
+	_graphics.add(displayModeChange).row();
 	_graphics.add(fps);
-	_graphicsTable.top().right().add(_graphics);
+	_graphicsTable.top().left().add(_graphics);
 	
 	performances = new Panel(skin,"black_alpha");
 	performances.defaults().left();
@@ -59,6 +62,7 @@ public class DebugScreen extends BaseScreen
     {
 	fps.setText("Fps : " + Gdx.graphics.getFramesPerSecond());
 	resolution.setText("Resolution : " + Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight());
+	displayModeChange.setText("DisplayModeChange supported : " + Gdx.graphics.supportsDisplayModeChange());
 	
 	long _currentTime = System.currentTimeMillis();
 	if(_currentTime - lastTime > 500)

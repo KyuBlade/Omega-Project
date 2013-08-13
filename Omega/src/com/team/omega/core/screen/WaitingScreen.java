@@ -13,6 +13,7 @@ public class WaitingScreen extends BaseScreen
     {
 	super(screenManager, Constants.WAITING_SCREEN_DEPTH);
 	
+	stage.setViewport(Gdx.graphics.getWidth() + 10f, Gdx.graphics.getHeight(), true);
 	modal = new Dialog("Please wait ...", skin, "no-background");
 	modal.setMovable(false);
 	layout.add(modal);
@@ -21,16 +22,14 @@ public class WaitingScreen extends BaseScreen
     @Override
     public void show()
     {
-	super.show();
-	
 	Gdx.input.setInputProcessor(stage);
+	setActive(true);
     }
     
     @Override
     public void hide()
     {
-	super.hide();
-	
+	setActive(false);
 	Gdx.input.setInputProcessor(inputProcessor);
     }
 

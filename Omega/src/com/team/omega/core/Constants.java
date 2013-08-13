@@ -30,6 +30,7 @@ public final class Constants
     public static final int IDENTIFICATION_SCREEN_DEPTH = 1;
     public static final int GAMESERVER_SELECTION_SCREEN_DEPTH = 2;
     public static final int CHARACTER_SELECTION_SCREEN_DEPTH = 3;
+    public static final int GAME_SCREEN_DEPTH = 4;
     public static final int WAITING_SCREEN_DEPTH = 19;
     public static final int DEBUG_SCREEN_DEPTH = 20;
     

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.team.omega.core.network.GameServerFactory;
 import net.team.omega.core.network.serialization.character.CharacterDelete;
+import net.team.omega.core.network.serialization.character.CharacterSelection;
 import net.team.omega.core.network.serialization.datas.SamplePlayer;
 
 import com.badlogic.gdx.Gdx;
@@ -116,7 +117,8 @@ public class CharacterSelectionScreen extends BaseScreen
 	    @Override
 	    public void changed(ChangeEvent event, Actor actor)
 	    {
-		Gdx.app.debug("Button", "Want to connect in game character " + playerBind.get(panelGroup.getChecked().getId()).getName());
+		screenManager.addScreen(WaitingScreen.class);
+		GameServerFactory.getInstance().sendTCP(new CharacterSelection(playerBind.get(panelGroup.getChecked().getId()).getId()));
 	    }
 
 	});

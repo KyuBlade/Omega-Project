@@ -6,7 +6,6 @@ import net.team.omega.core.network.serialization.character.CharacterCreation;
 import net.team.omega.core.network.serialization.character.CharacterCreationMaxCapacityReached;
 import net.team.omega.core.network.serialization.character.CharacterCreationNameTaken;
 import net.team.omega.core.network.serialization.character.CharacterDelete;
-import net.team.omega.core.network.serialization.character.CharacterDeleted;
 import net.team.omega.core.network.serialization.character.CharacterList;
 import net.team.omega.core.network.serialization.character.CharacterSelection;
 import net.team.omega.core.network.serialization.connection.ConnectionLogin;
@@ -69,7 +68,6 @@ public class ClassRegister
             CharacterSelection.class, 
             CharacterList.class, 
             CharacterDelete.class, 
-            CharacterDeleted.class, 
             
             StartGame.class, 
             

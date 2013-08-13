@@ -5,20 +5,12 @@ filter: Nearest,Nearest
 repeat: none
 backgrounds/black_alpha80
   rotate: false
-  xy: 224, 37
-  size: 1, 1
-  orig: 1, 1
-  offset: 0, 0
-  index: -1
-buttons/button_down
-  rotate: false
   xy: 160, 96
   size: 32, 32
-  split: 8, 8, 8, 8
   orig: 32, 32
   offset: 0, 0
   index: -1
-buttons/button_over
+buttons/button_down
   rotate: false
   xy: 128, 32
   size: 32, 32
@@ -26,9 +18,17 @@ buttons/button_over
   orig: 32, 32
   offset: 0, 0
   index: -1
-buttons/button_up
+buttons/button_over
   rotate: false
   xy: 128, 0
+  size: 32, 32
+  split: 8, 8, 8, 8
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+buttons/button_up
+  rotate: false
+  xy: 160, 64
   size: 32, 32
   split: 7, 7, 7, 7
   orig: 32, 32
@@ -127,35 +127,35 @@ icons/races/original_race
   index: -1
 icons/sex/female_checked
   rotate: false
-  xy: 224, 96
+  xy: 160, 32
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 icons/sex/female_up
   rotate: false
-  xy: 160, 32
+  xy: 160, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 icons/sex/male_checked
   rotate: false
-  xy: 192, 64
+  xy: 224, 64
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 icons/sex/male_up
   rotate: false
-  xy: 224, 64
+  xy: 192, 32
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 panels/black_alpha
   rotate: false
-  xy: 192, 7
+  xy: 239, 54
   size: 10, 10
   split: 3, 3, 3, 3
   orig: 10, 10
@@ -163,7 +163,7 @@ panels/black_alpha
   index: -1
 panels/character_selection_cell
   rotate: false
-  xy: 160, 64
+  xy: 192, 96
   size: 32, 32
   split: 5, 5, 7, 7
   orig: 32, 32
@@ -171,7 +171,7 @@ panels/character_selection_cell
   index: -1
 panels/character_selection_cell_checked
   rotate: false
-  xy: 192, 96
+  xy: 224, 96
   size: 32, 32
   split: 5, 5, 7, 7
   orig: 32, 32
@@ -179,7 +179,7 @@ panels/character_selection_cell_checked
   index: -1
 panels/character_selection_cell_over
   rotate: false
-  xy: 192, 96
+  xy: 224, 96
   size: 32, 32
   split: 5, 5, 7, 7
   orig: 32, 32
@@ -187,7 +187,7 @@ panels/character_selection_cell_over
   index: -1
 panels/light_brown
   rotate: false
-  xy: 160, 0
+  xy: 192, 64
   size: 32, 32
   split: 8, 8, 8, 8
   orig: 32, 32
@@ -195,7 +195,7 @@ panels/light_brown
   index: -1
 panels/panel_brown
   rotate: false
-  xy: 192, 17
+  xy: 224, 49
   size: 15, 15
   split: 4, 4, 3, 3
   orig: 15, 15
@@ -203,7 +203,7 @@ panels/panel_brown
   index: -1
 panels/title_brown
   rotate: false
-  xy: 192, 32
+  xy: 192, 0
   size: 32, 32
   split: 6, 6, 5, 6
   orig: 32, 32
@@ -211,7 +211,7 @@ panels/title_brown
   index: -1
 scrolls/hScroll
   rotate: false
-  xy: 233, 59
+  xy: 239, 49
   size: 10, 5
   split: 2, 2, 2, 2
   orig: 10, 5
@@ -219,7 +219,7 @@ scrolls/hScroll
   index: -1
 scrolls/hScroll_knob
   rotate: false
-  xy: 192, 2
+  xy: 233, 44
   size: 10, 5
   split: 2, 2, 2, 2
   orig: 10, 5
@@ -227,7 +227,7 @@ scrolls/hScroll_knob
   index: -1
 scrolls/vScroll
   rotate: false
-  xy: 202, 7
+  xy: 249, 54
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -235,7 +235,7 @@ scrolls/vScroll
   index: -1
 scrolls/vScroll_knob
   rotate: false
-  xy: 207, 14
+  xy: 224, 5
   size: 5, 10
   split: 2, 2, 2, 2
   orig: 5, 10
@@ -243,7 +243,7 @@ scrolls/vScroll_knob
   index: -1
 textfields/background
   rotate: false
-  xy: 207, 24
+  xy: 224, 23
   size: 8, 8
   split: 1, 1, 1, 1
   orig: 8, 8
@@ -251,7 +251,7 @@ textfields/background
   index: -1
 textfields/background_focus
   rotate: false
-  xy: 224, 38
+  xy: 224, 15
   size: 8, 8
   split: 3, 3, 3, 3
   orig: 8, 8
@@ -259,14 +259,14 @@ textfields/background_focus
   index: -1
 textfields/blue_cursor
   rotate: false
-  xy: 224, 46
+  xy: 224, 31
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 textfields/selection
   rotate: false
-  xy: 215, 27
+  xy: 224, 0
   size: 5, 5
   split: 1, 1, 1, 1
   orig: 5, 5

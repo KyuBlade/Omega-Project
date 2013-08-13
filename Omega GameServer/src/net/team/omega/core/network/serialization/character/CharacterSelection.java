@@ -1,44 +1,43 @@
 package net.team.omega.core.network.serialization.character;
 
+import net.team.omega.core.database.HibernateFactory;
+import net.team.omega.core.database.table.Player;
 import net.team.omega.core.network.gameserver.ClientConnection;
 import net.team.omega.core.network.serialization.MessageData;
+import net.team.omega.core.network.serialization.game.StartGame;
+import net.team.omega.logging.LogHandler;
+
+import org.hibernate.Session;
 
 
 public class CharacterSelection extends MessageData
 {
 
-    //private EntityId entityId;
+    private int id;
     
     @Override
     public void process(ClientConnection connection)
     {
-	// Check if character is owned by user
-	/*Entity _e = MasterEntityData.getInstance().getEntity(entityId, PlayerComponent.class);
-
-	if(_e == null)
-	{
-	    LogHandler.getInstance().warning("Account " + MasterEntityData.getInstance().getComponent(connection.getAccount(), AccountComponent.class).getAccountId() + " try to connect with an unloaded character");
-	    connection.close();
-	    
-	    return;
-	}
+	int _accountId = connection.getClientData().getAccount().getId();
 	
-	// Can connect with this character
-	if(MasterEntityData.getInstance().getComponent(connection.getAccount(), AccountComponent.class).getAccountId() == _e.get(PlayerComponent.class).getAccountId())
+	
+	Session _session = HibernateFactory.getSession();
+	Player _player = (Player) _session.get(Player.class, new Integer(id));
+	
+	if(_player == null) // Check if character is owned by user
 	{
-	    connection.setPlayer(entityId);
-	    
-	    MasterEntityData.getInstance().setComponent(entityId, new InitializedComponent(true));
-	    
-	    connection.sendTCP(RecycleManager.getInstance().newObject(StartGame.class));
+	    LogHandler.warning("Account " + _accountId + " try to connect an uncreated character");
+	    connection.close();
+	}
+	else if(_player.getAccountId() != _accountId)
+	{
+	    LogHandler.warning("Account " + _accountId + " try to connect with an unowned character");
+	    connection.close();
 	}
 	else
 	{
-	    LogHandler.getInstance().warning("Account " + MasterEntityData.getInstance().getComponent(connection.getAccount(), AccountComponent.class).getAccountId() + " try to connect with an unowned character");
-	    connection.close();
-	    
-	    return;
-	}*/
+	    connection.sendTCP(new StartGame());
+	}
     }
     
 }
