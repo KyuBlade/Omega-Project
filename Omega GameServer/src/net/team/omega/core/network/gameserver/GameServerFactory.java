@@ -63,9 +63,7 @@ public class GameServerFactory
 
 		@Override
 		public void disconnected(Connection connection)
-		{
-		    ClientConnection _connection = (ClientConnection) connection;
-		    
+		{   
 		    LogHandler.info("Connection " + connection.getID() + " was disconnected");
 		}
 
