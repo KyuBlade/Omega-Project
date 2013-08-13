@@ -182,7 +182,7 @@ public class CharacterSelectionScreen extends BaseScreen
 	characterPanel.add(appendTable);
 	
 	characterPanel.row().spaceTop(10f).minWidth(100f);
-	characterPanel.defaults().maxWidth(50f);
+	characterPanel.defaults().maxWidth(100f).spaceLeft(40f);
 	characterPanel.add(backButton);
 	characterPanel.add(newButton);
 	characterPanel.add(deleteButton);

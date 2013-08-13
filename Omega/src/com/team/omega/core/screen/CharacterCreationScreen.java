@@ -201,7 +201,7 @@ public class CharacterCreationScreen extends BaseScreen
 	    
 	});
 	
-	buttonsPanel.row().pad(10f).spaceRight(90f);
+	buttonsPanel.row().pad(10f).minWidth(100f);
 	buttonsPanel.add(backButton).left();
 	buttonsPanel.add(createButton).right();
 	

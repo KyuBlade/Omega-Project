@@ -36,8 +36,9 @@ public class ChoiceDialog extends Dialog
 	acceptButton.align(Align.center);
 	
 	getContentTable().add(message).minWidth(300f).pad(10f);
-	getButtonTable().add(refuseButton).minWidth(100f);
-	getButtonTable().add(acceptButton).minWidth(100f);
+	getButtonTable().defaults().minWidth(100f).pad(10f);
+	getButtonTable().add(refuseButton);
+	getButtonTable().add(acceptButton);
 	setMovable(false);
 	center();
     }

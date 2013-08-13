@@ -159,7 +159,7 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
 	});
 	
 	_dialog.getContentTable().add(_message).minWidth(300f).pad(10f);
-	_dialog.getButtonTable().add(_okButton).minWidth(100f);
+	_dialog.getButtonTable().add(_okButton).minWidth(100f).pad(10f);
 	_dialog.setTitleAlignment(Align.center);
 	_dialog.setMovable(false);
 	_dialog.center();
