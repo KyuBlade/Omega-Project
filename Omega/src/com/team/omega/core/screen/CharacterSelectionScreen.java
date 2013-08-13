@@ -9,7 +9,6 @@ import net.team.omega.core.network.serialization.character.CharacterDelete;
 import net.team.omega.core.network.serialization.character.CharacterSelection;
 import net.team.omega.core.network.serialization.datas.SamplePlayer;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
