@@ -57,6 +57,18 @@ public class ProgressBar extends Widget
 	if(percent > 0f)
 	    style.progressBackground.draw(batch, getX() + style.background.getLeftWidth(), getY() + style.background.getBottomHeight(), percent * (getWidth() - style.background.getRightWidth() - style.background.getLeftWidth()), getHeight() - style.background.getTopHeight() - style.background.getBottomHeight());
     }
+    
+    @Override
+    public float getPrefHeight()
+    {
+	return getHeight();
+    }
+    
+    @Override
+    public float getPrefWidth()
+    {
+	return getWidth();
+    }
 
     public void setPercent(float percent)
     {
