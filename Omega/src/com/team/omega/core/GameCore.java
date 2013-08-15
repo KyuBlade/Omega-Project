@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.team.omega.core.screen.DebugScreen;
 import com.team.omega.core.screen.IdentificationScreen;
+import com.team.omega.core.screen.LoadingScreen;
 import com.team.omega.core.screen.ScreenManager;
 import com.team.omega.core.screen.WaitingScreen;
 
@@ -54,7 +55,8 @@ public class GameCore extends BaseGame
 	
 	assetManager.finishLoading();
 	
-	screenManager.addScreen(IdentificationScreen.class);
+	//screenManager.addScreen(IdentificationScreen.class);
+	screenManager.addScreen(LoadingScreen.class);
 	screenManager.addScreen(DebugScreen.class);
     }
 
