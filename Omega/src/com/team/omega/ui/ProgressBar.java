@@ -52,10 +52,10 @@ public class ProgressBar extends Widget
 
 	batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 
-	style.background.draw(batch, getX(), getY(), getWidth(), getHeight() + style.background.getTopHeight() + style.background.getBottomHeight());
+	style.background.draw(batch, getX(), getY(), getWidth(), getHeight());
 
 	if(percent > 0f)
-	    style.progressBackground.draw(batch, getX() + style.background.getLeftWidth(), getY() + style.background.getBottomHeight(), percent * (getWidth() - style.background.getRightWidth() - style.background.getLeftWidth()), getHeight());
+	    style.progressBackground.draw(batch, getX() + style.background.getLeftWidth(), getY() + style.background.getBottomHeight(), percent * (getWidth() - style.background.getRightWidth() - style.background.getLeftWidth()), getHeight() - style.background.getTopHeight() - style.background.getBottomHeight());
     }
 
     public void setPercent(float percent)
