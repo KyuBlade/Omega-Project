@@ -53,5 +53,12 @@ com.team.omega.ui.list.TabbedList$TabbedListStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { background: buttons/button_down, corner: textfields/selection, hScroll: scrolls/hScroll, hScrollKnob: scrolls/hScroll_knob, vScroll: scrolls/vScroll, vScrollKnob: scrolls/vScroll_knob }
+}, 
+com.team.omega.ui.ProgressBar$ProgressBarStyle: {
+	default: { background: progress/progress_outer, knobBefore: progress/progress_inner }, 
+	loading: { background: progress/progress_outer, knobBefore: progress/progress_inner }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+	default-horizontal: { background: progress/progress_outer, knobBefore: progress/progress_inner }
 }
 }
