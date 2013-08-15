@@ -3,13 +3,15 @@ package com.team.omega.ui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
-public class ProgressBar extends Slider
+public class ProgressBar extends Widget
 {
 
     private ProgressBarStyle style;
+    
+    private float percent;
 
     public ProgressBar(Skin skin)
     {
@@ -18,8 +20,6 @@ public class ProgressBar extends Slider
     
     public ProgressBar(Skin skin, String styleName)
     {
-	super(0, 100, 1, false, skin);
-
 	setStyle(skin.get(styleName, ProgressBarStyle.class));
     }
 
@@ -32,8 +32,8 @@ public class ProgressBar extends Slider
 
 	if (style.background == null)
 	    throw new NullPointerException("background cannot be null");
-	if (style.knobBefore == null)
-	    throw new NullPointerException("knobBefore cannot be null");
+	if (style.progressBackground == null)
+	    throw new NullPointerException("progressBackground cannot be null");
 
 	invalidateHierarchy();
     }
@@ -46,43 +46,36 @@ public class ProgressBar extends Slider
     @Override
     public void draw(SpriteBatch batch, float parentAlpha)
     {
-	final Drawable bg = style.background;
-	final Drawable knobBefore = style.knobBefore;
-
+	validate();
+	
 	Color color = getColor();
-	float x = getX();
-	float y = getY();
-	float width = getWidth();
-	float height = getHeight();
-	float percent = this.getValue() / 100;
 
 	batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 
-	bg.draw(batch, x, y + bg.getMinHeight(), width, height + bg.getTopHeight() + bg.getBottomHeight());
+	style.background.draw(batch, getX(), getY(), getWidth(), getHeight() + style.background.getTopHeight() + style.background.getBottomHeight());
 
-	if (knobBefore != null)
-	{
-	    if(percent > 0f)
-		knobBefore.draw(batch, x + bg.getLeftWidth(), y + bg.getMinHeight() + bg.getBottomHeight(), percent * (width - bg.getRightWidth() - bg.getLeftWidth()), height);
-	}
+	if(percent > 0f)
+	    style.progressBackground.draw(batch, getX() + style.background.getLeftWidth(), getY() + style.background.getBottomHeight(), percent * (getWidth() - style.background.getRightWidth() - style.background.getLeftWidth()), getHeight());
     }
 
-    @Override
-    public float getPrefWidth()
+    public void setPercent(float percent)
     {
-	return getWidth();
+	this.percent = percent;
     }
     
-    @Override
-    public float getPrefHeight()
+    public float getPercent()
     {
-	return getHeight();
+	return percent;
     }
 
     /** The style for a {@link ProgressBar} */
-    static public class ProgressBarStyle extends SliderStyle
+    static public class ProgressBarStyle
     {
 
+	private Drawable background;
+	
+	private Drawable progressBackground;
+	
 	public ProgressBarStyle()
 	{
 	}
@@ -90,13 +83,13 @@ public class ProgressBar extends Slider
 	public ProgressBarStyle(Drawable background, Drawable progressBackground)
 	{
 	    this.background = background;
-	    this.knobBefore = progressBackground;
+	    this.progressBackground = progressBackground;
 	}
 
 	public ProgressBarStyle(ProgressBarStyle style)
 	{
-
-	    super(style);
+	    this.background = style.background;
+	    this.progressBackground = style.progressBackground;
 	}
     }
 
