@@ -13,4 +13,9 @@
    eJxjYBgFo4A2oJAINYdo7opRMJQAMWmGFHCcyuaRCi4j4eFq7+EBshcZ0MLegwNkL6kAnzuP0M0Vo2AkAHqUp9SuA2BgtK0xCkYBfgAAkfQTzA==
   </data>
  </layer>
+ <objectgroup name="Calque d'objets 1" width="30" height="30">
+  <object x="9" y="410">
+   <polyline points="0,0 375,-396 885,99 340,487 -7,4"/>
+  </object>
+ </objectgroup>
 </map>

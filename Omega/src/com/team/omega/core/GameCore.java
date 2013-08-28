@@ -1,6 +1,7 @@
 package com.team.omega.core;
 
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -9,10 +10,9 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.team.omega.core.screen.DebugScreen;
-import com.team.omega.core.screen.IdentificationScreen;
+import com.team.omega.core.screen.GameScreen;
 import com.team.omega.core.screen.LoadingScreen;
 import com.team.omega.core.screen.ScreenManager;
-import com.team.omega.core.screen.WaitingScreen;
 
 public class GameCore extends BaseGame
 {
@@ -56,7 +56,7 @@ public class GameCore extends BaseGame
 	assetManager.finishLoading();
 	
 	//screenManager.addScreen(IdentificationScreen.class);
-	screenManager.addScreen(LoadingScreen.class);
+	screenManager.addScreen(GameScreen.class);
 	screenManager.addScreen(DebugScreen.class);
     }
 

@@ -12,47 +12,44 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.team.omega.core.Constants;
 import com.team.omega.ui.ProgressBar;
 
-
 public class LoadingScreen extends BaseScreen implements Runnable
 {
 
     private Table progressTable;
     private Label progressText;
     private ProgressBar progressBar;
-    
+
     private List<Callable<Void>> tasks = new LinkedList<>();
     private Thread thread;
-    
-    private boolean isLoading;
-    
+
     public LoadingScreen(ScreenManager screenManager)
     {
 	super(screenManager, Constants.LOADING_SCREEN_DEPTH);
-	
+
 	progressTable = new Table(skin);
 	progressText = new Label("0%", skin);
 	progressText.setAlignment(Align.center);
 	progressBar = new ProgressBar(skin, "loading");
 	progressBar.setWidth(400f);
 	progressBar.setHeight(35f);
-	
+
 	progressTable.stack(progressBar, progressText);
 	progressTable.debug();
 	layout.add().minHeight(600f).row();
 	layout.add(progressTable);
 	layout.debug();
-	
+
 	thread = new Thread(this);
-	
+
 	isActive = false;
     }
-    
+
     @Override
     public void render(float delta)
-    {	
+    {
 	super.render(delta);
     }
-    
+
     public void addTask(Callable<Void> task)
     {
 	tasks.add(task);
@@ -61,7 +58,6 @@ public class LoadingScreen extends BaseScreen implements Runnable
     public void load()
     {
 	isActive = true;
-	isLoading = true;
 	thread.start();
     }
 
@@ -79,29 +75,25 @@ public class LoadingScreen extends BaseScreen implements Runnable
     @Override
     public void run()
     {
-	while(isLoading)
+	Iterator<Callable<Void>> _iter = tasks.iterator();
+	while (_iter.hasNext())
 	{
-	    Iterator<Callable<Void>> _iter = tasks.iterator();
-	    while(_iter.hasNext())
+	    try
 	    {
-		try
-		{
-		    Thread.sleep(500);
-		} catch (InterruptedException e1)
-		{
-		    e1.printStackTrace();
-		}
-		try
-		{
-		    _iter.next().call();
-		} catch (Exception e)
-		{
-		    e.printStackTrace();
-		}
+		Thread.sleep(500);
+	    } catch (InterruptedException e1)
+	    {
+		e1.printStackTrace();
 	    }
-	    isLoading = false;
-	    progressText.setText("Finished");
+	    try
+	    {
+		_iter.next().call();
+	    } catch (Exception e)
+	    {
+		e.printStackTrace();
+	    }
 	}
+	progressText.setText("Finished");
     }
 
 }
