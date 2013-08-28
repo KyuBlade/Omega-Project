@@ -14,7 +14,7 @@ public class ThreadFactory
     private static ThreadPoolExecutor poolExec;
    
     static {
-	poolExec = new ThreadPoolExecutor(2, 5, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(5));
+	poolExec = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), Runtime.getRuntime().availableProcessors() * 2, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(5));
 	poolExec.setRejectedExecutionHandler(new RejectedExecutionHandler() {
 	    
 		@Override
