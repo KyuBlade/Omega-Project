@@ -30,7 +30,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
 
-public class IsometricMapRenderer extends IsometricTiledMapRenderer
+public class IsometricMapRenderer extends IsometricTiledMapRenderer implements Renderer
 {
 
     private float[] vertices = new float[20];
@@ -214,6 +214,18 @@ public class IsometricMapRenderer extends IsometricTiledMapRenderer
 		}
 	    }
 	}
+    }
+
+    @Override
+    public void render(float delta)
+    {
+	super.render();	
+    }
+
+    @Override
+    public void preRender()
+    {
+	
     }
 
 }

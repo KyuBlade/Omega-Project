@@ -2,6 +2,14 @@ package com.team.omega.core.entity;
 
 import com.artemis.World;
 import com.badlogic.gdx.Gdx;
+import com.team.omega.core.entity.manager.InteractiveObjectManager;
+import com.team.omega.core.entity.manager.ItemManager;
+import com.team.omega.core.entity.manager.MonsterManager;
+import com.team.omega.core.entity.manager.NpcManager;
+import com.team.omega.core.entity.manager.PlayerManager;
+import com.team.omega.core.entity.manager.SpellManager;
+import com.team.omega.core.entity.system.MovementSystem;
+import com.team.omega.core.entity.system.RenderSystem;
 
 
 public class WorldManager extends World implements Runnable
@@ -19,6 +27,24 @@ public class WorldManager extends World implements Runnable
 	this.name = name;
 	
 	worldThread = new Thread(this);
+    }
+    
+    /**
+     * Initialize the world
+     */
+    public void setup()
+    {
+	setManager(new PlayerManager());
+	setManager(new NpcManager());
+	setManager(new ItemManager());
+	setManager(new InteractiveObjectManager());
+	setManager(new SpellManager());
+	setManager(new MonsterManager());
+	
+	setSystem(new MovementSystem());
+	setSystem(new RenderSystem(), true);
+	
+	super.initialize();
     }
     
     /**
@@ -61,7 +87,6 @@ public class WorldManager extends World implements Runnable
      */
     public void close()
     {
-	
 	// Exit the world thread
 	isRunning = false;
     }
