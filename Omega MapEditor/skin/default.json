@@ -1,0 +1,59 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	default-font: { file: fonts/default.fnt }, 
+	arial-black: { file: fonts/ArialBlack.fnt }
+},
+com.badlogic.gdx.graphics.Color: {
+	green: { a: 1, b: 0, g: 1, r: 0 },
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { a: 1, b: 0, g: 0, r: 1 },
+	black: { a: 1, b: 0, g: 0, r: 0 }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over }, 
+	new-file: { down: buttons/new_file_down, up: buttons/new_file_up, over: buttons/new_file_over }, 
+	save: { down: buttons/save_down, up: buttons/save_up, over: buttons/save_over }, 
+	open: { down: buttons/open_down, up: buttons/open_up, over: buttons/open_over }
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white }, 
+	blank: { font: default-font, fontColor: white }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
+	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: { font: default-font, fontColor: white }
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: { background: textfields/background, focusedBackground: textfields/background_focus, cursor: textfields/blue_cursor, selection: textfields/selection, font: default-font, fontColor: white }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+	default: { background: buttons/button_down, titleFont: default-font, titleFontColor: white }
+},
+com.team.omega.ui.panel.Panel$PanelStyle: {
+	default: { background: buttons/button_down }, 
+	grey: { background: backgrounds/grey }, 
+	blank: {}
+},
+com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
+	default-vertical: { handle: scrolls/vScroll }, 
+	default-horizontal: { handle: scrolls/hScroll }
+}, 
+com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+	default: { font: default-font,  selection: textfields/selection }
+},
+com.team.omega.ui.list.TabbedList$TabbedListStyle: {
+	default: { font: default-font,  selection: textfields/selection }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	default: { background: buttons/button_down, corner: textfields/selection, hScroll: scrolls/hScroll, hScrollKnob: scrolls/hScroll_knob, vScroll: scrolls/vScroll, vScrollKnob: scrolls/vScroll_knob }
+}, 
+com.team.omega.ui.ProgressBar$ProgressBarStyle: {
+	default: { background: progress/progress_outer, progressBackground: progress/progress_inner }, 
+	loading: { background: progress/progress_outer, progressBackground: progress/progress_inner }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+	default-horizontal: { background: progress/progress_outer, knobBefore: progress/progress_inner }
+}
+}
