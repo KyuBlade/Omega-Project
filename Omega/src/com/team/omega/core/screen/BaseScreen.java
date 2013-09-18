@@ -64,7 +64,7 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     @Override
     public void render(float delta)
     {
-	stage.act(Gdx.graphics.getDeltaTime());
+	stage.act(delta);
 	stage.draw();
 	
 	Table.drawDebug(stage);

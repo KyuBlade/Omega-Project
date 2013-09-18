@@ -1,27 +1,23 @@
 package com.team.omega.core.renderer;
 
-import com.artemis.ComponentMapper;
-import com.artemis.annotations.Mapper;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.esotericsoftware.spine.SkeletonRendererDebug;
-import com.team.omega.core.entity.component.render.SkeletonComponent;
 
 
 public class PlayerRenderer implements Renderer
 {
-
+    
     private SpriteBatch batch;
     
     private SkeletonRenderer renderer;
     private SkeletonRendererDebug debugRenderer;
     
-    @Mapper
-    private ComponentMapper<SkeletonComponent> skeletonMap;
-    
-    public PlayerRenderer()
+    public PlayerRenderer(SpriteBatch batch)
     {
-	batch = new SpriteBatch();
+	this.batch = batch;
+	
 	renderer = new SkeletonRenderer();
 	debugRenderer = new SkeletonRendererDebug();
     }
@@ -35,6 +31,12 @@ public class PlayerRenderer implements Renderer
     public void render(float delta)
     {
 	
+    }
+    
+    public void render(Skeleton skeleton, float delta)
+    {
+	renderer.draw(batch, skeleton);
+	debugRenderer.draw(skeleton);
     }
 
 }

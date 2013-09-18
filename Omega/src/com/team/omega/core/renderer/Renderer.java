@@ -2,6 +2,7 @@ package com.team.omega.core.renderer;
 
 
 
+
 public interface Renderer
 {
     

@@ -14,9 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
-import com.team.omega.ui.list.ListRow;
-import com.team.omega.ui.list.TabbedList;
-import com.team.omega.ui.panel.Panel;
+import com.team.omega.ui.base.list.ListRow;
+import com.team.omega.ui.base.list.TabbedList;
+import com.team.omega.ui.base.panel.Panel;
 
 
 public class GameServerSelectionScreen extends BaseScreen

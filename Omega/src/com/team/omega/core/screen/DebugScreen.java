@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.team.omega.core.Constants;
-import com.team.omega.ui.panel.Panel;
+import com.team.omega.ui.base.panel.Panel;
 import com.team.omega.utils.FormatUtils;
 
 

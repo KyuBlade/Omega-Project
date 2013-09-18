@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.team.omega.core.Constants;
-import com.team.omega.ui.ProgressBar;
+import com.team.omega.ui.base.ProgressBar;
 
 public class LoadingScreen extends BaseScreen implements Runnable
 {

@@ -1,4 +1,4 @@
-package com.team.omega.ui.list;
+package com.team.omega.ui.base.list;
 
 import java.util.ArrayList;
 import java.util.List;

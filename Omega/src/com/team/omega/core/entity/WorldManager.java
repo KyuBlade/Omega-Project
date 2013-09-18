@@ -9,7 +9,7 @@ import com.team.omega.core.entity.manager.NpcManager;
 import com.team.omega.core.entity.manager.PlayerManager;
 import com.team.omega.core.entity.manager.SpellManager;
 import com.team.omega.core.entity.system.MovementSystem;
-import com.team.omega.core.entity.system.RenderSystem;
+import com.team.omega.core.entity.system.PlayerSystem;
 
 
 public class WorldManager extends World implements Runnable
@@ -42,7 +42,7 @@ public class WorldManager extends World implements Runnable
 	setManager(new MonsterManager());
 	
 	setSystem(new MovementSystem());
-	setSystem(new RenderSystem(), true);
+	setSystem(new PlayerSystem());
 	
 	super.initialize();
     }

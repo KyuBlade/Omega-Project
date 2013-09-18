@@ -1,22 +1,45 @@
 package com.team.omega.core.screen;
 
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.SplitPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.esotericsoftware.tablelayout.Value;
-import com.team.omega.ui.panel.Panel;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.team.omega.core.project.ProjectFileFilter;
+import com.team.omega.ui.EditorContainer;
+import com.team.omega.ui.MainEditorTab;
+import com.team.omega.ui.base.menu.BasicMenuItem;
+import com.team.omega.ui.base.menu.CheckboxMenuItem;
+import com.team.omega.ui.base.menu.ContextMenu;
+import com.team.omega.ui.base.menu.MenuBar;
+import com.team.omega.ui.base.menu.ToolBar;
+import com.team.omega.ui.base.tab.TabPane;
 
 
 
 public class InterfaceScreen extends BaseScreen
 {
     
-    private Panel topMenu;
+    private EditorScreen editorScreen;
+    
+    private JFileChooser fileDialog;
+    
+    private MenuBar menuBar;
+    private ContextMenu fileMenu;
+    private ContextMenu editMenu;
+    private ContextMenu viewMenu;
+    private ContextMenu tilesetMenu;
+    
     private TextButton fileMenuButton;
     private TextButton editMenuButton;
     private TextButton viewMenuButton;
+    private TextButton tilesetMenuButton;
+    
+    private ToolBar toolBar;
     
     private ImageButton newButton;
     private ImageButton openButton;
@@ -24,78 +47,180 @@ public class InterfaceScreen extends BaseScreen
     private ImageButton undoButton;
     private ImageButton redoButton;
     
-    private SplitPane rightSplitPane;
-    private Panel rightPanel;
-    private Panel leftPanel;
-    private Panel tilePanel;
-    private SplitPane leftSplitPane;
-    
-    private Panel mapPropertiesPanel;
-    private Label mapPropertiesLabel;
-    
-    private ScrollPane tileScrollPane;
-    private ScrollPane rightScrollPane;
+    private TabPane tabPane;
 
     public InterfaceScreen(ScreenManager screenManager)
     {
-	super(screenManager, 1);
+	super(screenManager, 2);
 	
-	// Top menu
-	topMenu = new Panel(skin, "grey");
-	topMenu.left();
-	fileMenuButton = new TextButton("File", skin, "blank");
-	editMenuButton = new TextButton("Edit", skin, "blank");
-	viewMenuButton = new TextButton("View", skin, "blank");
-	topMenu.defaults().padLeft(5f).padRight(5f);
-	topMenu.add(fileMenuButton);
-	topMenu.add(editMenuButton);
-	topMenu.add(viewMenuButton);
-	topMenu.row();
+	this.editorScreen = screenManager.getScreen(EditorScreen.class);
 	
-	// Toolbar
-	newButton = new ImageButton(skin, "new-file");
-	openButton = new ImageButton(skin, "open");
-	saveButton = new ImageButton(skin, "save");
-	undoButton = new ImageButton(skin);
-	redoButton = new ImageButton(skin);
-	topMenu.add(newButton);
-	topMenu.add(openButton);
-	topMenu.add(saveButton);
-	topMenu.add(undoButton);
-	topMenu.add(redoButton);
+	fileDialog = new JFileChooser();
+	fileDialog.setFileFilter(new ProjectFileFilter());
+	fileDialog.setAcceptAllFileFilterUsed(false);
 	
-	layout.add(topMenu).expandX().fillX().left();
+	// MenuBar
+	menuBar = new MenuBar(skin);
+	fileMenuButton = new TextButton("File", skin, "menu");
+	fileMenuButton.setWidth(50f);
+	createFileMenu();
+	menuBar.addContextMenu(fileMenuButton, fileMenu, stage);
+	
+	editMenuButton = new TextButton("Edit", skin, "menu");
+	editMenuButton.setWidth(50f);
+	createEditMenu();
+	menuBar.addContextMenu(editMenuButton, editMenu, stage);
+	
+	viewMenuButton = new TextButton("View", skin, "menu");
+	viewMenuButton.setWidth(50f);
+	createViewMenu();
+	menuBar.addContextMenu(viewMenuButton, viewMenu, stage);
+	
+	tilesetMenuButton = new TextButton("Tileset", skin, "menu");
+	tilesetMenuButton.setWidth(70f);
+	createTilesetMenu();
+	menuBar.addContextMenu(tilesetMenuButton, tilesetMenu, stage);
+	
+	layout.add(menuBar).expandX().fillX().left();
 	layout.row();
 	
-	rightPanel = new Panel(skin, "blank");
-	rightPanel.top();
-	leftPanel = new Panel(skin, "blank");
-	leftPanel.row();
+	// Toolbar
+	toolBar = new ToolBar(skin);
+	newButton = new ImageButton(skin, "new-file");
+	newButton.addListener(new ClickListener() {
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		openOpenDialog();
+	    }
+	    
+	});
+	openButton = new ImageButton(skin, "open");
+	saveButton = new ImageButton(skin, "save");
+	undoButton = new ImageButton(skin, "back");
+	redoButton = new ImageButton(skin, "next");
+	toolBar.add(newButton);
+	toolBar.add(openButton);
+	toolBar.add(saveButton);
+	toolBar.add(undoButton);
+	toolBar.add(redoButton);
 	
-	mapPropertiesPanel = new Panel(skin);
-	mapPropertiesLabel = new Label("Map properties", skin);
+	layout.add(toolBar).expandX().fillX().left();
+	layout.row();
 	
-	tilePanel = new Panel(skin);
+	tabPane = new TabPane(skin);
+	layout.add(tabPane).expand().fill();
+    }
+    
+    public void createFileMenu()
+    {
+	fileMenu = new ContextMenu(skin);
+	fileMenu.add(new BasicMenuItem("New...", "Ctrl + N", skin));
 	
-	tileScrollPane = new ScrollPane(tilePanel, skin);
-	tileScrollPane.setFadeScrollBars(false);
-	tileScrollPane.setFlickScroll(false);
-	
-	leftSplitPane = new SplitPane(new Panel(skin, "blank"), tileScrollPane, true, skin);
-	leftPanel.bottom().add(leftSplitPane).minHeight(Value.percentHeight(0.5f)).expandX().fillX();
-	
-	rightPanel.defaults().expandX().fill();
-	rightPanel.add(mapPropertiesPanel);
-	mapPropertiesPanel.add(mapPropertiesLabel);
-	
-	rightScrollPane = new ScrollPane(rightPanel, skin);
-	rightScrollPane.setFadeScrollBars(false);
-	rightScrollPane.setFlickScroll(false);
-	
-	rightSplitPane = new SplitPane(leftPanel, rightScrollPane, false, skin);
-	rightSplitPane.setMaxSplitAmount(0.8f);
-	rightSplitPane.setSplitAmount(0.8f);
-	layout.add(rightSplitPane).expand().fill();
+	BasicMenuItem _open = new BasicMenuItem("Open...", "Ctrl + O", skin);
+	_open.addListener(new ClickListener()
+	{
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		openOpenDialog();
+	    }
+
+	});
+	fileMenu.add(_open);
+	BasicMenuItem _saveAs = new BasicMenuItem("Save As...", skin);
+	_saveAs.addListener(new ClickListener() {
+	   
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		openSaveDialog();
+	    }
+	    
+	});
+	fileMenu.add(_saveAs);
+	fileMenu.add(new BasicMenuItem("Save", "Ctrl + S", skin));
+	fileMenu.add(new BasicMenuItem("Export...", skin));
+	fileMenu.add(new BasicMenuItem("Close", skin));
+	fileMenu.add(new BasicMenuItem("Close all", skin));
+	fileMenu.add(new BasicMenuItem("Exit", skin));
+    }
+    
+    public void openOpenDialog()
+    {
+	new Thread(new Runnable() {
+
+	    @Override
+	    public void run()
+	    {
+		int _val = fileDialog.showOpenDialog(null);
+		if (_val == JFileChooser.APPROVE_OPTION)
+		{
+		    File _file = fileDialog.getSelectedFile();
+		    tabPane.addTab(new MainEditorTab(_file.getName(), new EditorContainer(_file, skin), stage, skin));
+		}
+	    }
+
+	}).start();
+    }
+    
+    public void openSaveDialog()
+    {
+	new Thread(new Runnable() {
+
+	    @Override
+	    public void run()
+	    {
+		int _val = fileDialog.showSaveDialog(null);
+		if (_val == JFileChooser.APPROVE_OPTION)
+		{
+		    
+		}
+	    }
+
+	}).start();
+    }
+
+    public void createEditMenu()
+    {
+	editMenu = new ContextMenu(skin);
+	editMenu.add(new BasicMenuItem("Cut", "Ctrl + X", skin));
+	editMenu.add(new BasicMenuItem("Copy", "Ctrl + C", skin));
+	editMenu.add(new BasicMenuItem("Paste", "Ctrl + V", skin));
+    }
+    
+    public void createViewMenu()
+    {
+	viewMenu = new ContextMenu(skin);
+	CheckboxMenuItem _checkboxMenu = new CheckboxMenuItem("Display grid", "Ctrl + G", skin) {
+	    
+	    @Override
+	    public boolean rules()
+	    {
+		return editorScreen.isGridDisplay();
+	    }
+	    
+	};
+	_checkboxMenu.addListener(new InputListener() {
+	    
+	    @Override
+	    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button)
+	    {
+		editorScreen.setGridDisplay(!editorScreen.isGridDisplay());
+		
+		return true;
+	    }
+	    
+	});
+	viewMenu.add(_checkboxMenu);
+    }
+    
+    public void createTilesetMenu()
+    {
+	tilesetMenu = new ContextMenu(skin);
+	tilesetMenu.add(new BasicMenuItem("Manage...", "Ctrl + T", skin));
     }
     
     @Override

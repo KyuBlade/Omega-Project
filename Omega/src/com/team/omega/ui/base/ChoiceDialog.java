@@ -1,4 +1,4 @@
-package com.team.omega.ui;
+package com.team.omega.ui.base;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;

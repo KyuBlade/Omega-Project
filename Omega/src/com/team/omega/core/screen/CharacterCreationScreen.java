@@ -24,7 +24,7 @@ import com.team.omega.core.Constants;
 import com.team.omega.core.GameCore;
 import com.team.omega.core.LocalizationHandler;
 import com.team.omega.core.Sex;
-import com.team.omega.ui.panel.Panel;
+import com.team.omega.ui.base.panel.Panel;
 
 
 public class CharacterCreationScreen extends BaseScreen

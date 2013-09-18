@@ -1,4 +1,4 @@
-package com.team.omega.ui.panel;
+package com.team.omega.ui.base.panel;
 
 import com.badlogic.gdx.utils.Array;
 

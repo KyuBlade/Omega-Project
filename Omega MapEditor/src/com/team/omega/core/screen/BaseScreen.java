@@ -70,8 +70,9 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     public void resize(int width, int height)
     {
 	Gdx.app.debug("Resizing " + this.getClass().getSimpleName(), "Resize to " + width + "x" + height);
+
 	
-	stage.setViewport(width, height, false);;
+	stage.setViewport(width, height, false);
     }
 
     @Override

@@ -8,15 +8,21 @@ com.badlogic.gdx.graphics.Color: {
 	white: { a: 1, b: 1, g: 1, r: 1 },
 	red: { a: 1, b: 0, g: 0, r: 1 },
 	black: { a: 1, b: 0, g: 0, r: 0 }
-},
+}, 
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over }	
+}, 
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over }, 
 	new-file: { down: buttons/new_file_down, up: buttons/new_file_up, over: buttons/new_file_over }, 
 	save: { down: buttons/save_down, up: buttons/save_up, over: buttons/save_over }, 
-	open: { down: buttons/open_down, up: buttons/open_up, over: buttons/open_over }
+	open: { down: buttons/open_down, up: buttons/open_up, over: buttons/open_over }, 
+	back: { down: buttons/back_down, up: buttons/back_up, over: buttons/back_over }, 
+	next: { down: buttons/next_down, up: buttons/next_up, over: buttons/next_over }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white }, 
+	menu: { down: buttons/button_menu_down, up: buttons/button_menu_up, over: buttons/button_menu_over, font: default-font, fontColor: white }, 
 	blank: { font: default-font, fontColor: white }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
@@ -31,9 +37,10 @@ com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: { background: buttons/button_down, titleFont: default-font, titleFontColor: white }
 },
-com.team.omega.ui.panel.Panel$PanelStyle: {
+com.team.omega.ui.base.panel.Panel$PanelStyle: {
 	default: { background: buttons/button_down }, 
 	grey: { background: backgrounds/grey }, 
+	light-grey: { background: backgrounds/light_grey }, 
 	blank: {}
 },
 com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
@@ -43,17 +50,34 @@ com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: { font: default-font,  selection: textfields/selection }
 },
-com.team.omega.ui.list.TabbedList$TabbedListStyle: {
+com.team.omega.ui.base.list.TabbedList$TabbedListStyle: {
 	default: { font: default-font,  selection: textfields/selection }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { background: buttons/button_down, corner: textfields/selection, hScroll: scrolls/hScroll, hScrollKnob: scrolls/hScroll_knob, vScroll: scrolls/vScroll, vScrollKnob: scrolls/vScroll_knob }
 }, 
-com.team.omega.ui.ProgressBar$ProgressBarStyle: {
+com.team.omega.ui.base.ProgressBar$ProgressBarStyle: {
 	default: { background: progress/progress_outer, progressBackground: progress/progress_inner }, 
 	loading: { background: progress/progress_outer, progressBackground: progress/progress_inner }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 	default-horizontal: { background: progress/progress_outer, knobBefore: progress/progress_inner }
+}, 
+com.team.omega.ui.base.menu.MenuBar$MenuBarStyle: {
+	default: { background: backgrounds/grey }
+}, 
+com.team.omega.ui.base.menu.ToolBar$ToolBarStyle: {
+	default: { background: backgrounds/grey }
+}, 
+com.team.omega.ui.base.menu.MenuItem$MenuItemStyle: {
+	default: { up: buttons/button_up, down: buttons/button_down, over: buttons/button_over }, 
+	default-checkbox: { up: buttons/button_up, down: buttons/button_down, over: buttons/button_over, icon: checkboxes/checked }, 
+	default-sub: { up: buttons/button_up, down: buttons/button_down, over: buttons/button_over, sub: miscs/arrow }
+}, 
+com.team.omega.ui.base.tab.Tab$TabStyle: {
+	default: { up: buttons/button_up, down: buttons/button_down, over: buttons/button_over  }
+}, 
+com.team.omega.ui.base.tab.TabPane$TabPaneStyle: {
+	default: { background: backgrounds/light_grey }
 }
 }

@@ -21,30 +21,7 @@ public class CameraRenderer implements Renderer
 	    @Override
 	    public boolean keyDown(int keycode)
 	    {
-		switch(keycode)
-		{
-		    case Keys.Z:
-			camera.translate(0f, 10f);
-			
-			break;
-			
-		    case Keys.S:
-			camera.translate(0f, -10f);
-			
-			break;
-			
-		    case Keys.Q:
-			camera.translate(-10f, 0f);
-			
-			break;
-			
-		    case Keys.D:
-			camera.translate(10f, 0f);
-			
-			break;
-		}
-		
-		return true;
+		return false;
 	    }
 
 	    @Override
@@ -62,7 +39,7 @@ public class CameraRenderer implements Renderer
 	    @Override
 	    public boolean touchDown(int screenX, int screenY, int pointer, int button)
 	    {
-		return true;
+		return false;
 	    }
 
 	    @Override
@@ -74,22 +51,6 @@ public class CameraRenderer implements Renderer
 	    @Override
 	    public boolean touchDragged(int screenX, int screenY, int pointer)
 	    {
-		if(screenX < 100f) // left
-		{
-		    camera.translate(-10f, 0f);
-		}
-		else if(screenX > Gdx.graphics.getWidth() -100f) // right
-		{
-		    camera.translate(10f, 0f);
-		}
-		if(screenY < 100f) // bottom
-		{
-		    camera.translate(0f, 10f);
-		}
-		else if(screenY > Gdx.graphics.getHeight() -100f) // top
-		{
-		    camera.translate(0f, -10f);
-		}
 		return false;
 	    }
 
@@ -102,7 +63,7 @@ public class CameraRenderer implements Renderer
 	    @Override
 	    public boolean scrolled(int amount)
 	    {
-		camera.zoom += amount * 0.1f;
+		camera.zoom += amount * (1 + Gdx.graphics.getDeltaTime());
 		
 		return true;
 	    }
@@ -111,8 +72,43 @@ public class CameraRenderer implements Renderer
     }
 
     @Override
-    public void render(float tpf)
+    public void render(float delta)
     {
+	if(Gdx.input.isKeyPressed(Keys.Z))
+	{
+	    camera.translate(0f, 10f * (1 + delta));
+	}
+	else if(Gdx.input.isKeyPressed(Keys.S))
+	{
+	    camera.translate(0f, -10f * (1 + delta));
+	}
+	
+	if(Gdx.input.isKeyPressed(Keys.Q))
+	{
+	    camera.translate(-10f * (1 + delta), 0f);
+	}
+	else if(Gdx.input.isKeyPressed(Keys.D))
+	{
+	    camera.translate(10f * (1 + delta), 0f);
+	}
+	
+	if(Gdx.input.getX() < 100f) // left
+	{
+	    camera.translate(-10f * (1 + delta), 0f);
+	}
+	else if(Gdx.input.getX() > Gdx.graphics.getWidth() -100f) // right
+	{
+	    camera.translate(10f * (1 + delta), 0f);
+	}
+	if(Gdx.input.getY() < 100f) // bottom
+	{
+	    camera.translate(0f, 10f * (1 + delta));
+	}
+	else if(Gdx.input.getY() > Gdx.graphics.getHeight() -100f) // top
+	{
+	    camera.translate(0f, -10f * (1 + delta));
+	}
+	
 	camera.update();
     }
 
