@@ -36,11 +36,23 @@ public class ProjectHandler
 	projectWriter = new ProjectWriter(document, file);
     }
     
-    public void save()
+    public boolean save()
     {
 	try
 	{
-	    projectWriter.save();
+	    return projectWriter.save();
+	} catch (IOException e)
+	{
+	    EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class).showPopup("Saving error", "Error when saving file\n\n " + e.getMessage());
+	}
+	
+	return true;
+    }
+    
+    public void saveAs(File file)
+    {
+	try {
+	    projectWriter.save(file);
 	} catch (IOException e)
 	{
 	    EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class).showPopup("Saving error", "Error when saving file\n\n " + e.getMessage());

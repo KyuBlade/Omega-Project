@@ -9,6 +9,8 @@ import org.jdom2.Document;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+import com.badlogic.gdx.Gdx;
+
 
 public class ProjectWriter
 {
@@ -52,6 +54,8 @@ public class ProjectWriter
     {
 	XMLOutputter output = new XMLOutputter(Format.getPrettyFormat());
 	output.output(document, new FileOutputStream(file));
+	
+	Gdx.app.debug("Save", "Project saved");
     }
     
 }

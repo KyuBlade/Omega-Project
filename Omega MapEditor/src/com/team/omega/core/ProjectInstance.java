@@ -8,18 +8,26 @@ import com.team.omega.core.project.ProjectHandler;
 public class ProjectInstance
 {
 
-    private File projectFile;
     private ProjectHandler handler;
+    
+    private boolean needSave;
     
     public ProjectInstance(File file)
     {
-	this.projectFile = file;
 	this.handler = new ProjectHandler(file);
     }
     
-    public void save()
+    public boolean save()
     {
-	handler.save();
+	if(!needSave)
+	    return false;
+	
+	return handler.save();
+    }
+    
+    public void saveAs(File file)
+    {
+	handler.saveAs(file);
     }
     
 }

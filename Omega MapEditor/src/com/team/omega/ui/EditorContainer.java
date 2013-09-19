@@ -64,5 +64,10 @@ public class EditorContainer extends TabContainer
 	rightSplitPane.setSplitAmount(0.8f);
 	this.add(rightSplitPane).expand().fill();
     }
+    
+    public ProjectInstance getProject()
+    {
+	return project;
+    }
 
 }

@@ -98,5 +98,10 @@ public class EditorCore extends ApplicationAdapter
     {
 	return screenManager;
     }
+    
+    public ProjectInstance getCurrentProject()
+    {
+	return screenManager.getScreen(InterfaceScreen.class).getCurrentProject();
+    }
 
 }

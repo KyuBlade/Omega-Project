@@ -3,12 +3,13 @@ package com.team.omega.core.screen;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.team.omega.core.ProjectInstance;
 import com.team.omega.core.project.ProjectFileFilter;
 import com.team.omega.ui.EditorContainer;
 import com.team.omega.ui.MainEditorTab;
@@ -17,6 +18,7 @@ import com.team.omega.ui.base.menu.CheckboxMenuItem;
 import com.team.omega.ui.base.menu.ContextMenu;
 import com.team.omega.ui.base.menu.MenuBar;
 import com.team.omega.ui.base.menu.ToolBar;
+import com.team.omega.ui.base.tab.Tab;
 import com.team.omega.ui.base.tab.TabPane;
 
 
@@ -92,12 +94,30 @@ public class InterfaceScreen extends BaseScreen
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		openOpenDialog();
+		openSaveDialog(true);
 	    }
 	    
 	});
 	openButton = new ImageButton(skin, "open");
+	openButton.addListener(new ClickListener() {
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		openOpenDialog();
+	    }
+	    
+	});
 	saveButton = new ImageButton(skin, "save");
+	saveButton.addListener(new ClickListener() {
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		saveProcess();
+	    }
+	    
+	});
 	undoButton = new ImageButton(skin, "back");
 	redoButton = new ImageButton(skin, "next");
 	toolBar.add(newButton);
@@ -116,7 +136,18 @@ public class InterfaceScreen extends BaseScreen
     public void createFileMenu()
     {
 	fileMenu = new ContextMenu(skin);
-	fileMenu.add(new BasicMenuItem("New...", "Ctrl + N", skin));
+	BasicMenuItem _new = new BasicMenuItem("New...", "Ctrl + N", skin);
+	_new.addListener(new ClickListener()
+	{
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		openOpenDialog();
+	    }
+
+	});
+	fileMenu.add(_new);
 	
 	BasicMenuItem _open = new BasicMenuItem("Open...", "Ctrl + O", skin);
 	_open.addListener(new ClickListener()
@@ -136,12 +167,22 @@ public class InterfaceScreen extends BaseScreen
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		openSaveDialog();
+		openSaveDialog(false);
 	    }
 	    
 	});
 	fileMenu.add(_saveAs);
-	fileMenu.add(new BasicMenuItem("Save", "Ctrl + S", skin));
+	BasicMenuItem _save = new BasicMenuItem("Save", "Ctrl + S", skin);
+	_save.addListener(new ClickListener() {
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		saveProcess();
+	    }
+	    
+	});
+	fileMenu.add(_save);
 	fileMenu.add(new BasicMenuItem("Export...", skin));
 	fileMenu.add(new BasicMenuItem("Close", skin));
 	fileMenu.add(new BasicMenuItem("Close all", skin));
@@ -166,8 +207,11 @@ public class InterfaceScreen extends BaseScreen
 	}).start();
     }
     
-    public void openSaveDialog()
+    public void openSaveDialog(final boolean newProject)
     {
+	if(!newProject && getCurrentProject() == null)
+	    return;
+	
 	new Thread(new Runnable() {
 
 	    @Override
@@ -176,7 +220,20 @@ public class InterfaceScreen extends BaseScreen
 		int _val = fileDialog.showSaveDialog(null);
 		if (_val == JFileChooser.APPROVE_OPTION)
 		{
-		    
+		    File _file = fileDialog.getSelectedFile();
+		    if(_file.exists())
+		    {
+			int _result = JOptionPane.showConfirmDialog(null, "File exists, overwrite?", "File exists", JOptionPane.YES_NO_OPTION);
+		        if(_result == JOptionPane.NO_OPTION)
+		            return;
+		    }
+			
+		    if(newProject)
+			tabPane.addTab(new MainEditorTab(_file.getName(), new EditorContainer(_file, skin), stage, skin));
+		    else
+		    {
+			getCurrentProject().saveAs(_file);
+		    }
 		}
 	    }
 
@@ -203,14 +260,12 @@ public class InterfaceScreen extends BaseScreen
 	    }
 	    
 	};
-	_checkboxMenu.addListener(new InputListener() {
+	_checkboxMenu.addListener(new ClickListener() {
 	    
 	    @Override
-	    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button)
+	    public void clicked(InputEvent event, float x, float y)
 	    {
 		editorScreen.setGridDisplay(!editorScreen.isGridDisplay());
-		
-		return true;
 	    }
 	    
 	});
@@ -221,6 +276,26 @@ public class InterfaceScreen extends BaseScreen
     {
 	tilesetMenu = new ContextMenu(skin);
 	tilesetMenu.add(new BasicMenuItem("Manage...", "Ctrl + T", skin));
+    }
+    
+    public synchronized void saveProcess()
+    {
+	ProjectInstance _project = getCurrentProject();
+	if(_project == null)
+	    return;
+	
+	boolean _needSave = _project.save();
+	if(_needSave)
+	    openSaveDialog(false);
+    }
+    
+    public ProjectInstance getCurrentProject()
+    {
+	Tab _curTab = tabPane.getCurrentTab();
+	if(_curTab == null)
+	    return null;
+	
+	return ((EditorContainer) _curTab.getContainer()).getProject();
     }
     
     @Override
