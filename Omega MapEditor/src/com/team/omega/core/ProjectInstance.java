@@ -23,6 +23,11 @@ public class ProjectInstance
 	this.handler = new ProjectHandler(file);
     }
     
+    public ProjectHandler getProjectHandler()
+    {
+	return handler;
+    }
+    
     public boolean save()
     {
 	if(!needSave)

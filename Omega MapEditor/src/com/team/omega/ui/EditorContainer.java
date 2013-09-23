@@ -2,12 +2,12 @@ package com.team.omega.ui;
 
 import java.io.File;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.SplitPane;
 import com.esotericsoftware.tablelayout.Value;
 import com.team.omega.core.ProjectInstance;
+import com.team.omega.core.project.ProjectData;
 import com.team.omega.ui.base.panel.Panel;
 import com.team.omega.ui.base.tab.TabContainer;
 
@@ -15,6 +15,7 @@ public class EditorContainer extends TabContainer
 {
 
     private ProjectInstance project;
+    private ProjectData projectData;
     
     private SplitPane rightSplitPane;
     private Panel rightPanel;
@@ -22,8 +23,7 @@ public class EditorContainer extends TabContainer
     private Panel tilePanel;
     private SplitPane leftSplitPane;
 
-    private Panel mapPropertiesPanel;
-    private Label mapPropertiesLabel;
+    private MenuPanel mapPropertiesPanel;
 
     private ScrollPane tileScrollPane;
     private ScrollPane rightScrollPane;
@@ -33,14 +33,17 @@ public class EditorContainer extends TabContainer
 	super(skin);
 	
 	project = new ProjectInstance(file);
+	projectData = project.getProjectHandler().getProjectData();
 	
 	rightPanel = new Panel(skin, "blank");
 	rightPanel.top();
 	leftPanel = new Panel(skin, "blank");
 	leftPanel.row();
 
-	mapPropertiesPanel = new Panel(skin);
-	mapPropertiesLabel = new Label("Map properties", skin);
+	mapPropertiesPanel = new MenuPanel("Map properties", skin);
+	mapPropertiesPanel.add("Name : " + projectData.getName());
+	mapPropertiesPanel.add("Width : " + projectData.getWidth());
+	mapPropertiesPanel.add("Height : " + projectData.getHeight());
 
 	tilePanel = new Panel(skin);
 
@@ -53,7 +56,6 @@ public class EditorContainer extends TabContainer
 
 	rightPanel.defaults().expandX().fill();
 	rightPanel.add(mapPropertiesPanel);
-	mapPropertiesPanel.add(mapPropertiesLabel);
 
 	rightScrollPane = new ScrollPane(rightPanel, skin);
 	rightScrollPane.setFadeScrollBars(false);

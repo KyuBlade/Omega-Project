@@ -38,6 +38,11 @@ public class ProjectHandler
 	projectWriter = new ProjectWriter(document, projectData, file);
     }
     
+    public ProjectData getProjectData()
+    {
+        return projectData;
+    }
+    
     public boolean save()
     {
 	try

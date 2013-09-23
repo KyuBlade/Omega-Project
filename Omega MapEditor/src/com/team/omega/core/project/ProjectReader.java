@@ -19,7 +19,8 @@ public class ProjectReader
     
     public void initialize()
     {
-	projectData.setName(document.getBaseURI());
+	String[] _split = document.getBaseURI().split("\\/");
+	projectData.setName(_split[_split.length - 1]);
     }
     
 }
