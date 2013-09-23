@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.team.omega.ui.base.menu.BasicMenuItem;
 import com.team.omega.ui.base.menu.ContextMenu;
 import com.team.omega.ui.base.menu.SubMenuItem;
@@ -31,8 +32,19 @@ public class MainEditorTab extends Tab
 	super(name, container, skin, styleName);
 
 	// Create menu
+	final MainEditorTab _self = this;
 	menu = new ContextMenu(skin);
 	closeItem = new BasicMenuItem("Close", skin);
+	closeItem.addListener(new ClickListener()
+	{
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		((EditorContainer) _self.getContainer()).getProject().close();
+	    }
+
+	});
 	closeAllItem = new BasicMenuItem("Close All", skin);
 
 	menu.add(closeItem);

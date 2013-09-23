@@ -17,15 +17,17 @@ public class ProjectWriter
 
     private File file;
     private Document document;
+    private ProjectData projectData;
     
-    public ProjectWriter(Document document)
+    public ProjectWriter(Document document, ProjectData projectData)
     {
-	this(document, null);
+	this(document, projectData, null);
     }
     
-    public ProjectWriter(Document document, File file)
+    public ProjectWriter(Document document, ProjectData projectData, File file)
     {
 	this.document = document;
+	this.projectData = projectData;
 	this.file = file;
     }
     

@@ -20,6 +20,7 @@ public class ProjectHandler
     
     private ProjectReader projectReader;
     private ProjectWriter projectWriter;
+    private ProjectData projectData;
     
     public ProjectHandler(File file)
     {
@@ -32,8 +33,9 @@ public class ProjectHandler
 	    EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class).showPopup("Error", "Error when loading file.\n\n" + e.getMessage());
 	}
 	
-	projectReader = new ProjectReader(document);
-	projectWriter = new ProjectWriter(document, file);
+	projectData = new ProjectData();
+	projectReader = new ProjectReader(document, projectData);
+	projectWriter = new ProjectWriter(document, projectData, file);
     }
     
     public boolean save()

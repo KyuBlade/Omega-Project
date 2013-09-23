@@ -19,6 +19,7 @@ import com.team.omega.ui.base.menu.ContextMenu;
 import com.team.omega.ui.base.menu.MenuBar;
 import com.team.omega.ui.base.menu.ToolBar;
 import com.team.omega.ui.base.tab.Tab;
+import com.team.omega.ui.base.tab.TabContainer;
 import com.team.omega.ui.base.tab.TabPane;
 
 
@@ -114,7 +115,7 @@ public class InterfaceScreen extends BaseScreen
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		saveProcess();
+		saveProcess(getCurrentProject());
 	    }
 	    
 	});
@@ -130,6 +131,8 @@ public class InterfaceScreen extends BaseScreen
 	layout.row();
 	
 	tabPane = new TabPane(skin);
+	tabPane.addTab(new MainEditorTab("Test", new EditorContainer(new File("C:\\Users\\Kyu\\Documents\\test.omp"), skin), stage, skin));
+	tabPane.addTab(new MainEditorTab("Test 2", new EditorContainer(new File("C:\\Users\\Kyu\\Documents\\test2.omp"), skin), stage, skin));
 	layout.add(tabPane).expand().fill();
     }
     
@@ -178,13 +181,26 @@ public class InterfaceScreen extends BaseScreen
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		saveProcess();
+		saveProcess(getCurrentProject());
 	    }
 	    
 	});
 	fileMenu.add(_save);
 	fileMenu.add(new BasicMenuItem("Export...", skin));
-	fileMenu.add(new BasicMenuItem("Close", skin));
+	BasicMenuItem _close = new BasicMenuItem("Close", skin);
+	_close.addListener(new ClickListener() {
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		ProjectInstance _project = getCurrentProject();
+		if(_project != null)
+		    _project.close();
+	    }
+	    
+	});
+	fileMenu.add(_close);
+	
 	fileMenu.add(new BasicMenuItem("Close all", skin));
 	fileMenu.add(new BasicMenuItem("Exit", skin));
     }
@@ -278,13 +294,12 @@ public class InterfaceScreen extends BaseScreen
 	tilesetMenu.add(new BasicMenuItem("Manage...", "Ctrl + T", skin));
     }
     
-    public synchronized void saveProcess()
+    public synchronized void saveProcess(ProjectInstance project)
     {
-	ProjectInstance _project = getCurrentProject();
-	if(_project == null)
+	if(project == null)
 	    return;
 	
-	boolean _needSave = _project.save();
+	boolean _needSave = project.save();
 	if(_needSave)
 	    openSaveDialog(false);
     }
@@ -296,6 +311,11 @@ public class InterfaceScreen extends BaseScreen
 	    return null;
 	
 	return ((EditorContainer) _curTab.getContainer()).getProject();
+    }
+    
+    public TabPane getTabPane()
+    {
+	return tabPane;
     }
     
     @Override
