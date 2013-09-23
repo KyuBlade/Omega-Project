@@ -57,4 +57,13 @@ public class ProjectInstance
 	
     }
     
+    public static void closeAll()
+    {
+	InterfaceScreen _screen = EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class);
+	TabPane _tabPane = _screen.getTabPane();
+	
+	for(TabContainer _tab : _tabPane.getTabBind().values().toArray())
+	    ((EditorContainer) _tab).getProject().close();
+    }
+    
 }

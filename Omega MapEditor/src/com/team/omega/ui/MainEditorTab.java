@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.team.omega.core.ProjectInstance;
 import com.team.omega.ui.base.menu.BasicMenuItem;
 import com.team.omega.ui.base.menu.ContextMenu;
 import com.team.omega.ui.base.menu.SubMenuItem;
@@ -46,7 +47,17 @@ public class MainEditorTab extends Tab
 
 	});
 	closeAllItem = new BasicMenuItem("Close All", skin);
+	closeAllItem.addListener(new ClickListener()
+	{
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		ProjectInstance.closeAll();
+	    }
 
+	});
+	
 	menu.add(closeItem);
 	menu.add(closeAllItem);
 	stage.addActor(menu);

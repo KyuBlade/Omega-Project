@@ -19,7 +19,6 @@ import com.team.omega.ui.base.menu.ContextMenu;
 import com.team.omega.ui.base.menu.MenuBar;
 import com.team.omega.ui.base.menu.ToolBar;
 import com.team.omega.ui.base.tab.Tab;
-import com.team.omega.ui.base.tab.TabContainer;
 import com.team.omega.ui.base.tab.TabPane;
 
 
@@ -146,7 +145,7 @@ public class InterfaceScreen extends BaseScreen
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		openOpenDialog();
+		openSaveDialog(true);
 	    }
 
 	});
@@ -201,7 +200,17 @@ public class InterfaceScreen extends BaseScreen
 	});
 	fileMenu.add(_close);
 	
-	fileMenu.add(new BasicMenuItem("Close all", skin));
+	BasicMenuItem _closeAll = new BasicMenuItem("Close All", skin);
+	_closeAll.addListener(new ClickListener() {
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		ProjectInstance.closeAll();
+	    }
+	    
+	});
+	fileMenu.add(_closeAll);
 	fileMenu.add(new BasicMenuItem("Exit", skin));
     }
     
@@ -223,6 +232,10 @@ public class InterfaceScreen extends BaseScreen
 	}).start();
     }
     
+    /**
+     * Open a file chooser to save
+     * @param newProject true if it's a new project, else false
+     */
     public void openSaveDialog(final boolean newProject)
     {
 	if(!newProject && getCurrentProject() == null)
