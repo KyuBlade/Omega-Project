@@ -1,7 +1,7 @@
 package com.team.omega.ui.base.tab;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -14,6 +14,7 @@ public class TabPane extends Table
 
     private Table tabs;
     private Stack body;
+    private ButtonGroup buttonGroup;
 
     private ArrayMap<Tab, TabContainer> tabBind = new ArrayMap<>();
 
@@ -28,6 +29,7 @@ public class TabPane extends Table
     {
 	super(skin);
 
+	buttonGroup = new ButtonGroup();
 	tabs = new Table(skin);
 	tabs.setBackground(skin.get(styleName, TabPaneStyle.class).background);
 	body = new Stack();
@@ -42,6 +44,7 @@ public class TabPane extends Table
     public void addTab(Tab tab)
     {
 	tabBind.put(tab, tab.getContainer());
+	buttonGroup.add(tab);
 	Array<Actor> _children = new Array<>(tabs.getChildren());
 	_children.add(tab);
 	tabs.clear();
@@ -50,6 +53,7 @@ public class TabPane extends Table
 
 	body.add(tab.getContainer());
 	tab.setFrom(this);
+	
 	setCurrentTab(tab);
     }
 
@@ -62,6 +66,7 @@ public class TabPane extends Table
 	else if(_index - 1 >= 0)
 	    _tab = tabBind.getKeyAt(_index - 1);
 	
+	buttonGroup.remove(tab);
 	tabBind.getValueAt(_index).remove();
 	tabBind.removeIndex(_index);
 	tab.remove();
@@ -94,6 +99,7 @@ public class TabPane extends Table
 	
 	hideAllContainer();
 	tabBind.get(currentTab).setVisible(true);
+	currentTab.setChecked(true);
     }
 
     public static class TabPaneStyle

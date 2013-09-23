@@ -10,7 +10,7 @@ com.badlogic.gdx.graphics.Color: {
 	black: { a: 1, b: 0, g: 0, r: 0 }
 }, 
 com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over }	
+	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, checked: buttons/button_over }	
 }, 
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over }, 
@@ -21,7 +21,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	next: { down: buttons/next_down, up: buttons/next_up, over: buttons/next_over }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, font: default-font, fontColor: white }, 
+	default: { down: buttons/button_down, up: buttons/button_up, over: buttons/button_over, checked: buttons/button_down, font: default-font, fontColor: white }, 
 	menu: { down: buttons/button_menu_down, up: buttons/button_menu_up, over: buttons/button_menu_over, font: default-font, fontColor: white }, 
 	blank: { font: default-font, fontColor: white }
 },
