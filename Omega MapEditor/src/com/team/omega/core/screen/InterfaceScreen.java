@@ -5,10 +5,12 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.ArrayMap.Values;
 import com.team.omega.core.ProjectInstance;
 import com.team.omega.core.project.ProjectFileFilter;
 import com.team.omega.ui.EditorContainer;
@@ -19,6 +21,7 @@ import com.team.omega.ui.base.menu.ContextMenu;
 import com.team.omega.ui.base.menu.MenuBar;
 import com.team.omega.ui.base.menu.ToolBar;
 import com.team.omega.ui.base.tab.Tab;
+import com.team.omega.ui.base.tab.TabContainer;
 import com.team.omega.ui.base.tab.TabPane;
 
 
@@ -214,6 +217,9 @@ public class InterfaceScreen extends BaseScreen
 	fileMenu.add(new BasicMenuItem("Exit", skin));
     }
     
+    /**
+     * Open a file chooser to open a project
+     */
     public void openOpenDialog()
     {
 	new Thread(new Runnable() {
@@ -225,6 +231,19 @@ public class InterfaceScreen extends BaseScreen
 		if (_val == JFileChooser.APPROVE_OPTION)
 		{
 		    File _file = fileDialog.getSelectedFile();
+		    
+		    // Check if project is already open
+		    Values<TabContainer> _containers = tabPane.getTabBind().values();
+		    for(TabContainer _container : _containers)
+		    {
+			if(((EditorContainer) _container).getProject().getProjectHandler().getProjectData().getName().equalsIgnoreCase(_file.getName()))
+			{
+			    tabPane.setCurrentTab(tabPane.getTabBind().getKey(_container, false));
+			    
+			    return;
+			}
+		    }
+		    
 		    tabPane.addTab(new MainEditorTab(_file.getName(), new EditorContainer(_file, skin), stage, skin));
 		}
 	    }
@@ -233,7 +252,7 @@ public class InterfaceScreen extends BaseScreen
     }
     
     /**
-     * Open a file chooser to save
+     * Open a file chooser to save project
      * @param newProject true if it's a new project, else false
      */
     public void openSaveDialog(final boolean newProject)
