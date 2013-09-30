@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/team/omega/ui/base/EditorContainer.java" kind="src" path="src"/>
+	<classpathentry excluding="com/team/omega/ui/base/EditorContainer.java|com/team/omega/ui/base/list/TabbedList.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="/Omega/libs/gdx-sources.jar"/>
-	<classpathentry kind="lib" path="/Omega/libs/gdx.jar" sourcepath="/Omega/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="/Omega/libs/gdx.jar" sourcepath="/gdx/src"/>
 	<classpathentry kind="lib" path="/Omega-desktop/libs/gdx-backend-lwjgl-natives.jar"/>
 	<classpathentry kind="lib" path="/Omega-desktop/libs/gdx-backend-lwjgl-sources.jar"/>
 	<classpathentry kind="lib" path="/Omega-desktop/libs/gdx-backend-lwjgl.jar" sourcepath="/Omega-desktop/libs/gdx-backend-lwjgl-sources.jar"/>

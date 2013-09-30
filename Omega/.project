@@ -20,4 +20,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>net.sourceforge.metrics.nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>libs/gdx.jar</name>
+			<type>1</type>
+			<location>D:/common/workspace/Omega/Git/libgdx/gdx/gdx.jar</location>
+		</link>
+	</linkedResources>
 </projectDescription>

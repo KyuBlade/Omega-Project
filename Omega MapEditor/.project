@@ -51,14 +51,14 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>src/com/team/omega/ui/base/list/AdvancedList.java</name>
+			<type>1</type>
+			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/list/AdvancedList.java</location>
+		</link>
+		<link>
 			<name>src/com/team/omega/ui/base/list/ListRow.java</name>
 			<type>1</type>
 			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/list/ListRow.java</location>
-		</link>
-		<link>
-			<name>src/com/team/omega/ui/base/list/TabbedList.java</name>
-			<type>1</type>
-			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/list/TabbedList.java</location>
 		</link>
 		<link>
 			<name>src/com/team/omega/ui/base/menu/BasicMenuItem.java</name>
