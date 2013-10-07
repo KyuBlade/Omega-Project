@@ -1,8 +1,9 @@
 package com.team.omega.core.screen;
 
+
 public class EditorScreen extends BaseScreen
 {
-
+    
     private boolean isGridDisplay;
 
     public EditorScreen(ScreenManager screenManager)

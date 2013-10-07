@@ -5,7 +5,6 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,8 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ArrayMap.Values;
 import com.team.omega.core.ProjectInstance;
 import com.team.omega.core.project.ProjectFileFilter;
-import com.team.omega.ui.EditorContainer;
-import com.team.omega.ui.MainEditorTab;
+import com.team.omega.ui.ResourceWindow;
 import com.team.omega.ui.base.menu.BasicMenuItem;
 import com.team.omega.ui.base.menu.CheckboxMenuItem;
 import com.team.omega.ui.base.menu.ContextMenu;
@@ -23,6 +21,8 @@ import com.team.omega.ui.base.menu.ToolBar;
 import com.team.omega.ui.base.tab.Tab;
 import com.team.omega.ui.base.tab.TabContainer;
 import com.team.omega.ui.base.tab.TabPane;
+import com.team.omega.ui.tab.MainEditorTab;
+import com.team.omega.ui.tab.container.EditorContainer;
 
 
 
@@ -37,12 +37,12 @@ public class InterfaceScreen extends BaseScreen
     private ContextMenu fileMenu;
     private ContextMenu editMenu;
     private ContextMenu viewMenu;
-    private ContextMenu tilesetMenu;
+    private ContextMenu resourceMenu;
     
     private TextButton fileMenuButton;
     private TextButton editMenuButton;
     private TextButton viewMenuButton;
-    private TextButton tilesetMenuButton;
+    private TextButton resourceMenuButton;
     
     private ToolBar toolBar;
     
@@ -51,6 +51,8 @@ public class InterfaceScreen extends BaseScreen
     private ImageButton saveButton;
     private ImageButton undoButton;
     private ImageButton redoButton;
+    
+    private ResourceWindow resourceWindow;
     
     private TabPane tabPane;
 
@@ -81,10 +83,10 @@ public class InterfaceScreen extends BaseScreen
 	createViewMenu();
 	menuBar.addContextMenu(viewMenuButton, viewMenu, stage);
 	
-	tilesetMenuButton = new TextButton("Tileset", skin, "menu");
-	tilesetMenuButton.setWidth(70f);
-	createTilesetMenu();
-	menuBar.addContextMenu(tilesetMenuButton, tilesetMenu, stage);
+	resourceMenuButton = new TextButton("Tileset", skin, "menu");
+	resourceMenuButton.setWidth(70f);
+	createResourceMenu();
+	menuBar.addContextMenu(resourceMenuButton, resourceMenu, stage);
 	
 	layout.add(menuBar).expandX().fillX().left();
 	layout.row();
@@ -320,10 +322,22 @@ public class InterfaceScreen extends BaseScreen
 	viewMenu.add(_checkboxMenu);
     }
     
-    public void createTilesetMenu()
+    public void createResourceMenu()
     {
-	tilesetMenu = new ContextMenu(skin);
-	tilesetMenu.add(new BasicMenuItem("Manage...", "Ctrl + T", skin));
+	resourceMenu = new ContextMenu(skin);
+	BasicMenuItem _manage = new BasicMenuItem("Manage...", "Ctrl + T", skin);
+	_manage.addListener(new ClickListener() {
+	    
+	    @Override
+	    public void clicked(InputEvent event, float x, float y)
+	    {
+		resourceWindow = ResourceWindow.getInstance(getCurrentProject(), skin);
+		stage.addActor(resourceWindow);
+		resourceWindow.setVisible(true);
+	    }
+	    
+	});
+	resourceMenu.add(_manage);
     }
     
     public synchronized void saveProcess(ProjectInstance project)

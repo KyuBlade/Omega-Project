@@ -5,7 +5,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.team.omega.core.project.resource.ResourceLoader;
 import com.team.omega.core.screen.EditorScreen;
 import com.team.omega.core.screen.InterfaceScreen;
 import com.team.omega.core.screen.ScreenManager;
@@ -13,8 +15,11 @@ import com.team.omega.core.screen.ScreenManager;
 public class EditorCore extends ApplicationAdapter
 {
 
-    private AssetManager assetManager;
+    private AssetManager internalAssetManager;
+    private AssetManager externalAssetManager;
     private ScreenManager screenManager;
+    
+    private ResourceLoader resourceLoader;
 
     private static EditorCore instance;
 
@@ -36,13 +41,21 @@ public class EditorCore extends ApplicationAdapter
     {
 	Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
-	assetManager = new AssetManager();
-	assetManager.load("skin/skin.atlas", TextureAtlas.class);
-	assetManager.finishLoading();
+	Texture.setEnforcePotImages(false);
+	
+	externalAssetManager = new AssetManager(new AbsoluteFileHandleResolver());
+	//externalAssetManager.getLogger().setLevel(Logger.DEBUG);
+	
+	internalAssetManager = new AssetManager();
+	//internalAssetManager.getLogger().setLevel(Logger.DEBUG);
+	internalAssetManager.load("skin/skin.atlas", TextureAtlas.class);
+	internalAssetManager.finishLoading();
 	
 	screenManager = new ScreenManager();
 	screenManager.addScreen(EditorScreen.class);
 	screenManager.addScreen(InterfaceScreen.class);
+	
+	resourceLoader = new ResourceLoader();
     }
 
     @Override
@@ -53,6 +66,7 @@ public class EditorCore extends ApplicationAdapter
 	Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
 	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 	
+	resourceLoader.update();
 	screenManager.render(Gdx.graphics.getDeltaTime());
     }
 
@@ -85,18 +99,29 @@ public class EditorCore extends ApplicationAdapter
     {
 	super.dispose();
 	
-	assetManager.dispose();
+	internalAssetManager.dispose();
+	externalAssetManager.dispose();
 	screenManager.dispose();
     }
 
-    public AssetManager getAssetManager()
+    public AssetManager getInternalAssetManager()
     {
-	return assetManager;
+	return internalAssetManager;
+    }
+    
+    public AssetManager getExternalAssetManager()
+    {
+	return externalAssetManager;
     }
 
     public ScreenManager getScreenManager()
     {
 	return screenManager;
+    }
+    
+    public ResourceLoader getResourceLoader()
+    {
+	return resourceLoader;
     }
     
     public ProjectInstance getCurrentProject()

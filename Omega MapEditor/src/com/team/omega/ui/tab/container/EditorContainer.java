@@ -1,4 +1,4 @@
-package com.team.omega.ui;
+package com.team.omega.ui.tab.container;
 
 import java.io.File;
 
@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.SplitPane;
 import com.esotericsoftware.tablelayout.Value;
 import com.team.omega.core.ProjectInstance;
 import com.team.omega.core.project.ProjectData;
+import com.team.omega.ui.MenuPanel;
 import com.team.omega.ui.base.panel.Panel;
 import com.team.omega.ui.base.tab.TabContainer;
 

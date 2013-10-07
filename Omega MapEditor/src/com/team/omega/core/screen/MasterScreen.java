@@ -31,7 +31,7 @@ public class MasterScreen implements Screen
 	inputProcessor = new InputMultiplexer();
 	Gdx.input.setInputProcessor(inputProcessor);
 	
-	TextureAtlas _atlas = EditorCore.getInstance().getAssetManager().get("skin/skin.atlas");
+	TextureAtlas _atlas = EditorCore.getInstance().getInternalAssetManager().get("skin/skin.atlas");
 	skin = new Skin(Gdx.files.internal("skin/default.json"), _atlas);
 	
 	mainBatch = new SpriteBatch();

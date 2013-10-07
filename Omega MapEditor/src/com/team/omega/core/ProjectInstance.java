@@ -4,28 +4,36 @@ import java.io.File;
 
 import com.badlogic.gdx.utils.ArrayMap;
 import com.team.omega.core.project.ProjectHandler;
+import com.team.omega.core.project.resource.ProjectResource;
 import com.team.omega.core.screen.InterfaceScreen;
-import com.team.omega.ui.EditorContainer;
 import com.team.omega.ui.base.tab.Tab;
 import com.team.omega.ui.base.tab.TabContainer;
 import com.team.omega.ui.base.tab.TabPane;
+import com.team.omega.ui.tab.container.EditorContainer;
 
 
 public class ProjectInstance
 {
 
     private ProjectHandler handler;
+    private ProjectResource resources;
     
     private boolean needSave;
     
     public ProjectInstance(File file)
     {
-	this.handler = new ProjectHandler(file);
+	handler = new ProjectHandler(file);
+	resources = new ProjectResource();
     }
     
     public ProjectHandler getProjectHandler()
     {
 	return handler;
+    }
+    
+    public ProjectResource getProjectResource()
+    {
+	return resources;
     }
     
     public boolean save()
