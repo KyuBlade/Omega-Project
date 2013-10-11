@@ -25,8 +25,8 @@ public class ResourceListRow extends ListRow
 	thumb = new Image(resource.getTextureRegion());
 	path = EditorCore.getInstance().getExternalAssetManager().getAssetFileName(resource.getTextureRegion().getTexture());
 	
-	add(thumb).expandX();
-	add(path).minWidth(Value.percentWidth(0.5f)).left();
+	add(thumb).maxSize(200f, 200f).expandX();
+	add(path).left();
     }
     
     public Resource getResource()

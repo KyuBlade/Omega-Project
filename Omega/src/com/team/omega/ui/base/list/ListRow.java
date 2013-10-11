@@ -1,58 +1,66 @@
 package com.team.omega.ui.base.list;
 
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 
-public class ListRow
+
+public abstract class ListRow extends Table
 {
 
-    private String[] content;
-    private String formatedContent;
-    private Object[] store;
+    private boolean isSelected;
+    private ListRowStyle style;
     
-    public ListRow()
+    public ListRow(Skin skin)
     {
+	this(skin, "default");
+    }
+    
+    public ListRow(Skin skin, String styleName)
+    {
+	super(skin);
+	
+	setTouchable(Touchable.enabled);
+	setStyle(skin.get(styleName, ListRowStyle.class));
+    }
+    
+    public void setStyle(ListRowStyle style)
+    {
+	this.style = style;
+	
+	setBackground(style.unselectedBackground);
+    }
+    
+    public void setIsSelected(boolean isSelected)
+    {
+	this.isSelected = isSelected;
+	
+	if(style == null)
+	    return;
+	
+	if(isSelected)
+	    setBackground(style.selectedBackground);
+	else
+	    setBackground(style.unselectedBackground);
+    }
+    
+    public boolean isSelected()
+    {
+	return isSelected;
+    }
+    
+    public static class ListRowStyle
+    {
+	
+	public Drawable selectedBackground, unselectedBackground;
+	
+	public ListRowStyle()
+	{
+	    
+	}
 	
     }
     
-    public ListRow(String[] content, Object[] store)
-    {
-	this.content = content;
-	this.store = store;
-    }
-
-    public String[] getContent()
-    {
-	return content;
-    }
-    
-    private void formatContent()
-    {
-	StringBuilder _sBuild = new StringBuilder();
-	for(String _s : content)
-	    _sBuild.append(_s).append("\t");
-	
-	formatedContent = _sBuild.toString();
-    }
-    
-    public String getFormatedContent()
-    {
-	return formatedContent;
-    }
-    public void setContent(String[] content)
-    {
-	this.content = content;
-	
-	formatContent();
-    }
-
-    public Object[] getStore()
-    {
-	return store;
-    }
-
-    public void setStore(Object[] store)
-    {
-	this.store = store;
-    }
-
 }

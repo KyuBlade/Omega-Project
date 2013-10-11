@@ -12,8 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.team.omega.core.EditorCore;
 import com.team.omega.core.project.resource.ObjectResource;
 import com.team.omega.core.project.resource.ProjectResource;
+import com.team.omega.core.project.resource.ResourceLoader;
+import com.team.omega.core.screen.InterfaceScreen;
 import com.team.omega.ui.ProgressWindow;
+import com.team.omega.ui.ResourceGridItem;
 import com.team.omega.ui.ResourceListRow;
+import com.team.omega.ui.tab.container.EditorContainer;
 import com.team.omega.ui.tab.container.ResourceContainer;
 
 public class ObjectResourceContainer extends ResourceContainer
@@ -53,7 +57,7 @@ public class ObjectResourceContainer extends ResourceContainer
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		folderChooser.setSelectedFile(new File("D:\\windows\\Downloads\\tiles\\ground"));
+		folderChooser.setSelectedFile(new File("D:\\windows\\Downloads\\tiles\\sample"));
 		new Thread(new Runnable() {
 
 		    @Override
@@ -114,24 +118,27 @@ public class ObjectResourceContainer extends ResourceContainer
     {
 	progress = new ProgressWindow(getStage(), skin);
 	progress.show();
-
+	
+	final EditorContainer _container = ((EditorContainer) EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class).getProjectTabPane().getCurrentTab().getContainer());
+	final ResourceLoader _loader = EditorCore.getInstance().getResourceLoader();
+	final AssetManager _assets = EditorCore.getInstance().getExternalAssetManager();
+	
 	for (int i = 0; i < toLoad.size; i++)
 	{
 	    final int _current = i;
 	    final String _file = toLoad.get(i);
-	    EditorCore.getInstance().getResourceLoader().addToQueue(new Runnable() {
+	    _loader.addToQueue(new Runnable() {
 
 		@Override
 		public void run()
 		{
-		    AssetManager _assets = EditorCore.getInstance().getExternalAssetManager();
-
 		    _assets.load(_file, Texture.class);
 		    _assets.finishLoading();
 
 		    ObjectResource _resource = new ObjectResource(_assets.get(_file, Texture.class));
 		    resource.getObjectResources().add(_resource);
 		    resourceList.addItem(new ResourceListRow(_resource, skin));
+		    _container.getResourceGrid().add(new ResourceGridItem(skin, _resource.getTextureRegion()));
 		    
 		    progress.getProgressBar().setPercent((float) _current / (toLoad.size - 1));
 		}
@@ -139,7 +146,7 @@ public class ObjectResourceContainer extends ResourceContainer
 	    });
 	}
 	
-	EditorCore.getInstance().getResourceLoader().addToQueue(new Runnable() {
+	_loader.addToQueue(new Runnable() {
 
 	    @Override
 	    public void run()

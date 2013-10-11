@@ -52,7 +52,7 @@ public class ProjectInstance
     public void close()
     {
 	InterfaceScreen _screen = EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class);
-	TabPane _tabPane = _screen.getTabPane();
+	TabPane _tabPane = _screen.getProjectTabPane();
 	
 	_screen.saveProcess(this);
 	
@@ -73,7 +73,7 @@ public class ProjectInstance
     public static void closeAll()
     {
 	InterfaceScreen _screen = EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class);
-	TabPane _tabPane = _screen.getTabPane();
+	TabPane _tabPane = _screen.getProjectTabPane();
 	
 	for(TabContainer _tab : _tabPane.getTabBind().values().toArray())
 	    ((EditorContainer) _tab).getProject().close();

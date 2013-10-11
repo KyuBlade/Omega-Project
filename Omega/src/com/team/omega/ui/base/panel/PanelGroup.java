@@ -26,7 +26,7 @@ public class PanelGroup
     public void add(Panel panel)
     {
 	if (panel == null)
-	    throw new IllegalArgumentException("panem cannot be null.");
+	    throw new IllegalArgumentException("panel cannot be null.");
 	panel.setPanelGroup(null);
 	boolean shouldCheck = panel.isChecked() || panels.size < minCheckCount;
 	panel.setChecked(false);

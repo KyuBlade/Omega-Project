@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Cullable;
 import com.badlogic.gdx.utils.Array;
 
-public class AdvancedList<T extends ListRow> extends Table implements Cullable
+public class AdvancedList<T extends ListRow> extends Table
 {
 
     private Array<T> items = new Array<>();

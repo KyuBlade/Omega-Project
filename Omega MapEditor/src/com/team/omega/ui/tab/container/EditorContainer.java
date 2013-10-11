@@ -9,6 +9,8 @@ import com.esotericsoftware.tablelayout.Value;
 import com.team.omega.core.ProjectInstance;
 import com.team.omega.core.project.ProjectData;
 import com.team.omega.ui.MenuPanel;
+import com.team.omega.ui.ResourceGridItem;
+import com.team.omega.ui.base.grid.GridSelection;
 import com.team.omega.ui.base.panel.Panel;
 import com.team.omega.ui.base.tab.TabContainer;
 
@@ -18,15 +20,18 @@ public class EditorContainer extends TabContainer
     private ProjectInstance project;
     private ProjectData projectData;
     
+    private SplitPane leftSplitPane;
     private SplitPane rightSplitPane;
+    
     private Panel rightPanel;
     private Panel leftPanel;
-    private Panel tilePanel;
-    private SplitPane leftSplitPane;
+    private Panel resourcePanel;
 
     private MenuPanel mapPropertiesPanel;
-
-    private ScrollPane tileScrollPane;
+    
+    private GridSelection<ResourceGridItem> resourceGrid;
+    
+    private ScrollPane resourceScrollPane;
     private ScrollPane rightScrollPane;
 
     public EditorContainer(File file, Skin skin)
@@ -46,13 +51,15 @@ public class EditorContainer extends TabContainer
 	mapPropertiesPanel.add("Width : " + projectData.getWidth());
 	mapPropertiesPanel.add("Height : " + projectData.getHeight());
 
-	tilePanel = new Panel(skin);
+	resourcePanel = new Panel(skin, "light-grey");
+	resourceGrid = new GridSelection<>();
+	resourcePanel.add(resourceGrid).expand().fill();
 
-	tileScrollPane = new ScrollPane(tilePanel, skin);
-	tileScrollPane.setFadeScrollBars(false);
-	tileScrollPane.setFlickScroll(false);
+	resourceScrollPane = new ScrollPane(resourcePanel, skin);
+	resourceScrollPane.setFadeScrollBars(false);
+	resourceScrollPane.setFlickScroll(false);
 
-	leftSplitPane = new SplitPane(new Panel(skin, "blank"), tileScrollPane, true, skin);
+	leftSplitPane = new SplitPane(new Panel(skin, "blank"), resourceScrollPane, true, skin);
 	leftPanel.bottom().add(leftSplitPane).minHeight(Value.percentHeight(0.5f)).expandX().fillX();
 
 	rightPanel.defaults().expandX().fill();
@@ -71,6 +78,11 @@ public class EditorContainer extends TabContainer
     public ProjectInstance getProject()
     {
 	return project;
+    }
+
+    public GridSelection<ResourceGridItem> getResourceGrid()
+    {
+        return resourceGrid;
     }
 
 }
