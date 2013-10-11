@@ -54,7 +54,7 @@ public class InterfaceScreen extends BaseScreen
     
     private ResourceWindow resourceWindow;
     
-    private TabPane tabPane;
+    private TabPane projectTabPane;
 
     public InterfaceScreen(ScreenManager screenManager)
     {
@@ -134,10 +134,10 @@ public class InterfaceScreen extends BaseScreen
 	layout.add(toolBar).expandX().fillX().left();
 	layout.row();
 	
-	tabPane = new TabPane(skin);
-	tabPane.addTab(new MainEditorTab("Test", new EditorContainer(new File("C:\\Users\\Kyu\\Documents\\test.omp"), skin), stage, skin));
-	tabPane.addTab(new MainEditorTab("Test 2", new EditorContainer(new File("C:\\Users\\Kyu\\Documents\\test2.omp"), skin), stage, skin));
-	layout.add(tabPane).expand().fill();
+	projectTabPane = new TabPane(skin);
+	projectTabPane.addTab(new MainEditorTab("Test", new EditorContainer(new File("C:\\Users\\Kyu\\Documents\\test.omp"), skin), stage, skin));
+	projectTabPane.addTab(new MainEditorTab("Test 2", new EditorContainer(new File("C:\\Users\\Kyu\\Documents\\test2.omp"), skin), stage, skin));
+	layout.add(projectTabPane).expand().fill();	
     }
     
     public void createFileMenu()
@@ -235,18 +235,18 @@ public class InterfaceScreen extends BaseScreen
 		    File _file = fileDialog.getSelectedFile();
 		    
 		    // Check if project is already open
-		    Values<TabContainer> _containers = tabPane.getTabBind().values();
+		    Values<TabContainer> _containers = projectTabPane.getTabBind().values();
 		    for(TabContainer _container : _containers)
 		    {
 			if(((EditorContainer) _container).getProject().getProjectHandler().getProjectData().getName().equalsIgnoreCase(_file.getName()))
 			{
-			    tabPane.setCurrentTab(tabPane.getTabBind().getKey(_container, false));
+			    projectTabPane.setCurrentTab(projectTabPane.getTabBind().getKey(_container, false));
 			    
 			    return;
 			}
 		    }
 		    
-		    tabPane.addTab(new MainEditorTab(_file.getName(), new EditorContainer(_file, skin), stage, skin));
+		    projectTabPane.addTab(new MainEditorTab(_file.getName(), new EditorContainer(_file, skin), stage, skin));
 		}
 	    }
 
@@ -279,7 +279,7 @@ public class InterfaceScreen extends BaseScreen
 		    }
 			
 		    if(newProject)
-			tabPane.addTab(new MainEditorTab(_file.getName(), new EditorContainer(_file, skin), stage, skin));
+			projectTabPane.addTab(new MainEditorTab(_file.getName(), new EditorContainer(_file, skin), stage, skin));
 		    else
 		    {
 			getCurrentProject().saveAs(_file);
@@ -331,6 +331,9 @@ public class InterfaceScreen extends BaseScreen
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
+		if(getCurrentProject() == null)
+			return;
+		
 		resourceWindow = ResourceWindow.getInstance(getCurrentProject(), skin);
 		stage.addActor(resourceWindow);
 		resourceWindow.setVisible(true);
@@ -352,16 +355,16 @@ public class InterfaceScreen extends BaseScreen
     
     public ProjectInstance getCurrentProject()
     {
-	Tab _curTab = tabPane.getCurrentTab();
+	Tab _curTab = projectTabPane.getCurrentTab();
 	if(_curTab == null)
 	    return null;
 	
 	return ((EditorContainer) _curTab.getContainer()).getProject();
     }
     
-    public TabPane getTabPane()
+    public TabPane getProjectTabPane()
     {
-	return tabPane;
+	return projectTabPane;
     }
     
     @Override
