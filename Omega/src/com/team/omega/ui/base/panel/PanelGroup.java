@@ -60,6 +60,11 @@ public class PanelGroup
 	    remove(panels[i]);
     }
 
+    public void setCheckedIndex(int index)
+    {
+	panels.get(index).setChecked(true);
+    }
+    
     public void setChecked(int id)
     {
 	for (int i = 0, n = panels.size; i < n; i++)
@@ -130,6 +135,7 @@ public class PanelGroup
     {
 	if (checkedPanels.size > 0)
 	    return checkedPanels.get(0);
+	
 	return null;
     }
 
@@ -141,6 +147,11 @@ public class PanelGroup
     public Array<Panel> getPanels()
     {
 	return panels;
+    }
+    
+    public Panel getLastChecked()
+    {
+	return lastChecked;
     }
 
     /** Sets the minimum number of panels that must be checked. Default is 1. */

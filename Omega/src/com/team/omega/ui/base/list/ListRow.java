@@ -2,16 +2,13 @@ package com.team.omega.ui.base.list;
 
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.team.omega.ui.base.panel.Panel;
 
 
 
-public abstract class ListRow extends Table
+public abstract class ListRow extends Panel
 {
-
-    private boolean isSelected;
-    private ListRowStyle style;
     
     public ListRow(Skin skin)
     {
@@ -28,33 +25,13 @@ public abstract class ListRow extends Table
     
     public void setStyle(ListRowStyle style)
     {
-	this.style = style;
-	
-	setBackground(style.unselectedBackground);
-    }
-    
-    public void setIsSelected(boolean isSelected)
-    {
-	this.isSelected = isSelected;
-	
-	if(style == null)
-	    return;
-	
-	if(isSelected)
-	    setBackground(style.selectedBackground);
-	else
-	    setBackground(style.unselectedBackground);
-    }
-    
-    public boolean isSelected()
-    {
-	return isSelected;
+	super.setStyle(new PanelStyle(style.background, style.disabled, style.selected, style.over));
     }
     
     public static class ListRowStyle
     {
 	
-	public Drawable selectedBackground, unselectedBackground;
+	public Drawable background, disabled, selected, over;
 	
 	public ListRowStyle()
 	{

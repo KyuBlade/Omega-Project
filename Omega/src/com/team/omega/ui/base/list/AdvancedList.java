@@ -3,15 +3,18 @@ package com.team.omega.ui.base.list;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Cullable;
 import com.badlogic.gdx.utils.Array;
+import com.team.omega.ui.base.panel.Panel;
+import com.team.omega.ui.base.panel.PanelGroup;
 
 public class AdvancedList<T extends ListRow> extends Table
 {
 
     private Array<T> items = new Array<>();
-    private int selectedIndex;
+    private int selectedIndex = -1;
     private boolean selectable = true;
+    
+    private PanelGroup panelGroup;
 
     public AdvancedList()
     {
@@ -21,22 +24,13 @@ public class AdvancedList<T extends ListRow> extends Table
 
     public AdvancedList(T[] items)
     {
+	panelGroup = new PanelGroup();
+	
 	setWidth(getPrefWidth());
 	setHeight(getPrefHeight());
 
+	top();
 	defaults().expandX().fillX();
-    }
-
-    /** Sets whether this List's items are selectable. If not selectable, touch events will not be consumed. */
-    public void setSelectable(boolean selectable)
-    {
-	this.selectable = selectable;
-    }
-
-    /** @return True if items are selectable. */
-    public boolean isSelectable()
-    {
-	return selectable;
     }
 
     /** @return The index of the currently selected item. The top item has an index of 0. Nothing selected has an index of -1. */
@@ -48,10 +42,11 @@ public class AdvancedList<T extends ListRow> extends Table
     /** @return The ListRow of the currently selected item, or null if the list is empty or nothing is selected. */
     public T getSelection()
     {
-	if (items.size == 0 || selectedIndex == -1)
+	try {
+	    return items.get(selectedIndex);
+	} catch(IndexOutOfBoundsException e) {
 	    return null;
-
-	return items.get(selectedIndex);
+	}
     }
 
     public Array<T> getItems()
@@ -66,23 +61,30 @@ public class AdvancedList<T extends ListRow> extends Table
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		items.get(selectedIndex).setIsSelected(false);
-		selectedIndex = items.indexOf(item, false);
-		item.setIsSelected(true);
+		setSelected(items.indexOf(item, false));
 	    }
 	    
 	});
 	
+	panelGroup.add(item);
 	items.add(item);
 	add(item).row();
     }
     
     public void removeItem(T item)
     {
+	int _index = panelGroup.getPanels().indexOf(item, false);
+	Array<Panel> _panels = panelGroup.getPanels();
+	
+	panelGroup.remove(item);
+	
 	item.remove();
-	int _index = items.indexOf(item, false);
 	items.removeValue(item, false);
-	items.get(_index).setIsSelected(true);
+	
+	if(_index >= panelGroup.getPanels().size - 1 && _panels.size > 0)
+	    _index = panelGroup.getPanels().indexOf(_panels.peek(), false);
+	
+	setSelected(_index);
     }
     
     /**
@@ -94,6 +96,17 @@ public class AdvancedList<T extends ListRow> extends Table
 	    return;
 
 	removeItem(items.get(selectedIndex));
+    }
+    
+    public void setSelected(int index)
+    {
+	if(index < 0 || index > items.size)
+	    return;
+	
+	selectedIndex = index;
+	
+	if(panelGroup.getPanels().size > 0)
+	    panelGroup.setCheckedIndex(index);
     }
 
 }
