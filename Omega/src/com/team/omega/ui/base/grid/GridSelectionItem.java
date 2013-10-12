@@ -1,5 +1,6 @@
 package com.team.omega.ui.base.grid;
 
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.team.omega.ui.base.panel.Panel;
@@ -17,6 +18,7 @@ public class GridSelectionItem extends Panel
     {
 	super(skin, styleName);
 	
+	setTouchable(Touchable.enabled);
 	setStyle(skin.get(styleName, GridSelectionItemStyle.class));
 	
 	debugTable();

@@ -9,20 +9,25 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.team.omega.core.EditorCore;
 import com.team.omega.core.project.resource.ObjectResource;
 import com.team.omega.core.project.resource.ProjectResource;
+import com.team.omega.core.project.resource.Resource;
 import com.team.omega.core.project.resource.ResourceLoader;
 import com.team.omega.core.screen.InterfaceScreen;
 import com.team.omega.ui.ProgressWindow;
 import com.team.omega.ui.ResourceGridItem;
 import com.team.omega.ui.ResourceListRow;
+import com.team.omega.ui.base.grid.GridSelection;
 import com.team.omega.ui.tab.container.EditorContainer;
 import com.team.omega.ui.tab.container.ResourceContainer;
 
 public class ObjectResourceContainer extends ResourceContainer
 {
 
+    private ArrayMap<Resource, ResourceGridItem> resourceGridBind = new ArrayMap<>();
+    
     public ObjectResourceContainer(final ProjectResource resource, Skin skin)
     {
 	super(resource, skin);
@@ -83,8 +88,17 @@ public class ObjectResourceContainer extends ResourceContainer
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		resource.removeObjectResource((ObjectResource) resourceList.getSelection().getResource());
+		final GridSelection<ResourceGridItem> _grid = ((EditorContainer) EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class).getProjectTabPane().getCurrentTab().getContainer()).getResourceGrid();
+		
+		if(resourceList.getSelection() == null)
+		    return;
+		
+		ObjectResource _resource = (ObjectResource) resourceList.getSelection().getResource();
+		resource.removeObjectResource(_resource);
 		resourceList.removeSelected();
+		
+		_grid.remove(resourceGridBind.get(_resource), true);
+		resourceGridBind.removeKey(_resource);		
 	    }
 
 	});
@@ -138,7 +152,10 @@ public class ObjectResourceContainer extends ResourceContainer
 		    ObjectResource _resource = new ObjectResource(_assets.get(_file, Texture.class));
 		    resource.getObjectResources().add(_resource);
 		    resourceList.addItem(new ResourceListRow(_resource, skin));
-		    _container.getResourceGrid().add(new ResourceGridItem(skin, _resource.getTextureRegion()));
+		    
+		    ResourceGridItem _item = new ResourceGridItem(skin, _resource.getTextureRegion());
+		    _container.getResourceGrid().add(_item);
+		    resourceGridBind.put(_resource, _item);
 		    
 		    progress.getProgressBar().setPercent((float) _current / (toLoad.size - 1));
 		}
@@ -151,6 +168,7 @@ public class ObjectResourceContainer extends ResourceContainer
 	    @Override
 	    public void run()
 	    {
+		_container.getResourceGrid().update();
 		progress.hide();
 	    }
 

@@ -1,6 +1,5 @@
 package com.team.omega.ui.base.grid;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -17,6 +16,11 @@ import com.team.omega.ui.base.panel.PanelGroup;
 public class GridSelection<T extends GridSelectionItem> extends Table
 {
 
+    public enum SelectionMode {
+	MULTI,
+	SINGLE
+    }
+    
     private Array<T> items = new Array<>();
     
     private boolean isVertical;
@@ -25,6 +29,9 @@ public class GridSelection<T extends GridSelectionItem> extends Table
     private float defaultItemHeight = 100f;
 
     private int itemCount;
+    private SelectionMode selectionMode = SelectionMode.SINGLE;
+    
+    private T[] selection;
     
     private PanelGroup panelGroup;
     
@@ -49,8 +56,6 @@ public class GridSelection<T extends GridSelectionItem> extends Table
 	this.isVertical = isVertical;
 	this.itemCount = itemCount;
 	
-	setTouchable(Touchable.enabled);
-	
 	panelGroup = new PanelGroup();
 	defaults().minSize(defaultItemWidth, defaultItemHeight).maxSize(defaultItemWidth, defaultItemHeight);
     }
@@ -66,28 +71,68 @@ public class GridSelection<T extends GridSelectionItem> extends Table
     
     /**
      * Add a {@link GridSelectionItem} to the grid according to {@link isVertical} and itemCount
-     * @param item
-     * @return
+     * You need to call {@link GridSelection#update()} after this to layout
+     * @param item {@link GridSelectionItem} to add
      */
-    public Cell<?> add(T item)
+    public void add(T item)
+    {
+	add(item, false);
+    }
+    
+    /**
+     * Add a {@link GridSelectionItem} to the grid according to {@link isVertical} and itemCount
+     * @param item  {@link GridSelectionItem} to add
+     * @param update true if you want to update automatically after this add
+     */
+    public void add(T item, boolean update)
     {
 	panelGroup.add(item);
+	items.add(item);
 	
-	super.getChildren().add(item);
-	GridSelectionItem[] _children = getChildren().toArray(GridSelectionItem.class);
+	if(update)
+	    update();
+    }
+    
+    /**
+     * Remove a {@link GridSelectionItem}
+     * @param item {@link GridSelectionItem} to remove
+     */
+    public void remove(T item)
+    {
+	remove(item, false);
+    }
+    
+    /**
+     * Remove a {@link GridSelectionItem}
+     * @param item {@link GridSelectionItem} to add
+     * @param update true if you want to update automatically after this remove
+     */
+    public void remove(T item, boolean update)
+    {
+	panelGroup.remove(item);
+	items.removeValue(item, false);
+	item.remove();
+	
+	if(update)
+	    update();
+    }
+    
+    /** 
+     * Update the TableLayout.
+     * Call it when you have finished to add your item
+     */
+    public void update()
+    {
 	clearChildren();
 	
-	int _splitedSize = _children.length / itemCount + 1;
-	Cell<?> _lastCell = null;
-	for(int i = 0; i < _children.length; i++)
+	int _splitedSize = items.size / itemCount + 1;
+	for(int i = 0; i < items.size; i++)
 	{
 	    if((!isVertical && i % _splitedSize == 0) || (isVertical && i % itemCount == 0))
 		row();
 	    
-	    _lastCell = super.add(_children[i]);
+	    super.add(items.get(i));
 	}
-	
-	return _lastCell;
     }
     
     /**
@@ -104,6 +149,25 @@ public class GridSelection<T extends GridSelectionItem> extends Table
     public int getItemCount()
     {
 	return itemCount;
+    }
+    
+    /**
+     * @return Return the current selection if you are in MultiSelection mode
+     */
+    public T getSelection()
+    {
+	if(selectionMode != SelectionMode.SINGLE)
+	    throw new OptimizationException("You are in MultiSelection mode, you must use getSelections()");
+	    
+	return selection[0];
+    }
+    
+    /**
+     * @return Return the current selected items
+     */
+    public T[] getSelections()
+    {
+	return selection;
     }
     
 }
