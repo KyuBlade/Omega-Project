@@ -69,6 +69,8 @@ public class AdvancedList<T extends ListRow> extends Table
 	panelGroup.add(item);
 	items.add(item);
 	add(item).row();
+	
+	setSelected(items.size - 1);
     }
     
     public void removeItem(T item)
@@ -98,6 +100,11 @@ public class AdvancedList<T extends ListRow> extends Table
 	removeItem(items.get(selectedIndex));
     }
     
+    /**
+     * Set the selected item
+     * 
+     * @param index The index of the item to be selected
+     */
     public void setSelected(int index)
     {
 	if(index < 0 || index > items.size)

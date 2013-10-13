@@ -93,12 +93,22 @@ public class ObjectResourceContainer extends ResourceContainer
 		if(resourceList.getSelection() == null)
 		    return;
 		
+		// Get selected resource
 		ObjectResource _resource = (ObjectResource) resourceList.getSelection().getResource();
-		resource.removeObjectResource(_resource);
+		
+		// Remove from the list
 		resourceList.removeSelected();
 		
+		// Remove from project resources
+		resource.removeObjectResource(_resource);
+		
+		// Remove from the GridSelection
 		_grid.remove(resourceGridBind.get(_resource), true);
-		resourceGridBind.removeKey(_resource);		
+		resourceGridBind.removeKey(_resource);
+		
+		// Release from memory
+		AssetManager _assets = EditorCore.getInstance().getExternalAssetManager();
+		_assets.unload(_assets.getAssetFileName(_resource.getTextureRegion().getTexture()));
 	    }
 
 	});
@@ -140,12 +150,15 @@ public class ObjectResourceContainer extends ResourceContainer
 	for (int i = 0; i < toLoad.size; i++)
 	{
 	    final int _current = i;
-	    final String _file = toLoad.get(i);
+	    final int _total = toLoad.size;
 	    _loader.addToQueue(new Runnable() {
 
 		@Override
 		public void run()
 		{
+		    String _file = toLoad.first();
+		    toLoad.removeIndex(0);
+		    
 		    _assets.load(_file, Texture.class);
 		    _assets.finishLoading();
 
@@ -157,7 +170,9 @@ public class ObjectResourceContainer extends ResourceContainer
 		    _container.getResourceGrid().add(_item);
 		    resourceGridBind.put(_resource, _item);
 		    
-		    progress.getProgressBar().setPercent((float) _current / (toLoad.size - 1));
+		    String[] _filename = _file.split("\\/");
+		    progress.setFilename(_filename[_filename.length - 1]);
+		    progress.getProgressBar().setPercent((float) _current / (_total - 1));
 		}
 
 	    });
