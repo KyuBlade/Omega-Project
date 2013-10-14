@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry excluding="com/team/omega/ui/base/EditorContainer.java|com/team/omega/ui/base/list/TabbedList.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="/Omega/libs/gdx.jar" sourcepath="/gdx/src"/>
 	<classpathentry kind="lib" path="/Omega-desktop/libs/gdx-backend-lwjgl-natives.jar"/>
 	<classpathentry kind="lib" path="/Omega-desktop/libs/gdx-backend-lwjgl-sources.jar"/>
 	<classpathentry kind="lib" path="/Omega-desktop/libs/gdx-backend-lwjgl.jar" sourcepath="/Omega-desktop/libs/gdx-backend-lwjgl-sources.jar"/>
@@ -12,5 +11,6 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/windows/Downloads/jdom-2.0.5/jdom-2.0.5-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/gdx"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

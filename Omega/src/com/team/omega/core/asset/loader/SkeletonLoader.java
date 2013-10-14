@@ -30,7 +30,7 @@ public class SkeletonLoader extends SynchronousAssetLoader<Skeleton, SkeletonLoa
     }
     
     @Override
-    public Skeleton load(AssetManager assetManager, String fileName, Parameters parameter)
+    public Skeleton load(AssetManager assetManager, String fileName, FileHandle file, Parameters parameter)
     {
 	
 	String _path = null;
@@ -68,7 +68,7 @@ public class SkeletonLoader extends SynchronousAssetLoader<Skeleton, SkeletonLoa
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Array<AssetDescriptor> getDependencies(String fileName, Parameters parameter)
+    public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, Parameters parameter)
     {
 	return null;
     }

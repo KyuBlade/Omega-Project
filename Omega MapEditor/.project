@@ -36,6 +36,11 @@
 			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/ProgressBar.java</location>
 		</link>
 		<link>
+			<name>src/com/team/omega/ui/base/SelectionMode.java</name>
+			<type>1</type>
+			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/SelectionMode.java</location>
+		</link>
+		<link>
 			<name>src/com/team/omega/ui/base/grid</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
