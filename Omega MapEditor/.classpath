@@ -11,6 +11,6 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/windows/Downloads/jdom-2.0.5/jdom-2.0.5-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/gdx"/>
+	<classpathentry kind="lib" path="libs/gdx.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

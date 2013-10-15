@@ -10,7 +10,7 @@
 			<attribute name="javadoc_location" value="http://gamadu.com/artemis/javadoc/index.html"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="libs/gdx.jar" sourcepath="libs/gdx-sources.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/spine-libgdx"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/gdx"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

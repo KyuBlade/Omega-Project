@@ -16,6 +16,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>libs/gdx.jar</name>
+			<type>1</type>
+			<location>D:/common/workspace/Omega/Git/Omega/libs/gdx.jar</location>
+		</link>
+		<link>
 			<name>src/com/team/omega/ui/base</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
