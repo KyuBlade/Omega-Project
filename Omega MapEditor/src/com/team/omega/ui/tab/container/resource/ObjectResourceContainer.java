@@ -1,15 +1,18 @@
 package com.team.omega.ui.tab.container.resource;
 
+import java.awt.EventQueue;
 import java.io.File;
 
 import javax.swing.JFileChooser;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.team.omega.core.EditorCore;
 import com.team.omega.core.project.resource.ObjectResource;
 import com.team.omega.core.project.resource.ProjectResource;
@@ -36,7 +39,7 @@ public class ObjectResourceContainer extends ResourceContainer
 
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		new Thread(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 
 		    @Override
 		    public void run()
@@ -52,7 +55,7 @@ public class ObjectResourceContainer extends ResourceContainer
 			}
 		    }
 
-		}).start();
+		});
 
 	    }
 
@@ -63,7 +66,7 @@ public class ObjectResourceContainer extends ResourceContainer
 	    public void clicked(InputEvent event, float x, float y)
 	    {
 		folderChooser.setSelectedFile(new File("D:\\windows\\Downloads\\tiles\\sample"));
-		new Thread(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 
 		    @Override
 		    public void run()
@@ -79,7 +82,7 @@ public class ObjectResourceContainer extends ResourceContainer
 			}
 		    }
 
-		}).start();
+		});
 	    }
 
 	});
@@ -88,27 +91,30 @@ public class ObjectResourceContainer extends ResourceContainer
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		final GridSelection<ResourceGridItem> _grid = ((EditorContainer) EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class).getProjectTabPane().getCurrentTab().getContainer()).getResourceGrid();
+		GridSelection<ResourceGridItem> _grid = ((EditorContainer) EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class).getProjectTabPane().getCurrentTab().getContainer()).getResourceGrid();
 		
-		if(resourceList.getSelection() == null)
-		    return;
-		
-		// Get selected resource
-		ObjectResource _resource = (ObjectResource) resourceList.getSelection().getResource();
-		
-		// Remove from the list
-		resourceList.removeSelected();
-		
-		// Remove from project resources
-		resource.removeObjectResource(_resource);
-		
-		// Remove from the GridSelection
-		_grid.remove(resourceGridBind.get(_resource), true);
-		resourceGridBind.removeKey(_resource);
-		
-		// Release from memory
-		AssetManager _assets = EditorCore.getInstance().getExternalAssetManager();
-		_assets.unload(_assets.getAssetFileName(_resource.getTextureRegion().getTexture()));
+		// Get selected resources
+		SnapshotArray<ResourceListRow> _resourceRows = resourceList.getSelection();
+		for (ResourceListRow _listRow : _resourceRows)
+		{
+		    Gdx.app.debug("Size", "" + _resourceRows.size);
+		    Resource _resource = _listRow.getResource();
+		    Gdx.app.debug("", "List row " + _resource);
+
+		    // Remove from the list
+		    resourceList.removeItem(_listRow);
+
+		    // Remove from the GridSelection
+		    _grid.remove(resourceGridBind.get(_resource));
+		    resourceGridBind.removeKey(_resource);
+
+		    // Remove from project resources
+		    resource.removeObjectResource((ObjectResource) _resource);
+		    
+		    // Release from memory
+		    AssetManager _assets = EditorCore.getInstance().getExternalAssetManager();
+		    _assets.unload(_assets.getAssetFileName(_resource.getTextureRegion().getTexture()));
+		}
 	    }
 
 	});
@@ -183,7 +189,6 @@ public class ObjectResourceContainer extends ResourceContainer
 	    @Override
 	    public void run()
 	    {
-		_container.getResourceGrid().update();
 		progress.hide();
 	    }
 

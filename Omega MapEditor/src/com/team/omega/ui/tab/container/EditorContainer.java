@@ -10,6 +10,7 @@ import com.team.omega.core.ProjectInstance;
 import com.team.omega.core.project.ProjectData;
 import com.team.omega.ui.MenuPanel;
 import com.team.omega.ui.ResourceGridItem;
+import com.team.omega.ui.base.SelectionMode;
 import com.team.omega.ui.base.grid.GridSelection;
 import com.team.omega.ui.base.panel.Panel;
 import com.team.omega.ui.base.tab.TabContainer;
@@ -53,6 +54,7 @@ public class EditorContainer extends TabContainer
 
 	resourcePanel = new Panel(skin, "light-grey");
 	resourceGrid = new GridSelection<>();
+	resourceGrid.left();
 	resourcePanel.add(resourceGrid).expand().fill();
 
 	resourceScrollPane = new ScrollPane(resourcePanel, skin);

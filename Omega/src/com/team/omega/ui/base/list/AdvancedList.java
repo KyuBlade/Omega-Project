@@ -1,119 +1,207 @@
 package com.team.omega.ui.base.list;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Array;
-import com.team.omega.ui.base.panel.Panel;
-import com.team.omega.ui.base.panel.PanelGroup;
+import com.badlogic.gdx.utils.IntArray;
+import com.badlogic.gdx.utils.SnapshotArray;
+import com.team.omega.ui.base.SelectionMode;
+import com.team.omega.ui.base.grid.GridSelectionItem;
+import com.team.omega.ui.base.group.ActorGroup;
 
-public class AdvancedList<T extends ListRow> extends Table
+/**
+ * Create a list with custom rows.
+ *
+ * @param <T>
+ */
+public class AdvancedList<T extends ListRow> extends VerticalGroup
 {
-
-    private Array<T> items = new Array<>();
-    private int selectedIndex = -1;
-    private boolean selectable = true;
     
-    private PanelGroup panelGroup;
+    private SelectionMode selectionMode;
+    
+    private boolean isSelectable = true;
+    
+    private ActorGroup<T> listRowGroup;
 
+    /**
+     * Create an {@link AdvancedList} with no default {@link GridSelectionItem}.
+     */
     public AdvancedList()
     {
 	this(null);
 
     }
 
+    /**
+     * Create an {@link AdvancedList} and fill it with {@link GridSelectionItem}.
+     * 
+     * @param items Array of {@link ListRow} to fill with
+     */
     public AdvancedList(T[] items)
     {
-	panelGroup = new PanelGroup();
+	listRowGroup = new ActorGroup<>();
+	listRowGroup.setMinCheckCount(0);
 	
-	setWidth(getPrefWidth());
-	setHeight(getPrefHeight());
-
-	top();
-	defaults().expandX().fillX();
+	setSelectionMode(SelectionMode.SINGLE);
+	
+	if(items == null)
+	    return;
+	
+	for(T _item : items)
+	    addItem(_item);
     }
-
-    /** @return The index of the currently selected item. The top item has an index of 0. Nothing selected has an index of -1. */
-    public int getSelectedIndex()
+    
+    public IntArray getSelectedIndexes()
     {
-	return selectedIndex;
+	IntArray _indexes = new IntArray();
+	for(T _item : listRowGroup.getAllChecked())
+	    _indexes.add(listRowGroup.getActors().indexOf(_item, true));
+	
+	return _indexes;
     }
 
-    /** @return The ListRow of the currently selected item, or null if the list is empty or nothing is selected. */
-    public T getSelection()
+    /** 
+     * @return The {@link ListRow}s of the currently selected items.
+     */
+    public SnapshotArray<T> getSelection()
     {
-	try {
-	    return items.get(selectedIndex);
-	} catch(IndexOutOfBoundsException e) {
-	    return null;
-	}
+	return new SnapshotArray<>(listRowGroup.getAllChecked());
     }
 
+    /**
+     * Access to all {@link ListRow} of this list.
+     * 
+     * @return All {@link ListRow} of this list.
+     */
     public Array<T> getItems()
     {
-	return items;
+	return listRowGroup.getActors();
     }
 
+    /**
+     * Add a {@link ListRow} to this list and set it to selected.
+     * @param item The {@link ListRow} to add.
+     */
     public void addItem(final T item)
-    {
-	item.addListener(new ClickListener() {
-	   
-	    @Override
-	    public void clicked(InputEvent event, float x, float y)
-	    {
-		setSelected(items.indexOf(item, false));
-	    }
-	    
-	});
-	
-	panelGroup.add(item);
-	items.add(item);
-	add(item).row();
-	
-	setSelected(items.size - 1);
+    {	
+	item.setList(this);
+	listRowGroup.add(item);
+	item.setWidth(getWidth());
+	addActor(item);
     }
     
+    /**
+     * Remove an {@link ListRow} from this list.
+     * Next {@link ListRow} will be set to selected. If there are no more {@link ListRow} next then it select the previous.
+     * 
+     * @param item The {@link ListRow} to remove.
+     */
     public void removeItem(T item)
     {
-	int _index = panelGroup.getPanels().indexOf(item, false);
-	Array<Panel> _panels = panelGroup.getPanels();
+	if(item == null)
+	    throw new NullPointerException("item cannot be null.");
 	
-	panelGroup.remove(item);
-	
+	listRowGroup.remove(item);
 	item.remove();
-	items.removeValue(item, false);
-	
-	if(_index >= panelGroup.getPanels().size - 1 && _panels.size > 0)
-	    _index = panelGroup.getPanels().indexOf(_panels.peek(), false);
-	
-	setSelected(_index);
     }
     
-    /**
-     * Remove the selected row
-     */
-    public void removeSelected()
+    
+    public void removeItems(Array<T> items)
     {
-	if (selectedIndex < 0 || selectedIndex >= items.size)
-	    return;
-
-	removeItem(items.get(selectedIndex));
+	for(T _item : items)
+	    removeItem(_item);
     }
     
     /**
-     * Set the selected item
+     * Remove severals {@link ListRow} from this list.
+     * Next {@link ListRow} will be set to selected. If there are no more {@link GridSelectionItem} next then it select the previous.
      * 
-     * @param index The index of the item to be selected
+     * @param items The {@link ListRow} to removes.
+     */
+    public void removeItems(T... items)
+    {
+	for(T _item : items)
+	    removeItem(_item);
+    }
+    
+    /**
+     * Set the selected item.
+     * 
+     * @param index The index of the item to be selected.
      */
     public void setSelected(int index)
     {
-	if(index < 0 || index > items.size)
+	Array<T> _items = listRowGroup.getActors();
+	if(index <= 0 || index >= _items.size )
 	    return;
 	
-	selectedIndex = index;
+	setSelected(_items.get(index));
+    }
+    
+    public void setSelected(T item)
+    {
+	if(item == null)
+	    throw new NullPointerException("Selected item cannot be null.");
 	
-	if(panelGroup.getPanels().size > 0)
-	    panelGroup.setCheckedIndex(index);
+	listRowGroup.setChecked(item);
+    }
+    
+    public boolean isSelected(int index)
+    {
+	return isSelected(listRowGroup.getAllChecked().get(index));
+    }
+    
+    public boolean isSelected(T item)
+    {
+	if(item == null)
+	    return false;
+	
+	return item.isChecked();
+    }
+    
+    /**
+     * Set if {@link ListRow} of this list are selectable.
+     * 
+     * @param isSelectable true if {@link ListRow} are selectable, false if not.
+     */
+    public void setSelectable(boolean isSelectable)
+    {
+	this.isSelectable = isSelectable;
+    }
+    
+    /**
+     * @return If {@link ListRow} are selectable.
+     */
+    public boolean isSelectable()
+    {
+	return isSelectable;
+    }
+    
+    public void unselect(int index)
+    {
+	unselect(listRowGroup.getAllChecked().get(index));
+    }
+    
+    public void unselect(T item)
+    {
+	listRowGroup.uncheck(item);
+    }
+    
+    /**
+     * Set the {@link SelectionMode} of the list.
+     * 
+     * @param mode The new {@link SelectionMode} of the list.
+     */
+    public void setSelectionMode(SelectionMode mode)
+    {
+	selectionMode = mode;
+    }
+    
+    /**
+     * @return The current {@link SelectionMode} of the list.
+     */
+    public SelectionMode getSelectionMode()
+    {
+	return selectionMode;
     }
 
 }

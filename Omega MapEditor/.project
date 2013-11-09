@@ -10,9 +10,15 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.zeroturnaround.eclipse.rebelXmlBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.zeroturnaround.eclipse.jrebelNature</nature>
 	</natures>
 	<linkedResources>
 		<link>
@@ -51,6 +57,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>src/com/team/omega/ui/base/group</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>src/com/team/omega/ui/base/list</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -79,6 +90,16 @@
 			<name>src/com/team/omega/ui/base/grid/GridSelectionItem.java</name>
 			<type>1</type>
 			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/grid/GridSelectionItem.java</location>
+		</link>
+		<link>
+			<name>src/com/team/omega/ui/base/group/ActorGroup.java</name>
+			<type>1</type>
+			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/group/ActorGroup.java</location>
+		</link>
+		<link>
+			<name>src/com/team/omega/ui/base/group/Groupable.java</name>
+			<type>1</type>
+			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/group/Groupable.java</location>
 		</link>
 		<link>
 			<name>src/com/team/omega/ui/base/list/AdvancedList.java</name>
@@ -129,11 +150,6 @@
 			<name>src/com/team/omega/ui/base/panel/Panel.java</name>
 			<type>1</type>
 			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/panel/Panel.java</location>
-		</link>
-		<link>
-			<name>src/com/team/omega/ui/base/panel/PanelGroup.java</name>
-			<type>1</type>
-			<location>D:/common/workspace/Omega/Git/Omega/src/com/team/omega/ui/base/panel/PanelGroup.java</location>
 		</link>
 		<link>
 			<name>src/com/team/omega/ui/base/tab/Tab.java</name>

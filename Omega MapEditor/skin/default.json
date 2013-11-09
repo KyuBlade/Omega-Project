@@ -48,7 +48,7 @@ com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
 	default-horizontal: { handle: scrolls/hScroll }
 }, 
 com.team.omega.ui.base.list.ListRow$ListRowStyle: {
-	default: { background: backgrounds/grey, selected: textfields/selection, over: textfields/selection, over: backgrounds/light_grey }
+	default: { background: backgrounds/grey, checked: textfields/selection, over: textfields/selection, over: backgrounds/light_grey }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { background: buttons/button_down, corner: textfields/selection, hScroll: scrolls/hScroll, hScrollKnob: scrolls/hScroll_knob, vScroll: scrolls/vScroll, vScrollKnob: scrolls/vScroll_knob }
@@ -78,6 +78,6 @@ com.team.omega.ui.base.tab.TabPane$TabPaneStyle: {
 	default: { background: backgrounds/light_grey }
 }, 
 com.team.omega.ui.base.grid.GridSelectionItem$GridSelectionItemStyle: {
-	default: { background: backgrounds/grey, selected: textfields/selection, over: backgrounds/light_grey }
+	default: { background: backgrounds/grey, checked: textfields/selection, over: backgrounds/light_grey }
 }
 }

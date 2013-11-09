@@ -53,7 +53,7 @@ public class ResourceWindow extends Window
 	});
 	add(closeButton);
 	
-	setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+	setSize(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight() / 1.5f);
 	setPosition(Gdx.graphics.getWidth() / 2 - getWidth() / 2, Gdx.graphics.getHeight() / 2 - getHeight() / 2);
     }
     

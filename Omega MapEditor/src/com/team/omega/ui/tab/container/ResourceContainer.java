@@ -11,6 +11,7 @@ import com.team.omega.core.project.resource.ProjectResource;
 import com.team.omega.core.project.resource.ResourceFileFilter;
 import com.team.omega.ui.ProgressWindow;
 import com.team.omega.ui.ResourceListRow;
+import com.team.omega.ui.base.SelectionMode;
 import com.team.omega.ui.base.list.AdvancedList;
 import com.team.omega.ui.base.panel.Panel;
 import com.team.omega.ui.base.tab.TabContainer;
@@ -62,6 +63,8 @@ public class ResourceContainer extends TabContainer
 	rightMenu = new Table(skin);
 	
 	resourceList = new AdvancedList<>();
+	resourceList.setSelectionMode(SelectionMode.MULTI);
+	
 	addResource = new TextButton("Add", skin);
 	addFolderResource = new TextButton("Add folder", skin);
 	removeResource = new TextButton("Remove", skin);
