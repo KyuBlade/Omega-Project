@@ -91,7 +91,8 @@ public class ObjectResourceContainer extends ResourceContainer
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		GridSelection<ResourceGridItem> _grid = ((EditorContainer) EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class).getProjectTabPane().getCurrentTab().getContainer()).getResourceGrid();
+		GridSelection<ResourceGridItem> _grid = ((EditorContainer) EditorCore.getInstance().getScreenManager().
+			getScreen(InterfaceScreen.class).getProjectTabPane().getCurrentTab().getContainer()).getResourceSelection().getGridSelection();
 		
 		// Get selected resources
 		SnapshotArray<ResourceListRow> _resourceRows = resourceList.getSelection();
@@ -173,7 +174,7 @@ public class ObjectResourceContainer extends ResourceContainer
 		    resourceList.addItem(new ResourceListRow(_resource, skin));
 		    
 		    ResourceGridItem _item = new ResourceGridItem(skin, _resource.getTextureRegion());
-		    _container.getResourceGrid().add(_item);
+		    _container.getResourceSelection().getGridSelection().add(_item);
 		    resourceGridBind.put(_resource, _item);
 		    
 		    String[] _filename = _file.split("\\/");

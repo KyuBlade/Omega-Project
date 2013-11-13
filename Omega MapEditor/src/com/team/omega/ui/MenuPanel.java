@@ -13,6 +13,8 @@ public class MenuPanel extends Panel
     private Panel titlePanel;
     private Label titleLabel;
     
+    private Panel contentPanel;
+    
     public MenuPanel(String title, Skin skin)
     {
 	this(title, skin, "default");
@@ -27,19 +29,24 @@ public class MenuPanel extends Panel
 	
 	titlePanel.add(titleLabel);
 	defaults().expandX().fillX().left();
-	add(titlePanel);
+	super.add(titlePanel).row();
+	
+	contentPanel = new Panel(skin, "blank");
+	super.add(contentPanel);
+	contentPanel.left();
+	contentPanel.defaults().left();
     }
     
     @Override
     public Cell<?> add(Actor actor)
     {
-	return super.add(actor).row();
+        return contentPanel.add(actor);
     }
-
+    
     @Override
-    public Cell<?> add(String label)
+    public Cell<?> add(String text)
     {
-	return super.add(label).row();
+        return contentPanel.add(text);
     }
     
 }

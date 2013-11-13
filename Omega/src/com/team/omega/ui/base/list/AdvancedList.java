@@ -28,7 +28,6 @@ public class AdvancedList<T extends ListRow> extends VerticalGroup
     public AdvancedList()
     {
 	this(null);
-
     }
 
     /**

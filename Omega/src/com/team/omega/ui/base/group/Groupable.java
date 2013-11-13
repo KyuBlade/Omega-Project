@@ -1,8 +1,7 @@
 package com.team.omega.ui.base.group;
 
 
-
-public interface Groupable 
+public interface Groupable
 {
 
     public void setActorGroup(ActorGroup<? extends Groupable> group);
