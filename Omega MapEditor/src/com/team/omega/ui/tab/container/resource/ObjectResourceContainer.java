@@ -5,7 +5,6 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,6 +24,7 @@ import com.team.omega.ui.ResourceListRow;
 import com.team.omega.ui.base.grid.GridSelection;
 import com.team.omega.ui.tab.container.EditorContainer;
 import com.team.omega.ui.tab.container.ResourceContainer;
+import com.team.omega.ui.tab.container.ResourceSelectionContainer;
 
 public class ObjectResourceContainer extends ResourceContainer
 {
@@ -91,16 +91,15 @@ public class ObjectResourceContainer extends ResourceContainer
 	    @Override
 	    public void clicked(InputEvent event, float x, float y)
 	    {
-		GridSelection<ResourceGridItem> _grid = ((EditorContainer) EditorCore.getInstance().getScreenManager().
-			getScreen(InterfaceScreen.class).getProjectTabPane().getCurrentTab().getContainer()).getResourceSelection().getGridSelection();
+		GridSelection<ResourceGridItem> _grid = ((EditorContainer) EditorCore.getInstance().getScreenManager()
+			.getScreen(InterfaceScreen.class).getProjectTabPane().getCurrentTab().getContainer())
+			.getResourceSelection().getTab(ObjectResourceSelectionContainer.class).getGridSelection();
 		
 		// Get selected resources
 		SnapshotArray<ResourceListRow> _resourceRows = resourceList.getSelection();
 		for (ResourceListRow _listRow : _resourceRows)
 		{
-		    Gdx.app.debug("Size", "" + _resourceRows.size);
 		    Resource _resource = _listRow.getResource();
-		    Gdx.app.debug("", "List row " + _resource);
 
 		    // Remove from the list
 		    resourceList.removeItem(_listRow);
@@ -174,7 +173,7 @@ public class ObjectResourceContainer extends ResourceContainer
 		    resourceList.addItem(new ResourceListRow(_resource, skin));
 		    
 		    ResourceGridItem _item = new ResourceGridItem(skin, _resource.getTextureRegion());
-		    _container.getResourceSelection().getGridSelection().add(_item);
+		    _container.getResourceSelection().getTab(ObjectResourceSelectionContainer.class).getGridSelection().add(_item);
 		    resourceGridBind.put(_resource, _item);
 		    
 		    String[] _filename = _file.split("\\/");

@@ -235,12 +235,12 @@ public class InterfaceScreen extends BaseScreen
 		    File _file = fileDialog.getSelectedFile();
 		    
 		    // Check if project is already open
-		    Values<TabContainer> _containers = projectTabPane.getTabBind().values();
+		    Values<TabContainer> _containers = projectTabPane.getTabs().values();
 		    for(TabContainer _container : _containers)
 		    {
 			if(((EditorContainer) _container).getProject().getProjectHandler().getProjectData().getName().equalsIgnoreCase(_file.getName()))
 			{
-			    projectTabPane.setCurrentTab(projectTabPane.getTabBind().getKey(_container, false));
+			    projectTabPane.setCurrentTab(projectTabPane.getTabs().getKey(_container, false));
 			    
 			    return;
 			}

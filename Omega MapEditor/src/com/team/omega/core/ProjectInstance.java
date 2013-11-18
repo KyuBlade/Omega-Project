@@ -56,13 +56,13 @@ public class ProjectInstance
 	
 	_screen.saveProcess(this);
 	
-	ArrayMap<Tab, TabContainer> _tabBind = _tabPane.getTabBind();
-	for(TabContainer _container : _tabBind.values())
+	ArrayMap<Tab, TabContainer> _tabs = _tabPane.getTabs();
+	for(TabContainer _container : _tabs.values())
 	{
 	    EditorContainer _eContainer = (EditorContainer) _container;
 	    if(_eContainer.getProject().equals(this))
 	    {
-		_tabPane.removeTab(_tabBind.getKey(_eContainer, false));
+		_tabPane.removeTab(_tabs.getKey(_eContainer, false));
 		
 		return;
 	    }
@@ -75,7 +75,7 @@ public class ProjectInstance
 	InterfaceScreen _screen = EditorCore.getInstance().getScreenManager().getScreen(InterfaceScreen.class);
 	TabPane _tabPane = _screen.getProjectTabPane();
 	
-	for(TabContainer _tab : _tabPane.getTabBind().values().toArray())
+	for(TabContainer _tab : _tabPane.getTabs().values().toArray())
 	    ((EditorContainer) _tab).getProject().close();
     }
     

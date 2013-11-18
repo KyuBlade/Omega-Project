@@ -1,37 +1,21 @@
 package com.team.omega.ui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.team.omega.ui.base.grid.GridSelection;
-import com.team.omega.ui.base.panel.Panel;
+import com.team.omega.ui.base.tab.Tab;
+import com.team.omega.ui.base.tab.TabPane;
+import com.team.omega.ui.tab.container.resource.ObjectResourceSelectionContainer;
+import com.team.omega.ui.tab.container.resource.TerrainResourceSelectionContainer;
 
 
-public class ResourceSelection extends Table
+public class ResourceSelection extends TabPane
 {
-
-    private ScrollPane scrollPane;
-    private Panel resourcePanel;
-    private GridSelection<ResourceGridItem> resourceGrid;
-    
-    
     
     public ResourceSelection(Skin skin)
     {
-	resourcePanel = new Panel(skin, "light-grey");
-	resourceGrid = new GridSelection<>();
-	resourceGrid.left();
-	resourcePanel.add(resourceGrid).expand().fill();
+	super(skin);
 	
-	scrollPane = new ScrollPane(resourcePanel);
-	scrollPane.setFadeScrollBars(false);
-	scrollPane.setFlickScroll(false);
-	add(scrollPane).expand().fill();
-    }
-    
-    public GridSelection<ResourceGridItem> getGridSelection()
-    {
-	return resourceGrid;
+	addTab(new Tab("Terrain", new TerrainResourceSelectionContainer(skin), skin));
+	addTab(new Tab("Objects", new ObjectResourceSelectionContainer(skin), skin));
     }
     
 }
