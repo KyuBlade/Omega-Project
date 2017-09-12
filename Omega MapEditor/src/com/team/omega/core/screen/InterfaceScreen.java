@@ -1,5 +1,6 @@
 package com.team.omega.core.screen;
 
+import java.awt.EventQueue;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -18,7 +19,6 @@ import com.team.omega.ui.base.menu.CheckboxMenuItem;
 import com.team.omega.ui.base.menu.ContextMenu;
 import com.team.omega.ui.base.menu.MenuBar;
 import com.team.omega.ui.base.menu.ToolBar;
-import com.team.omega.ui.base.tab.Tab;
 import com.team.omega.ui.base.tab.TabContainer;
 import com.team.omega.ui.base.tab.TabPane;
 import com.team.omega.ui.tab.MainEditorTab;
@@ -140,7 +140,7 @@ public class InterfaceScreen extends BaseScreen
 	layout.add(projectTabPane).expand().fill();	
     }
     
-    public void createFileMenu()
+    private void createFileMenu()
     {
 	fileMenu = new ContextMenu(skin);
 	BasicMenuItem _new = new BasicMenuItem("New...", "Ctrl + N", skin);
@@ -222,9 +222,9 @@ public class InterfaceScreen extends BaseScreen
     /**
      * Open a file chooser to open a project
      */
-    public void openOpenDialog()
+    private void openOpenDialog()
     {
-	new Thread(new Runnable() {
+	EventQueue.invokeLater(new Runnable() {
 
 	    @Override
 	    public void run()
@@ -250,19 +250,19 @@ public class InterfaceScreen extends BaseScreen
 		}
 	    }
 
-	}).start();
+	});
     }
     
     /**
      * Open a file chooser to save project
      * @param newProject true if it's a new project, else false
      */
-    public void openSaveDialog(final boolean newProject)
+    private void openSaveDialog(final boolean newProject)
     {
 	if(!newProject && getCurrentProject() == null)
 	    return;
 	
-	new Thread(new Runnable() {
+	EventQueue.invokeLater(new Runnable() {
 
 	    @Override
 	    public void run()
@@ -287,10 +287,10 @@ public class InterfaceScreen extends BaseScreen
 		}
 	    }
 
-	}).start();
+	});
     }
 
-    public void createEditMenu()
+    private void createEditMenu()
     {
 	editMenu = new ContextMenu(skin);
 	editMenu.add(new BasicMenuItem("Cut", "Ctrl + X", skin));
@@ -298,7 +298,7 @@ public class InterfaceScreen extends BaseScreen
 	editMenu.add(new BasicMenuItem("Paste", "Ctrl + V", skin));
     }
     
-    public void createViewMenu()
+    private void createViewMenu()
     {
 	viewMenu = new ContextMenu(skin);
 	CheckboxMenuItem _checkboxMenu = new CheckboxMenuItem("Display grid", "Ctrl + G", skin) {
@@ -322,7 +322,7 @@ public class InterfaceScreen extends BaseScreen
 	viewMenu.add(_checkboxMenu);
     }
     
-    public void createResourceMenu()
+    private void createResourceMenu()
     {
 	resourceMenu = new ContextMenu(skin);
 	BasicMenuItem _manage = new BasicMenuItem("Manage...", "Ctrl + T", skin);
@@ -355,11 +355,11 @@ public class InterfaceScreen extends BaseScreen
     
     public ProjectInstance getCurrentProject()
     {
-	Tab _curTab = projectTabPane.getCurrentTab();
+	TabContainer _curTab = projectTabPane.getCurrentTab();
 	if(_curTab == null)
 	    return null;
 	
-	return ((EditorContainer) _curTab.getContainer()).getProject();
+	return ((EditorContainer) _curTab).getProject();
     }
     
     public TabPane getProjectTabPane()

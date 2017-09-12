@@ -2,7 +2,6 @@ package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -18,11 +17,6 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
      * Internal screen layout
      */
     protected Table layout;
-    
-    /** 
-     * Draw the internal screen layout
-     */
-    protected Stage stage;
     
     /**
      * If true, rendered by the {@link ScreenManager}
@@ -42,13 +36,9 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     protected ScreenManager screenManager;
     
     public BaseScreen(ScreenManager screenManager, int depth)
-    {
-	stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, mainBatch);
-	
+    {	
 	layout = new Table();
-	layout.setFillParent(true);
-	
-	stage.addActor(layout);
+	stageStack.addActor(layout);
 	
 	this.screenManager = screenManager;
 	
@@ -60,10 +50,7 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     @Override
     public void render(float delta)
     {
-	stage.act(delta);
-	stage.draw();
 	
-	Table.drawDebug(stage);
     }
 
     @Override
@@ -71,7 +58,6 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     {
 	Gdx.app.debug("Resizing " + this.getClass().getSimpleName(), "Resize to " + width + "x" + height);
 
-	
 	stage.setViewport(width, height, false);
     }
 
@@ -102,7 +88,6 @@ public class BaseScreen extends MasterScreen implements Comparable<BaseScreen>
     @Override
     public void dispose()
     {
-	stage.dispose();
     }
     
     /**

@@ -1,7 +1,9 @@
 package com.team.omega.core.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.team.omega.ui.base.panel.Panel;
 
@@ -13,6 +15,9 @@ public class DebugScreen extends BaseScreen
     private Label resolution;
     
     private Panel screens;
+    private Panel graphics;
+    
+    private Stack stack;
     
     public DebugScreen(ScreenManager screenManager)
     {
@@ -20,21 +25,36 @@ public class DebugScreen extends BaseScreen
 	
 	fps = new Label("", skin);
 	resolution = new Label("", skin);
+	fps.setTouchable(Touchable.disabled);
+	resolution.setTouchable(Touchable.disabled);
 	
 	Table _graphicsTable = new Table();
 	Table _screensTable = new Table();
 	
-	Panel _graphics = new Panel(skin, "black_alpha");
-	_graphics.defaults().left();
-	_graphics.add(resolution).row();
-	_graphics.add(fps);
-	_graphicsTable.top().left().add(_graphics);
+	graphics = new Panel(skin, "black_alpha");
+	graphics.defaults().left();
+	graphics.add(resolution).row();
+	graphics.add(fps);
+	_graphicsTable.top().left().add(graphics);
 	
 	screens = new Panel(skin, "black_alpha");
 	screens.defaults().left();
 	_screensTable.bottom().right().add(screens).right();
 	
-	layout.stack(_graphicsTable, _screensTable).size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+	stack = new Stack();
+	stack.setFillParent(true);
+	stack.add(_graphicsTable);
+	stack.add(_screensTable);
+	layout.add(stack);
+	layout.bottom().left();
+    }
+    
+    @Override
+    public void resize(int width, int height)
+    {
+	super.resize(width, height);
+	
+        stack.size(width, height);
     }
     
     @Override

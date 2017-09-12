@@ -11,6 +11,8 @@ import com.team.omega.core.ProjectInstance;
 import com.team.omega.ui.base.tab.Tab;
 import com.team.omega.ui.base.tab.TabPane;
 import com.team.omega.ui.tab.container.resource.ObjectResourceContainer;
+import com.team.omega.ui.tab.container.resource.TerrainRessourceContainer;
+import com.team.omega.ui.tab.container.resource.WallResourceContainer;
 
 
 public class ResourceWindow extends Window
@@ -38,7 +40,10 @@ public class ResourceWindow extends Window
 	setVisible(false);
 	
 	tabPane = new TabPane(skin);
+	tabPane.addTab(new Tab("Terrain", new TerrainRessourceContainer(project.getProjectResource(), skin), skin));
+	tabPane.addTab(new Tab("Wall", new WallResourceContainer(project.getProjectResource(), skin), skin));
 	tabPane.addTab(new Tab("Object", new ObjectResourceContainer(project.getProjectResource(), skin), skin));
+	tabPane.setCurrentTab(0);
 	
 	add(tabPane).expand().fill().row();
 	

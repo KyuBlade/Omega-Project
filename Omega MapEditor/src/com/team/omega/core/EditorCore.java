@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.team.omega.core.project.resource.ResourceLoader;
+import com.team.omega.core.screen.DebugScreen;
 import com.team.omega.core.screen.EditorScreen;
 import com.team.omega.core.screen.InterfaceScreen;
 import com.team.omega.core.screen.ScreenManager;
@@ -54,6 +55,7 @@ public class EditorCore extends ApplicationAdapter
 	screenManager = new ScreenManager();
 	screenManager.addScreen(EditorScreen.class);
 	screenManager.addScreen(InterfaceScreen.class);
+	screenManager.addScreen(DebugScreen.class);
 	
 	resourceLoader = new ResourceLoader();
     }

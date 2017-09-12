@@ -112,13 +112,13 @@ public class TabPane extends Table
     }
 
     /**
-     * Get the selected {@link Tab}.
+     * Get the selected {@link TabContainer}.
      * 
-     * @return the selected {@link Tab}
+     * @return the selected {@link TabContainer}
      */
-    public Tab getCurrentTab()
+    public TabContainer getCurrentTab()
     {
-	return currentTab;
+	return currentTab.getContainer();
     }
 
     /**
@@ -136,6 +136,16 @@ public class TabPane extends Table
 	hideAllContainer();
 	tabBind.get(currentTab).setVisible(true);
 	currentTab.setChecked(true);
+    }
+    
+    /**
+     * Set the selected {@ink Tab}.
+     * 
+     * @param index the index of the {@link Tab}
+     */
+    public void setCurrentTab(int index)
+    {
+	setCurrentTab(tabBind.getKeyAt(index));
     }
     
     /**

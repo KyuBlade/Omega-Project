@@ -5,11 +5,14 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.team.omega.core.EditorCore;
 
 
-public class MasterScreen implements Screen
+public abstract class MasterScreen implements Screen
 {
     
     /**
@@ -27,6 +30,16 @@ public class MasterScreen implements Screen
      */
     protected static SpriteBatch mainBatch;
     
+    /** 
+     * Catch events and draw actors
+     */
+    protected static Stage stage;
+    
+    /**
+     * Overlap all screen layouts
+     */
+    protected static Stack stageStack;
+    
     static {
 	inputProcessor = new InputMultiplexer();
 	Gdx.input.setInputProcessor(inputProcessor);
@@ -35,42 +48,46 @@ public class MasterScreen implements Screen
 	skin = new Skin(Gdx.files.internal("skin/default.json"), _atlas);
 	
 	mainBatch = new SpriteBatch();
+	stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, mainBatch);
+	stageStack = new Stack();
+	stage.addActor(stageStack);
+	stageStack.setFillParent(true);
     }
-
-    @Override
-    public void render(float delta)
+    
+    public final static void masterRender(float delta)
     {
+	stage.act(delta);
+	stage.draw();
+	
+	Table.drawDebug(stage);
     }
 
     @Override
-    public void resize(int width, int height)
-    {
-    }
+    public abstract void render(float delta);
 
     @Override
-    public void show()
-    {
-    }
+    public abstract void resize(int width, int height);
+    
+    @Override
+    public abstract void show();
 
     @Override
-    public void hide()
-    {
-    }
+    public abstract void hide();
 
     @Override
-    public void pause()
-    {
-    }
+    public abstract void pause();
 
     @Override
-    public void resume()
-    {
-    }
-
+    public abstract void resume();
+    
     @Override
-    public void dispose()
+    public abstract void dispose();
+
+    public final static void masterDispose()
     {
 	skin.dispose();
+	stage.dispose();
+	mainBatch.dispose();
     }
     
     public static Skin getSkin()

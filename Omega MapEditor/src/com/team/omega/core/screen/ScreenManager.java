@@ -27,6 +27,8 @@ public class ScreenManager implements Disposable
     {
 	for (Screen _screen : depthList)
 	    _screen.render(delta);
+	
+	MasterScreen.masterRender(delta);
     }
     
     public void resize(int width, int height)
@@ -63,6 +65,8 @@ public class ScreenManager implements Disposable
     {
 	for (BaseScreen _screen : screens.values())
 	    _screen.dispose();
+	
+	MasterScreen.masterDispose();
     }
     
     public synchronized <T extends BaseScreen> T addScreen(Class<T> screen)

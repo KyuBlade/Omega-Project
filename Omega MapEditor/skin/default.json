@@ -41,6 +41,7 @@ com.team.omega.ui.base.panel.Panel$PanelStyle: {
 	default: { background: buttons/button_down }, 
 	grey: { background: backgrounds/grey }, 
 	light-grey: { background: backgrounds/light_grey }, 
+	black_alpha: { background: backgrounds/black_alpha }, 
 	blank: {}
 },
 com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
